@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: navigator-localization-719-engine
+    runtime: node
+    plan: free
+    autoDeploy: false
+    buildCommand: npm ci || npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
