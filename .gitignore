@@ -2,3 +2,6 @@ node_modules/
 generated-site/
 table-context-audit.json
 __pycache__/
+
+# Reproducible HTML preview; delivered separately
+dist/

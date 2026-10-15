@@ -1,3 +1,4 @@
+(function(root) {
 'use strict';
 
 // Project workflow only. No route, statutory obligation, deadline or calculation
@@ -9,6 +10,7 @@ const canonical = value => Array.isArray(value) ? '[' + value.map(canonical).joi
 const text = (v, max = 5000) => typeof v === 'string' && v.trim().length > 0 && v.length <= max;
 const id = v => typeof v === 'string' && /^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$/.test(v);
 const list = v => Array.isArray(v) && v.length <= 100 && v.every(id) && new Set(v).size === v.length;
+const scopes = v => Array.isArray(v) && v.length > 0 && v.length <= 100 && v.every(x => text(x, 120)) && new Set(v).size === v.length;
 function demand(ok, reason) { if (!ok) throw new Error(reason); }
 function create(assessmentId) {
   demand(id(assessmentId), 'Invalid assessment id');
@@ -36,13 +38,15 @@ function reduce(state, event) {
   const remark = () => { const r = next.remarks.find(r => r.id === p.remarkId); demand(r, 'Remark not found'); return r; };
   switch (event.type) {
     case 'document.version': {
-      demand(id(p.documentId) && id(p.versionId) && text(p.title, 500) && list(p.scope), 'Invalid document');
+      demand(id(p.documentId) && id(p.versionId) && text(p.title, 500) && scopes(p.scope), 'Invalid document');
+      demand(p.reference === undefined || (typeof p.reference === 'string' && p.reference.length <= 5000), 'Invalid document reference');
       demand(typeof p.checksum === 'string' && /^[a-f0-9]{64}$/.test(p.checksum), 'SHA-256 required');
       let doc = next.documents.find(d => d.id === p.documentId);
       if (!doc) { demand(next.documents.length < 200, 'Document limit'); doc = {id: p.documentId, currentVersionId: '', versions: []}; next.documents.push(doc); }
       demand(!doc.versions.some(v => v.id === p.versionId), 'Document version already exists');
       const oldVersion = doc.currentVersionId;
       doc.versions.push({id: p.versionId, title: p.title, checksum: p.checksum, scope: clone(p.scope), recordedAt: event.at, recordedBy: event.actor});
+      if (p.reference !== undefined) doc.versions.at(-1).reference = p.reference;
       doc.currentVersionId = p.versionId;
       if (oldVersion) for (const r of next.remarks) {
         if (r.documentIds.includes(doc.id) || r.evidence.some(e => e.documentId === doc.id) || r.officialDecisions.some(d => d.evidence.some(e => e.documentId === doc.id))) {
@@ -57,7 +61,7 @@ function reduce(state, event) {
     case 'remark.open': {
       demand(id(p.remarkId) && !next.remarks.some(r => r.id === p.remarkId) && next.remarks.length < 200, 'Invalid or duplicate remark');
       demand(['TPP','INTERNAL','MINPROMTORG'].includes(p.source) && text(p.text) && /^P(0[1-9]|[1-4][0-9]|5[0-4])$/.test(p.checkId), 'Invalid remark content');
-      demand(list(p.scope) && p.scope.length > 0 && list(p.documentIds), 'Invalid remark scope');
+      demand(scopes(p.scope) && list(p.documentIds), 'Invalid remark scope');
       demand(p.documentIds.every(k => next.documents.some(d => d.id === k)), 'Unknown related document');
       next.remarks.push({id: p.remarkId, source: p.source, text: p.text, checkId: p.checkId, scope: clone(p.scope), documentIds: clone(p.documentIds), status: 'OPEN', evidence: [], lastReview: null, officialDecisions: [], openedAt: event.at});
       break;
@@ -139,4 +143,7 @@ function readiness(dossier) {
   return {workflowVersion: SCHEMA, unresolvedRemarkIds: open, allRecordedRemarksReviewed: dossier.remarks.length > 0 && open.length === 0,
     legalReadiness: 'NOT_EVALUATED', productionReadiness: 'NOT_EVALUATED', officialOutcome: 'NOT_INFERRED'};
 }
-module.exports = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness};
+const api = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness};
+if (typeof module !== 'undefined' && module.exports) module.exports = api;
+else root.Tpp52Dossier = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);

@@ -10,7 +10,10 @@
     "build:site": "node build-site-modules.cjs",
     "test:server": "node server-smoke.mjs",
     "test:audit": "python3 tools/test-table-context.py && node audit-search-tests.cjs && python3 tools/check-amendment-audit.py",
-    "test:tpp52": "node tpp52-dossier-tests.cjs"
+    "test:tpp52": "node tpp52-dossier-tests.cjs",
+    "build:web": "python3 build-web.py",
+    "test:import": "node project-import-tests.cjs",
+    "test:web": "node web-tests.cjs"
   },
   "engines": {
     "node": ">=20"
@@ -19,5 +22,8 @@
     "@modelcontextprotocol/sdk": "1.x",
     "express": "^4.21.2",
     "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "linkedom": "0.18.12"
   }
 }
