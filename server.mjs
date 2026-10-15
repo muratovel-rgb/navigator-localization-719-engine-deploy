@@ -15,14 +15,14 @@ const toolResult = (output) => ({
 function createMcpServer() {
   const server = new McpServer({
     name: 'navigator-localization-719-engine',
-    version: '0.2.2'
+    version: '0.3.0'
   });
 
   server.registerTool(
     'engine_health',
     {
       title: 'Navigator 719 Engine Health',
-      description: 'Return deterministic engine version and available calculation rule IDs. Use to verify which HTML 0.7 calculation branches are actually available.'
+      description: 'Return deterministic engine version and available calculation rule IDs. Use to verify which HTML 0.8 calculation branches are actually available.'
     },
     async () => toolResult(A.health())
   );
@@ -31,7 +31,7 @@ function createMcpServer() {
     'search_localization_rules',
     {
       title: 'Search PP 719 Calculation Rules',
-      description: 'Search only the deterministic calculation branches extracted from Navigator HTML 0.7 by OKPD2, rule name, registry number, or known product identifier. This is not the full 787-row search index.',
+      description: 'Search only the deterministic calculation branches extracted from Navigator HTML 0.8 by OKPD2, rule name, registry number, or known product identifier. This is not the full 787-row search index.',
       inputSchema: {
         query: z.string().min(1).describe('OKPD2, product name, rule name, registry number, or identifier')
       }
@@ -43,7 +43,7 @@ function createMcpServer() {
     'get_localization_rule',
     {
       title: 'Get PP 719 Calculation Rule',
-      description: 'Return the exact prepared calculation rule from Navigator HTML 0.7, including mandatory conditions, operations, points, source, evidence expectations, and exclusions.',
+      description: 'Return the exact prepared calculation rule from Navigator HTML 0.8, including mandatory conditions, operations, points, source, evidence expectations, and exclusions.',
       inputSchema: {
         ruleId: z.string().min(1).describe('Rule ID returned by search_localization_rules')
       }
@@ -69,8 +69,8 @@ function createMcpServer() {
   server.registerTool(
     'calculate_localization',
     {
-      title: 'Calculate Localization with Navigator 0.7 Engine',
-      description: 'Run the deterministic Navigator HTML 0.7 calculation engine for a prepared rule branch. The tool keeps mandatory conditions separate from points and returns unknown/blocked when rule selection, applicability, or facts are insufficient. It does not create official Russian-origin status.',
+      title: 'Calculate Localization with Navigator 0.8 Engine',
+      description: 'Run the deterministic Navigator HTML 0.8 calculation engine for a prepared rule branch. The tool keeps mandatory conditions separate from points and returns unknown/blocked when rule selection, applicability, or facts are insufficient. It does not create official Russian-origin status.',
       inputSchema: {
         ruleId: z.string().min(1),
         date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -92,7 +92,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(express.json({ limit: '1mb' }));
 
-app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.2.2' }));
+app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.3.0' }));
 
 app.post('/mcp', async (req, res) => {
   const server = createMcpServer();
@@ -121,5 +121,6 @@ app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
 
 const port = Number.parseInt(process.env.PORT || '3000', 10);
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Navigator 719 MCP v0.2.2 listening on :${port}/mcp`);
+  console.log(`Navigator 719 MCP v0.3.0 listening on :${port}/mcp`);
 });
+

@@ -4,7 +4,7 @@ const A = require('./adapter.js');
 
 const H = A.health();
 assert.equal(H.ok,true);
-assert.equal(H.engineVersion,'0.7.0');
+assert.equal(H.engineVersion,'0.8.1');
 assert(H.ruleIds.includes('flow-coriolis'));
 
 const s = A.searchRules({query:'26.51.52.110'});
@@ -47,3 +47,4 @@ assert.equal(r.result.limit,null);
 assert.equal(r.result.status,'unknown');
 
 console.log(JSON.stringify({pass:true,tests:10,engineVersion:H.engineVersion,releaseVersion:H.releaseVersion},null,2));
+

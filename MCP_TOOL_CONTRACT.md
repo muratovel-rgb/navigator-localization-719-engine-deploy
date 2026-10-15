@@ -23,6 +23,19 @@ Call only when:
 3. `classificationConfirmed=true` only when the selected PP No. 719 position is actually confirmed;
 4. facts are mapped to criterion IDs returned by `get_localization_rule`.
 
-Treat the tool result as the Navigator 0.7 deterministic calculation result, not as an official legal determination of Russian origin.
+Treat the tool result as the Navigator 0.8 deterministic calculation result, not as an official legal determination of Russian origin.
 
 If the tool result conflicts with the legal text or the skill's verified rule context, stop and report a candidate engine defect; do not silently overwrite either result.
+
+
+## Additive response fields in service 0.3.0
+
+- health: `calculationRules` and `unresolvedRules`; legacy `rules` remains all entries.
+- rule: `foreignLimit`, `thresholdPolicy`, `periods`.
+- criteria: `manufactureOrUse`, `originRequired`, `originTerritories`, `creditGroup`.
+
+For an alternative criterion choose `route=manufacture` with Russian production facts, or `route=use` with `origin=rf` and an explicit `originBasis` where the rule permits only RF. EAEU residence or supplier country does not establish RF origin. Do not count the alternative twice. Purchasing or outsourcing does not remove an applicable operation from the maximum.
+
+`applicableCriterionIds` is the complete set of included scored criteria. IDs must be unique scored criteria from this rule. This tool validates the set, not the technological evidence for exclusions. A numeric threshold uses that rule/date/goal. `null` is preserved for unassigned thresholds, including 2026 procurement contexts in the supplied measurement rules.
+
+Tool names and calculation fact input keys remain unchanged. LNG selection and BOM transport remain unsupported and must not be guessed. Unresolved rules remain blocked.

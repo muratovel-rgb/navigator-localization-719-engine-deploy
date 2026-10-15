@@ -20,6 +20,9 @@ function summarizeRule(e) {
     source: e.source,
     scope: e.scope,
     review: e.review,
+    foreignLimit: e.foreignLimit ?? null,
+    thresholdPolicy: e.thresholdPolicy ?? null,
+    periods: e.periods ?? null,
     criteria: e.criteria.map(c => ({
       id: c.id,
       name: c.name,
@@ -29,6 +32,10 @@ function summarizeRule(e) {
       exclusionReasonRequired: !!c.exclusionReasonRequired,
       minMountedPercent: c.minMountedPercent ?? null,
       russianSoftware: !!c.russianSoftware,
+      manufactureOrUse: !!c.manufactureOrUse,
+      originRequired: !!c.originRequired,
+      originTerritories: c.originTerritories ?? null,
+      creditGroup: c.creditGroup,
       evidence: c.evidence ?? null,
       description: c.description ?? null
     }))
@@ -58,7 +65,7 @@ function getRule({ ruleId }) {
 
 function applyFacts(assessment, facts = {}) {
   for (const [criterionId, patch] of Object.entries(facts)) {
-    if (!assessment.facts[criterionId]) throw new Error(`Unknown criterionId: ${criterionId}`);
+    if (!Object.hasOwn(assessment.facts, criterionId)) throw new Error(`Unknown criterionId: ${criterionId}`);
     const allowed = [
       'state','complete','place','documentPresent','reference','executor','performer',
       'applicable','basis','years','origin','originBasis','route','diameterOnly',
@@ -111,10 +118,15 @@ function calculateLocalization(input) {
 
 function thresholdContext({ ruleId, date, goal = 'localization', applicableCriterionIds = null }) {
   const entry = findRule(ruleId);
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) || new Date(date+'T00:00:00Z').toISOString().slice(0,10) !== date) throw new Error('Invalid calendar date');
+  if (!['localization','registry','support','procurement'].includes(goal)) throw new Error('Unknown goal');
   let maximum = entry.maximum ?? null;
   if (entry.method === 'points' && Array.isArray(applicableCriterionIds)) {
     const ids = new Set(applicableCriterionIds);
-    maximum = entry.criteria.filter(c => c.points && ids.has(c.id)).reduce((s,c)=>s+c.points,0);
+    if (ids.size !== applicableCriterionIds.length || [...ids].some(id => !entry.criteria.some(c => c.id === id && c.points > 0))) throw new Error('Expected unique scored criterion IDs from this rule');
+    const groups = new Map();
+    for (const c of entry.criteria.filter(c => c.points && ids.has(c.id))) groups.set(c.creditGroup, Math.max(groups.get(c.creditGroup) || 0, c.points));
+    maximum = [...groups.values()].reduce((s,p)=>s+p,0);
   }
   return {
     engineVersion: E.VERSION,
@@ -134,8 +146,11 @@ function health() {
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
     rules: E.entries.length,
+    calculationRules: E.entries.filter(e => e.method !== 'unresolved').length,
+    unresolvedRules: E.entries.filter(e => e.method === 'unresolved').length,
     ruleIds: E.entries.map(e => e.id)
   };
 }
 
 module.exports = { health, searchRules, getRule, calculateLocalization, thresholdContext };
+

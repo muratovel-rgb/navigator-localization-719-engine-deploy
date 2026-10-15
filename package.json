@@ -1,12 +1,14 @@
 {
   "name": "navigator-localization-719-mcp",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": true,
-  "description": "Deterministic MCP wrapper for Navigator Localization 719 HTML 0.7 calculation engine",
+  "description": "Shared deterministic Navigator 719 core: HTML 0.8 rules and corrected threshold forwarding",
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node test.cjs"
+    "test": "node test.cjs && node regression.cjs",
+    "build:site": "node build-site-modules.cjs",
+    "test:server": "node server-smoke.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -17,3 +19,4 @@
     "zod": "^3.25.0"
   }
 }
+
