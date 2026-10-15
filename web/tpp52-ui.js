@@ -44,7 +44,7 @@ function render(a){
   const state=a.tpp52||T.create(a.id),ready=T.readiness(state);
   box.append(node('p','Автоматическая экспертиза по №52 пока недоступна. Здесь ведутся документы и замечания.','small'));
   box.append(disclosure('Как работает досье',node('p','Файлы остаются у тебя. Сохраняются реквизиты, контрольные суммы и история. Проверки по редакции №52 от 29.07.2026 не активированы; соответствие нормам и решение ТПП автоматически не подтверждаются.','small')));
-  const send=(type,payload)=>{if(ctx.assessment()?.id!==a.id||ctx.assessment()?.revision!==a.revision||JSON.stringify(current())!==JSON.stringify(state))throw Error('Проект изменился. Повтори действие в текущем досье');dispatch(type,payload);};
+  const send=(type,payload)=>{if(type==='package.freeze'&&ctx.ready&&!ctx.ready())throw Error('Сначала сохрани изменения карточки проекта');if(ctx.assessment()?.id!==a.id||ctx.assessment()?.revision!==a.revision||JSON.stringify(current())!==JSON.stringify(state))throw Error('Проект изменился. Повтори действие в текущем досье');dispatch(type,payload);};
   const who=field('Кто вносит запись','tpp52-actor','text',actor);who.input.maxLength=200;who.input.addEventListener('input',()=>{actor=who.input.value;});box.append(who.label);
   box.append(node('p',state.documents.length+' документов · '+state.remarks.length+' замечаний · '+ready.unresolvedRemarkIds.length+' требуют работы','tpp-summary'));
   const docs=node('section');docs.append(node('h3','Документы и версии'));
@@ -67,6 +67,7 @@ function render(a){
   if(!state.documents.length)docs.append(node('p','Документов пока нет. Добавь файл, чтобы связать его с замечанием.','small'));
   for(const d of state.documents){
     const article=node('details',undefined,'tpp-record'),v=d.versions.find(v=>v.id===d.currentVersionId);article.append(node('summary',v.title+' · версий: '+d.versions.length));
+    if(state.documents.flatMap(d=>d.versions).filter(ver=>ver.checksum===v.checksum).length>1)article.append(node('p','Содержимое этого файла совпадает с другой записанной версией. Повторная запись сама по себе не добавляет доказательств.','small'));
     for(const ver of [...d.versions].reverse())article.append(node('p',ver.title+(ver.id===d.currentVersionId?' · текущая версия':' · предыдущая версия')),node('p','Исполнения: '+scopeNames(ver.scope),'small'),node('p',ver.recordedAt+' · '+ver.recordedBy,'small'),node('p',ver.reference||'Место хранения не указано','small'),node('p','SHA-256: '+ver.checksum,'tpp-hash'));
     docs.append(article);
   }
@@ -97,10 +98,11 @@ function render(a){
     action(of,()=>send('remark.official_decision',{remarkId:r.id,decision:decision.input.value,reference:basis.input.value.trim(),evidence:referenceList(current(),selected(orefs))}));official.append(of);record.append(official);remarks.append(record);
   }
   box.append(remarks);
+  root.NavigatorWorkflowUI.render({box,a,state,send,node,field,choose,scopeField,evidencePicker,selected,referenceList,disclosure,action,submit,uid});
   const history=node('details');history.append(node('summary','История изменений · '+state.events.length));
   for(const e of [...state.events].reverse()){
     const types={'document.version':'Версия документа','remark.open':'Открыто замечание','remark.receive':'Получен ответ','remark.review':'Проведена проверка','remark.reopen':'Повторная проверка','remark.official_decision':'Записано внешнее решение'};
-    history.append(node('p',e.at+' · '+e.actor+' · '+types[e.type]),node('p',e.payload.title||e.payload.text||e.payload.answer||e.payload.basis||e.payload.reason||e.payload.reference||'','small'));
+    history.append(node('p',e.at+' · '+e.actor+' · '+(types[e.type]||({'request.open':'Создан запрос','request.receive':'Получен ответ на запрос','request.review':'Проверен ответ','request.amend':'Изменён срок или ответственный','origin.record':'Записан объект происхождения','origin.review':'Проверено происхождение','workflow.recheck':'Повторная проверка оснований','package.freeze':'Сохранён состав пакета','official.event':'Записано внешнее событие'}[e.type])||e.type)),node('p',e.payload.title||e.payload.label||e.payload.text||e.payload.answer||e.payload.basis||e.payload.reason||e.payload.reference||'','small'));
   }box.append(history);
 }
 root.Tpp52UI={init:config=>{ctx=config;},render};

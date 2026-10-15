@@ -13,8 +13,8 @@
     },
     {
       "id": "G02",
-      "status": "partial",
-      "evidenceOrGap": "Remark and reply history exists; structured request register and deadlines are pending"
+      "status": "implemented",
+      "evidenceOrGap": "Addressed request, explicit due date and owner, answer/review/recheck in workflow core and DOM tests"
     },
     {
       "id": "G03",
@@ -23,18 +23,18 @@
     },
     {
       "id": "G04",
-      "status": "missing",
-      "evidenceOrGap": "Component classification register is not yet part of dossier-only projects"
+      "status": "partial",
+      "evidenceOrGap": "Origin objects record candidate codes and separate object kinds; statutory classification remains gated"
     },
     {
       "id": "G05",
       "status": "partial",
-      "evidenceOrGap": "Unknown origin is not automatically Russian; structured component-origin model is pending"
+      "evidenceOrGap": "Separate object/ancestor status, documentary basis and scope checks implemented; actual client proof remains open"
     },
     {
       "id": "G06",
       "status": "partial",
-      "evidenceOrGap": "Manufacturer documents can be recorded; component supply-chain graph is pending"
+      "evidenceOrGap": "Cycle-free supplier/manufacturer/batch graph and descendant recheck implemented; primary chain documents not fully accepted"
     },
     {
       "id": "G07",
@@ -43,8 +43,8 @@
     },
     {
       "id": "G08",
-      "status": "missing",
-      "evidenceOrGap": "Per-variant GISP application and signature/send events are pending"
+      "status": "implemented",
+      "evidenceOrGap": "Per-variant application/signature/submission events can be recorded with source evidence; no live GISP API or automatic authenticity check"
     },
     {
       "id": "G09",
@@ -88,13 +88,13 @@
     },
     {
       "id": "G17",
-      "status": "missing",
-      "evidenceOrGap": "Frozen submitted-package manifest is pending"
+      "status": "implemented",
+      "evidenceOrGap": "Frozen local package contains exact document versions, project revision, then-current remarks/requests/origins; later edits do not change it"
     },
     {
       "id": "G18",
-      "status": "missing",
-      "evidenceOrGap": "Confirmed official submission event model is pending"
+      "status": "partial",
+      "evidenceOrGap": "Submission evidence can be recorded separately per package/variant; actual external authenticity remains unverified"
     },
     {
       "id": "G19",
@@ -103,28 +103,33 @@
     },
     {
       "id": "G20",
-      "status": "missing",
-      "evidenceOrGap": "Separate official act and registry-record result types are pending"
+      "status": "implemented",
+      "evidenceOrGap": "TPP_ACT and REGISTRY_ENTRY are distinct, registry record requires recorded submission scope"
     },
     {
       "id": "G21",
-      "status": "partial",
-      "evidenceOrGap": "No automatic origin confirmation; structured raw-material/component distinction is pending in project UI"
+      "status": "implemented",
+      "evidenceOrGap": "RAW_MATERIAL and PART separated; raw-only status never automatically approves child object"
     },
     {
       "id": "G22",
       "status": "partial",
-      "evidenceOrGap": "Candidate applicability remains unresolved; component legacy-code routing is pending in project UI"
+      "evidenceOrGap": "Legacy 28.14.20.000 receives a review warning; automated legal routing remains pending"
     },
     {
       "id": "G23",
       "status": "partial",
-      "evidenceOrGap": "Event IDs are idempotent; repeated-file checksum review policy is pending"
+      "evidenceOrGap": "Idempotent events retained; matching file checksums shown as duplicate content, no independent proof inferred"
     },
     {
       "id": "G24",
-      "status": "partial",
-      "evidenceOrGap": "Project summaries and individual JSON export exist; structured client status report is pending"
+      "status": "implemented",
+      "evidenceOrGap": "Per-project text status report includes open requests, owners, dates and distinct submission/act/registry counts"
     }
-  ]
+  ],
+  "technicalWorkflowPassed": true,
+  "coreWorkflowChecks": 26,
+  "domWorkflowChecks": 14,
+  "actualClientSourceInventoryStarted": true,
+  "actualClientSourceContentsInRepository": false
 }

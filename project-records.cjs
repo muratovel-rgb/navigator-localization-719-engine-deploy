@@ -23,6 +23,7 @@ function valid(p){
     if(!isProject(p)||p.projectSchemaVersion!==SCHEMA||!id(p.id)||Object.hasOwn(p,'entryId')||!validMetadata(p)||!T.validOptional(p))return false;
     const variants=new Set(p.variants.map(v=>v.id));
     if(p.tpp52 && (!p.tpp52.documents.every(d=>d.versions.every(v=>v.scope.every(s=>variants.has(s))))||!p.tpp52.remarks.every(r=>r.scope.every(s=>variants.has(s)))))return false;
+    if(p.tpp52&&[...(p.tpp52.requests||[]),...(p.tpp52.origins||[]),...(p.tpp52.packages||[]),...(p.tpp52.officialEvents||[])].some(x=>!x.scope.every(s=>variants.has(s))))return false;
     if(!Array.isArray(p.projectHistory)||p.projectHistory.length<1||p.projectHistory.length>200||new Set(p.projectHistory.map(h=>h.id)).size!==p.projectHistory.length)return false;
     let previous=null;
     for(let i=0;i<p.projectHistory.length;i++){
@@ -31,6 +32,7 @@ function valid(p){
       if(previous&&!previous.snapshot.variants.every(v=>h.snapshot.variants.some(n=>n.id===v.id)))return false;
       previous=h;
     }
+    if(p.tpp52?.packages?.some(k=>!p.projectHistory[k.projectRevision-1]||canonical(k.projectSnapshot)!==canonical(p.projectHistory[k.projectRevision-1].snapshot)))return false;
     return p.revision===p.projectHistory.length&&canonical(metadata(p))===canonical(previous.snapshot);
   }catch{return false;}
 }
@@ -58,6 +60,7 @@ function update(project,fields,event){
   const newBasis={product:next.product,manufacturer:next.manufacturer,variants:next.variants,positions:next.positions};
   if(canonical(oldBasis)!==canonical(newBasis)&&next.tpp52){
     for(const [i,r] of next.tpp52.remarks.entries())next.tpp52=T.apply(next.tpp52,{id:event.id+'-recheck-'+i,at:event.at,actor:event.actor,type:'remark.reopen',payload:{remarkId:r.id,reason:'Изменились изделие, изготовитель, исполнения или позиции для проверки. Нужна повторная проверка.'}});
+    if(next.tpp52.requests?.length||next.tpp52.origins?.length)next.tpp52=T.apply(next.tpp52,{id:event.id+'-workflow',at:event.at,actor:event.actor,type:'workflow.recheck',payload:{reason:'Изменились исходные сведения проекта. Повтори проверку запросов и происхождения.'}});
   }
   next.revision++;
   next.projectHistory.push({id:event.id,revision:next.revision,at:event.at,actor:event.actor,snapshot:metadata(next)});

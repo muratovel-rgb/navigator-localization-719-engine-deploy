@@ -11,6 +11,7 @@ const text = (v, max = 5000) => typeof v === 'string' && v.trim().length > 0 && 
 const id = v => typeof v === 'string' && /^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$/.test(v);
 const list = v => Array.isArray(v) && v.length <= 100 && v.every(id) && new Set(v).size === v.length;
 const scopes = v => Array.isArray(v) && v.length > 0 && v.length <= 100 && v.every(x => text(x, 120)) && new Set(v).size === v.length;
+const date = v => typeof v === 'string' && /^\d{4}-\d\d-\d\d$/.test(v) && !Number.isNaN(Date.parse(v)) && new Date(v).toISOString().slice(0,10) === v;
 function demand(ok, reason) { if (!ok) throw new Error(reason); }
 function create(assessmentId) {
   demand(id(assessmentId), 'Invalid assessment id');
@@ -28,6 +29,21 @@ function evidenceRefs(state, refs, currentOnly) {
     demand(version && (!currentOnly || doc.currentVersionId === version.id), 'Missing or superseded evidence');
     return {documentId: doc.id, versionId: version.id};
   });
+}
+function covered(state, refs, scope) {
+  const all=new Set(refs.flatMap(ref=>state.documents.find(d=>d.id===ref.documentId).versions.find(v=>v.id===ref.versionId).scope));
+  return scope.every(s=>all.has(s));
+}
+function recordingDate(event,p){
+  const day=p.recordedLocalDate||event.at.slice(0,10),utc=Date.parse(event.at);
+  demand(date(day)&&day>=new Date(utc-12*3600000).toISOString().slice(0,10)&&day<=new Date(utc+14*3600000).toISOString().slice(0,10),'Invalid recording date');
+  return day;
+}
+function invalidateWorkflow(next, reason, documentId) {
+  for(const r of next.requests||[])if(!documentId||r.evidence.some(e=>e.documentId===documentId)||r.review?.evidence.some(e=>e.documentId===documentId)) {r.status='REOPENED';r.recheckReason=reason;}
+  const changed=new Set((next.origins||[]).filter(o=>!documentId||o.evidence.some(e=>e.documentId===documentId)||o.review?.evidence.some(e=>e.documentId===documentId)).map(o=>o.id));
+  let repeat=true;while(repeat){repeat=false;for(const o of next.origins||[])if(!changed.has(o.id)&&o.parentIds.some(id=>changed.has(id))){changed.add(o.id);repeat=true;}}
+  for(const o of next.origins||[])if(changed.has(o.id)){o.status='LEGAL_REVIEW_REQUIRED';o.recheckReason=reason;}
 }
 function reduce(state, event) {
   demand(event && id(event.id) && text(event.actor, 200), 'Invalid event identity');
@@ -56,6 +72,7 @@ function reduce(state, event) {
           // of the replacement document.
         }
       }
+      if(oldVersion)invalidateWorkflow(next,'Document version changed',doc.id);
       break;
     }
     case 'remark.open': {
@@ -101,6 +118,80 @@ function reduce(state, event) {
       // Recording an external decision does not fabricate an internal review.
       break;
     }
+    case 'request.open': {
+      next.requests ||= [];
+      demand(id(p.requestId)&&!next.requests.some(r=>r.id===p.requestId)&&next.requests.length<200,'Invalid request');
+      demand(['title','reason','object','recipientRole','recipient','owner'].every(k=>text(p[k]))&&date(p.dueDate)&&scopes(p.scope),'Request fields required');
+      demand(p.remarkId===''||next.remarks.some(r=>r.id===p.remarkId),'Unknown request remark');
+      next.requests.push({id:p.requestId,title:p.title,reason:p.reason,object:p.object,recipientRole:p.recipientRole,recipient:p.recipient,owner:p.owner,dueDate:p.dueDate,scope:clone(p.scope),remarkId:p.remarkId,status:'OPEN',answer:'',evidence:[],review:null,recheckReason:'',openedAt:event.at});break;
+    }
+    case 'request.receive': {
+      const r=next.requests?.find(r=>r.id===p.requestId);demand(r&&text(p.answer),'Request answer required');
+      r.answer=p.answer;r.evidence=evidenceRefs(next,p.evidence,true);r.status='ANSWER_RECEIVED';break;
+    }
+    case 'request.review': {
+      const r=next.requests?.find(r=>r.id===p.requestId);demand(r&&text(r.answer)&&text(p.basis)&&['ACCEPTED','PARTIAL','REJECTED'].includes(p.result),'Request review required');
+      const refs=evidenceRefs(next,p.evidence,true);
+      demand(p.result!=='ACCEPTED'||(refs.length>0&&covered(next,refs,r.scope)),'Request evidence does not cover scope');
+      r.evidence=refs;r.review={at:event.at,actor:event.actor,basis:p.basis,result:p.result,evidence:clone(refs)};
+      r.status=p.result==='ACCEPTED'?'REVIEWED':p.result;r.recheckReason='';break;
+    }
+    case 'request.amend': {
+      const r=next.requests?.find(r=>r.id===p.requestId);demand(r&&text(p.owner)&&date(p.dueDate)&&text(p.reason),'Request amendment required');
+      r.owner=p.owner;r.dueDate=p.dueDate;break;
+    }
+    case 'origin.record': {
+      next.origins ||= [];
+      demand(id(p.nodeId)&&['RAW_MATERIAL','BLANK','PART','ASSEMBLY','PRODUCT'].includes(p.kind)&&text(p.label,500)&&scopes(p.scope),'Invalid origin object');
+      demand(['designation','code','supplier','manufacturer','batch','delivery','operations','operationDates'].every(k=>typeof p[k]==='string'&&p[k].length<=5000),'Origin fields required');
+      demand(list(p.parentIds)&&p.parentIds.every(id=>id!==p.nodeId&&next.origins.some(o=>o.id===id)),'Unknown origin parent');
+      const descendants=new Set([p.nodeId]);let repeat=true;while(repeat){repeat=false;for(const o of next.origins)if(!descendants.has(o.id)&&o.parentIds.some(id=>descendants.has(id))){descendants.add(o.id);repeat=true;}}
+      demand(!p.parentIds.some(id=>descendants.has(id)),'Origin chain cycle');
+      const refs=evidenceRefs(next,p.evidence,true),old=next.origins.find(o=>o.id===p.nodeId);
+      demand(old||next.origins.length<300,'Origin object limit');
+      for(const o of next.origins)if(descendants.has(o.id)){o.status='LEGAL_REVIEW_REQUIRED';o.recheckReason='Origin object changed';}
+      const record={id:p.nodeId,kind:p.kind,label:p.label,scope:clone(p.scope),parentIds:clone(p.parentIds),evidence:refs,status:'COMPONENT_ORIGIN_UNCONFIRMED',review:old?.review||null,recheckReason:old?'Origin object changed':'',recordedAt:event.at};
+      for(const k of ['designation','code','supplier','manufacturer','batch','delivery','operations','operationDates'])record[k]=p[k];
+      if(old)Object.assign(old,record);else next.origins.push(record);break;
+    }
+    case 'origin.review': {
+      const o=next.origins?.find(o=>o.id===p.nodeId);
+      demand(o&&['RUS_CONFIRMED','RUS_RAW_MATERIAL_ONLY','COMPONENT_ORIGIN_UNCONFIRMED','FOREIGN','LEGAL_REVIEW_REQUIRED'].includes(p.status)&&text(p.basis),'Origin review required');
+      const refs=evidenceRefs(next,p.evidence,true);
+      demand(['classificationBasis','objectBasis','traceBasis'].every(k=>p[k]===undefined||(typeof p[k]==='string'&&p[k].length<=5000)),'Invalid origin basis');
+      if(['RUS_CONFIRMED','RUS_RAW_MATERIAL_ONLY','FOREIGN'].includes(p.status))demand(refs.length>0&&covered(next,refs,o.scope),'Origin evidence does not cover scope');
+      if(p.status==='RUS_CONFIRMED'){
+        demand(text(p.classificationBasis)&&text(p.objectBasis)&&text(p.traceBasis)&&text(o.batch),'Object origin basis required');
+        // This records a human conclusion for this object. It must not impose
+        // a made-up statutory ban on foreign or unresolved input materials.
+        // Chain completeness is displayed independently from object origin.
+      }
+      o.status=p.status;o.evidence=refs;o.review={at:event.at,actor:event.actor,status:p.status,basis:p.basis,classificationBasis:p.classificationBasis||'',objectBasis:p.objectBasis||'',traceBasis:p.traceBasis||'',evidence:clone(refs)};o.recheckReason='';
+      // A parent's review never approves its descendants. Recheck old conclusions.
+      const affected=new Set([o.id]);let repeat=true;while(repeat){repeat=false;for(const child of next.origins)if(!affected.has(child.id)&&child.parentIds.some(id=>affected.has(id))){affected.add(child.id);child.status='LEGAL_REVIEW_REQUIRED';child.recheckReason='Parent origin review changed';repeat=true;}}
+      break;
+    }
+    case 'workflow.recheck': {
+      demand(text(p.reason),'Workflow recheck reason required');invalidateWorkflow(next,p.reason);break;
+    }
+    case 'package.freeze': {
+      next.packages ||= [];
+      demand(id(p.packageId)&&!next.packages.some(k=>k.id===p.packageId)&&next.packages.length<100&&text(p.title,500)&&scopes(p.scope),'Invalid package');
+      demand(Number.isInteger(p.projectRevision)&&p.projectRevision>=0&&p.projectSnapshot&&typeof p.projectSnapshot==='object'&&!Array.isArray(p.projectSnapshot),'Project snapshot required');
+      const refs=evidenceRefs(next,p.evidence,true);demand(refs.length>0&&covered(next,refs,p.scope),'Package evidence does not cover scope');
+      next.packages.push({id:p.packageId,title:p.title,scope:clone(p.scope),frozenAt:event.at,frozenOn:recordingDate(event,p),frozenBy:event.actor,projectRevision:p.projectRevision,projectSnapshot:clone(p.projectSnapshot),documents:refs.map(ref=>({documentId:ref.documentId,...clone(next.documents.find(d=>d.id===ref.documentId).versions.find(v=>v.id===ref.versionId))})),remarks:clone(next.remarks),requests:clone(next.requests||[]),origins:clone(next.origins||[]),legalReadiness:'NOT_EVALUATED'});break;
+    }
+    case 'official.event': {
+      next.officialEvents ||= [];
+      const pack=next.packages?.find(k=>k.id===p.packageId);
+      demand(id(p.officialId)&&!next.officialEvents.some(e=>e.id===p.officialId)&&next.officialEvents.length<500&&pack,'Invalid official event');
+      demand(['APPLICATION_CREATED','SIGNED','SUBMITTED','RETURNED','TPP_ACT','REGISTRY_ENTRY','REJECTED'].includes(p.kind)&&['GISP','TPP','MINPROMTORG'].includes(p.authority)&&text(p.number)&&text(p.reference)&&date(p.date)&&scopes(p.scope)&&p.scope.every(s=>pack.scope.includes(s)),'Official event fields required');
+      demand(p.date<=recordingDate(event,p),'Official event date in future');
+      demand((p.kind!=='TPP_ACT'||p.authority==='TPP')&&(p.kind!=='REGISTRY_ENTRY'||p.authority==='MINPROMTORG'),'Official authority mismatch');
+      const refs=evidenceRefs(next,p.evidence,true);demand(refs.length>0&&covered(next,refs,p.scope),'Official evidence required');
+      if(p.kind==='REGISTRY_ENTRY')demand(next.officialEvents.some(e=>e.kind==='SUBMITTED'&&e.packageId===pack.id&&e.date<=p.date&&p.scope.every(s=>next.officialEvents.some(x=>x.kind==='SUBMITTED'&&x.packageId===pack.id&&x.date<=p.date&&x.scope.includes(s)))),'Recorded submission required');
+      next.officialEvents.push({id:p.officialId,packageId:pack.id,kind:p.kind,authority:p.authority,number:p.number,reference:p.reference,date:p.date,scope:clone(p.scope),evidence:refs,recordedAt:event.at,recordedBy:event.actor,authenticity:'NOT_AUTOMATICALLY_VERIFIED',packageRelationship:p.date<pack.frozenOn?'RETROSPECTIVE_RECORD':'CONTEMPORARY_RECORD'});break;
+    }
     default: throw new Error('Unsupported event type');
   }
   next.events.push(clone(event));
@@ -143,7 +234,7 @@ function readiness(dossier) {
   return {workflowVersion: SCHEMA, unresolvedRemarkIds: open, allRecordedRemarksReviewed: dossier.remarks.length > 0 && open.length === 0,
     legalReadiness: 'NOT_EVALUATED', productionReadiness: 'NOT_EVALUATED', officialOutcome: 'NOT_INFERRED'};
 }
-const api = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness};
+const api = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness, canonical};
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 else root.Tpp52Dossier = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

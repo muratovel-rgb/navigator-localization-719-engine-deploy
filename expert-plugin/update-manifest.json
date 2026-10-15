@@ -7,5 +7,10 @@
   "privateSourcePolicy": "Only the generic component-origin instruction diff is mirrored. Client case-source text stays in the existing private Plugin.",
   "updateFileCount": 10,
   "normativeFormulasChanged": false,
-  "mcpConnectionChanged": false
+  "mcpConnectionChanged": false,
+  "pendingSourceChanges": [
+    "skills/localization-719/references/16_runtime_workflow.md"
+  ],
+  "pendingCompatibilityTarget": "HTML 0.9.0",
+  "pendingChangesPublished": false
 }

@@ -126,7 +126,7 @@
   $('import-dialog').addEventListener('cancel',()=>{pendingImport=null;});
   $('import-file').addEventListener('change',async()=>{const file=$('import-file').files[0];if(!file)return;try{if(file.size>5000000)throw Error('Файл JSON больше 5 МБ');importData(JSON.parse(await file.text()));}catch(err){notice('Импорт не выполнен. '+err.message+'. Текущие данные сохранены.');}$('import-file').value='';});
   $('migrate-browser').addEventListener('click',()=>{try{importData(JSON.parse(localStorage.getItem('localization-prototype-v1')));}catch(err){notice('Перенос не выполнен. '+err.message+'. Исходные данные сохранены.');}});
-  Tpp52UI.init({assessment:()=>a,notice,commit:next=>{
+  Tpp52UI.init({assessment:()=>a,notice,ready:()=>!projectDirty,commit:next=>{
     const previous=a.tpp52;a.tpp52=next;const ok=save();
     if(!ok){if(previous===undefined)delete a.tpp52;else a.tpp52=previous;}
     return ok;
