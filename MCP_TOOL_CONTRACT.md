@@ -39,3 +39,6 @@ For an alternative criterion choose `route=manufacture` with Russian production 
 `applicableCriterionIds` is the complete set of included scored criteria. IDs must be unique scored criteria from this rule. This tool validates the set, not the technological evidence for exclusions. A numeric threshold uses that rule/date/goal. `null` is preserved for unassigned thresholds, including 2026 procurement contexts in the supplied measurement rules.
 
 Tool names and calculation fact input keys remain unchanged. LNG selection and BOM transport remain unsupported and must not be guessed. Unresolved rules remain blocked.
+
+## Full-index search in 0.4.0
+Search results include indexed positions in addition to prepared calculations. Choose by code, purpose and characteristics. Use limit/offset and nextOffset to read all candidates. Use resultType and calculationAvailable; never treat every indexed ID as an implemented calculation. get_localization_rule accepts a prepared ID or indexed position ID and returns the exact indexedPosition text and provenance. A search miss does not establish absence in PP719. fullLegalCoverageVerified is false for this imported baseline.

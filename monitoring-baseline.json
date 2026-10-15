@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "indexVersion": "719-index-2026-10-14-v2",
+  "importedFrom": "localization-prototype-v0.8-source.zip",
+  "indexSha256": "d9de0bb27055abf9f4db7b11790c9ba6fc9a74f3f1636789409fc5acd2602bc4",
+  "indexRows": 787,
+  "sections": 29,
+  "fullLegalCoverageVerified": false,
+  "lastLegalSnapshot": "2026-10-14",
+  "cadence": "quarterly",
+  "scheduledMonths": [
+    1,
+    4,
+    7,
+    10
+  ],
+  "firstScheduledReview": "2027-01-01",
+  "reviewScope": [
+    "classification",
+    "positions",
+    "group context",
+    "footnotes",
+    "operations",
+    "points",
+    "cost criteria",
+    "effective dates"
+  ],
+  "publicationGate": "source verification, impact review and regression tests; ambiguous positions remain blocked"
+}

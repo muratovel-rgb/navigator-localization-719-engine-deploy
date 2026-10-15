@@ -69,3 +69,9 @@ node build-site-modules.cjs /absolute/path/to/existing-site/lib/navigator
 ```
 
 The generator performs checked module-format replacements, copies rule data and records SHA-256 source/output hashes. Do not edit generated files manually. The Site runs these generated modules locally; it is not a transparent Render proxy. Both interfaces must be built from the same source revision.
+
+## Full-index search, service 0.4.0
+
+search_localization_rules now searches all 787 positions from the existing HTML index (29 sections) plus the prepared rule catalog. It accepts optional limit (1–100, default 20) and offset. nextOffset paginates broad queries. Results distinguish prepared_rule from indexed_position and disclose calculationAvailable. Indexed position IDs can be passed to get_localization_rule for full source text, editorial notes, context and effective-period fields. A prepared mapped position resolves to its prepared rule; otherwise calculation remains blocked and no threshold is invented.
+
+Health separates indexedPositions=787, indexedSections=29, calculationRules=9, unresolvedRules=2 and legacy catalog rules=11. fullLegalCoverageVerified remains false. Data are transferred unchanged from HTML 0.8; missing context and uncertain dates are not silently repaired. The import expands retrieval coverage, not verified computational coverage.
