@@ -58,7 +58,8 @@ function searchRules({ query, limit=20, offset=0 }) {
     calculationRuleId:E.entries.some(e=>e.id===p.entryId)?p.entryId:null,
     calculationAvailable:E.entries.some(e=>e.id===p.entryId&&e.method!=='unresolved'),
     normativeStatus:p.status,verified:p.verified,effectivePeriod:p.effectivePeriod,
-    sourceSnapshotDate:p.sourceSnapshotDate,textNeedsContext:p.textNeedsContext,codeInherited:p.codeInherited
+    sourceSnapshotDate:p.sourceSnapshotDate,textNeedsContext:p.textNeedsContext,codeInherited:p.codeInherited,
+    sourceContextStatus:I.context(p.id)?.status??'unmatched'
   }));
   const results=[...prepared,...indexed];
   return {
@@ -78,7 +79,7 @@ function getRule({ ruleId }) {
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
     rule: summarizeRule(findRule(ruleId)),
-    ...(I.byId.has(ruleId)?{indexedPosition:I.byId.get(ruleId),indexVersion:I.data.version,calculationAvailable:findRule(ruleId).method!=='unresolved'}:{})
+    ...(I.byId.has(ruleId)?{indexedPosition:I.byId.get(ruleId),indexVersion:I.data.version,calculationAvailable:findRule(ruleId).method!=='unresolved',requirementContext:I.context(ruleId)}:{})
   };
 }
 
@@ -164,7 +165,7 @@ function health() {
     ok: true,
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
-    serviceVersion: '0.4.0',
+    serviceVersion: '0.4.1',
     ...I.metadata(),
     rules: E.entries.length,
     calculationRules: E.entries.filter(e => e.method !== 'unresolved').length,

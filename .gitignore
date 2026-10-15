@@ -1,2 +1,4 @@
 node_modules/
 generated-site/
+table-context-audit.json
+__pycache__/

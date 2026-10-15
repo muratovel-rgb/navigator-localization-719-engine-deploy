@@ -1,12 +1,12 @@
 {
   "name": "navigator-localization-719-mcp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "description": "Shared deterministic Navigator 719 core: HTML 0.8 rules and corrected threshold forwarding",
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node test.cjs && node regression.cjs && node index-tests.cjs",
+    "test": "node test.cjs && node regression.cjs && node index-tests.cjs && node context-tests.cjs",
     "build:site": "node build-site-modules.cjs",
     "test:server": "node server-smoke.mjs"
   },
@@ -19,4 +19,3 @@
     "zod": "^3.25.0"
   }
 }
-

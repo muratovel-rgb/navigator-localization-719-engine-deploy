@@ -6,7 +6,7 @@
   "indexRows": 787,
   "sections": 29,
   "fullLegalCoverageVerified": false,
-  "lastLegalSnapshot": "2026-10-14",
+  "lastLegalSnapshot": null,
   "cadence": "quarterly",
   "scheduledMonths": [
     1,
@@ -25,5 +25,11 @@
     "cost criteria",
     "effective dates"
   ],
-  "publicationGate": "source verification, impact review and regression tests; ambiguous positions remain blocked"
+  "publicationGate": "source verification, impact review and regression tests; ambiguous positions remain blocked",
+  "indexAssembledAt": "2026-10-14",
+  "sourceSnapshotDates": [
+    "2026-10-06",
+    "2026-10-14"
+  ],
+  "lastVerifiedLegalReview": null
 }
