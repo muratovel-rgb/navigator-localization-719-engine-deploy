@@ -1,0 +1,30 @@
+{
+  "approval": {
+    "tableApprovedByUser": false,
+    "specificTableId": null
+  },
+  "officialChainVerified": false,
+  "acceptedEffectiveDates": {
+    "2026-10-05-1297": null,
+    "2026-09-29-1257": null,
+    "2026-07-29-64": null
+  },
+  "reported1297Dates": [
+    "2026-10-16",
+    "2026-10-17"
+  ],
+  "productionActivation": false,
+  "productionDeployed": false,
+  "clientDataTransmitted": false,
+  "clientProjectAssessment": "not_performed_no_current_dossiers_loaded",
+  "singleAcceptedRuleSet": "No runtime rule files modified; new candidates exist only under audits/2026-10-16",
+  "remainingGaps": [
+    "Official full text and complete amendment chain for 719",
+    "Official TPP control text and all changing orders for 52",
+    "Resolve 1297 effective-date conflict",
+    "Disambiguate structural matches and publisher differences",
+    "Review original images, merged cells and all general notes",
+    "Re-evaluate current client dossiers locally using accepted rules only",
+    "Verify all deployed consumers against one accepted manifest before any release"
+  ]
+}

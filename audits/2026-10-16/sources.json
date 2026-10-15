@@ -1,0 +1,850 @@
+[
+  {
+    "id": "I",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/c5cbf66646c36b556c785729a8b328aa9d3ebe62/",
+    "retrievedAt": "2026-10-15T17:41:22.000308+00:00",
+    "status": 200,
+    "bytes": 218398,
+    "sha256": "bff2e72588866daf993410199c241f748b34129ad1d7c0ed4d4c8a2d3b14b463",
+    "title": "I. Продукция станкоинструментальной промышленности \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/I.html",
+      "sha256": "47beb7d0a31cd9fe58c13bccedbb1da338248bd9e1f22ea4ae13af324db95f2a",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "II",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/b0c544bca128eb1e1b05c84e3c781ec577765fc4/",
+    "retrievedAt": "2026-10-15T17:41:22.001035+00:00",
+    "status": 200,
+    "bytes": 263228,
+    "sha256": "013ca09cf0e3c7e5dedb969bd56b56bb9915fd0d201a024e2494630e0e9a1ed0",
+    "title": "II. Продукция автомобилестроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/II.html",
+      "sha256": "7879d6d2bd8b13d0767c45999cce6144e8a0cdd0e2f4f5d630da8483da909ed7",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "III",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/bb688cdf5b25bfd2fa91a7983d42e875e90326b0/",
+    "retrievedAt": "2026-10-15T17:41:22.001516+00:00",
+    "status": 200,
+    "bytes": 259395,
+    "sha256": "b4ecfcfef7801af8136e4b9cff41540d709e9b71ac3117bff7fca87b17b0d025",
+    "title": "III. Продукция отрасли специального машиностроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/III.html",
+      "sha256": "cc1412d467bb69274b616a50bd2f44f3d1e2f9d591c0d76c1461ed67db900378",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "IV",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/ac7e6594399db8356bd452aff17dc6b97d529913/",
+    "retrievedAt": "2026-10-15T17:41:22.001991+00:00",
+    "status": 200,
+    "bytes": 142906,
+    "sha256": "45fc416c0cc06a3fa248e339a5237e4fb95d4b9a31898589bc432a2c14a9a539",
+    "title": "IV. Продукция отрасли фотоники и светотехники \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/IV.html",
+      "sha256": "3d1de8b75124ea4c13fa54818e3c27a5512c90d4a415260cb75911a9b91f853a",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "V",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/509293a94a2478ecbb038e23fcd82931d6886c18/",
+    "retrievedAt": "2026-10-15T17:41:22.003022+00:00",
+    "status": 200,
+    "bytes": 276295,
+    "sha256": "cd8f361db80d50fe54535182e4bdef536b1de0a2a8b1bf43713ef6323421ebc4",
+    "title": "V. Продукция энергетического машиностроения, электротехнической и кабельной промышленности \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/V.html",
+      "sha256": "5a2b1bb02bf5b2c4fc17cd1a6cb2ae3f10fdaffc6b8fa0a54e04ab11689b7418",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "VI",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/802ab1cf50833250ea937ba6383350c1bc1972a2/",
+    "retrievedAt": "2026-10-15T17:41:22.004650+00:00",
+    "status": 200,
+    "bytes": 165952,
+    "sha256": "5a652caf2bce5eb8be18ebbe4aa373c430734e83093d907813b0d3842ada3e0c",
+    "title": "VI. Продукция тяжелого машиностроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/VI.html",
+      "sha256": "dbecba04b6b0669f03862d4d38297ba295b07e22f907c02fc961df79dafd9619",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "VII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/9753a26e40eb658d454896cd522298b7a188dc54/",
+    "retrievedAt": "2026-10-15T17:41:22.005479+00:00",
+    "status": 200,
+    "bytes": 241468,
+    "sha256": "0c23782a55a64806401e6bed3f275727f9ea0d69fca05552c0874f6c81b4a4f1",
+    "title": "VII. Медицинские изделия \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/VII.html",
+      "sha256": "596ad9bafb5d44d72f945b5ada49ca3ef1b9414167a943c5b24dc5a88f58794e",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "VIII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/032d05e7f9559050b9c4c63d13802eee23b53e93/",
+    "retrievedAt": "2026-10-15T17:41:22.006182+00:00",
+    "status": 200,
+    "bytes": 41082,
+    "sha256": "04b61fdbad6712040602427f6488c39ef6642d71e48af6cae7e0a8f0c4421877",
+    "title": "VIII. Фармацевтическая продукция \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/VIII.html",
+      "sha256": "ae1f01a560f529fbf790257f79473482e384f3b32b2ca11645801915b5d1bb43",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "IX",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/bd619500675e317ea6264602152bfd3a9bf6e1f3/",
+    "retrievedAt": "2026-10-15T17:41:33.769028+00:00",
+    "status": 200,
+    "bytes": 268138,
+    "sha256": "a9272f205ec61b3513c34d67381cde226b24d999e8deb4ab91a7562b890273f0",
+    "title": "IX. Продукция радиоэлектроники \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/IX.html",
+      "sha256": "abee62a9228ecad27aab5560a9b4338a7aa96def6e2888844284eb1eb20a9a37",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "X",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/1ca869c577b5b8d22b30c26dac3fe73801ab6fb1/",
+    "retrievedAt": "2026-10-15T17:41:33.833744+00:00",
+    "status": 200,
+    "bytes": 36557,
+    "sha256": "52c15830bbb68271d2db96cca3992a374263166fb05c330d819f9a7ccb00e272",
+    "title": "X. Продукция промышленности строительных материалов \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/X.html",
+      "sha256": "8de25e2a6f0af2d59e69ca51fb3465a7a0ddedee1e25c711bbdf6e4189a0164a",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XI",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/1eac6d2f752cbc8b6567d27a50f1bf14dc5a1f86/",
+    "retrievedAt": "2026-10-15T17:41:33.958373+00:00",
+    "status": 200,
+    "bytes": 54102,
+    "sha256": "30b463b0a3e3326d00c2f70070ab8ab5bc1eda3704835fa1ba13d90f5aae8501",
+    "title": "XI. Продукция мебельной и деревообрабатывающей промышленности \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XI.html",
+      "sha256": "f9db383eb45ec5e9ff78d6c4e01e2044ef5ec1726b8f28097f0ecff49413e4c7",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/d0ac47c26266bfe0a06f8801770eeffcf08fda17/",
+    "retrievedAt": "2026-10-15T17:41:33.964762+00:00",
+    "status": 200,
+    "bytes": 54500,
+    "sha256": "4ea15b9f5384424f6b27c0a0788be72b9886269ffa536616b76b04fb6d092a5f",
+    "title": "XII. Продукция железнодорожного машиностроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XII.html",
+      "sha256": "ac6529ccfc150acb2d2ccccc26a647cfe7506230fbc09ecc69d0bcb53be3d194",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XIII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/7a0353e11825617a0c1e5802db1c729d85dc3181/",
+    "retrievedAt": "2026-10-15T17:41:34.160927+00:00",
+    "status": 200,
+    "bytes": 39308,
+    "sha256": "3b91a7105eb59b2252f5acc00cdb4b845beacb03baa0db200c1bda6b05b50e2e",
+    "title": "XIII. Продукция арматуростроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XIII.html",
+      "sha256": "3e2eb8117bf295c65b0d68dacc7277b844fd29b761f21db3688ad0d166351f60",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XIV",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/784a1b57f19041b3d3d9bd171646bd9ba55f5858/",
+    "retrievedAt": "2026-10-15T17:41:35.401809+00:00",
+    "status": 200,
+    "bytes": 46496,
+    "sha256": "c88063b2e0603e469f15a8c1679869dd0d9fa4788d42c5e2e511fd1ee3697c0f",
+    "title": "XIV. Вещества химические, используемые при добыче и переработке полезных ископаемых \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XIV.html",
+      "sha256": "5802592ffb68781f6586933fba52cdc11f78ccc54e8c7af695892b249f34cfa3",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XV",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/ff9ba7f01fa218b91bac57e9efac6506cc79b2b0/",
+    "retrievedAt": "2026-10-15T17:41:35.436964+00:00",
+    "status": 200,
+    "bytes": 89666,
+    "sha256": "ea0b0dc078ee95b75bfe6bbd5dd8740854b5680ed1a4c193cd72ee65f7ada57a",
+    "title": "XV. Отдельные виды технологического оборудования для подготовки, хранения и переработки углеводородов \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XV.html",
+      "sha256": "fd91a30c812b9a0c7a2b4c35c89b74d72a1f08d5f4bc9bb692b2134ca743ce01",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XVI",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/73dc15f46878da2029d1358645232bb2b77e31f4/",
+    "retrievedAt": "2026-10-15T17:41:35.921099+00:00",
+    "status": 200,
+    "bytes": 226441,
+    "sha256": "1f993f93bef4119d70a4c6cffce4c333993321dd0de067a534f43cc99f79f0d9",
+    "title": "XVI. Компрессорное и холодильное оборудование \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XVI.html",
+      "sha256": "38e8b1426ca42f8c2336f85033cd25f9bb277eb14c274fb47e479a11443b5c82",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XVII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/8aa387a18d5f115dc27526e9890ddfbd25b7583c/",
+    "retrievedAt": "2026-10-15T17:41:40.032332+00:00",
+    "status": 200,
+    "bytes": 164619,
+    "sha256": "af2512a5665099358bc4da9a1727c2c056edadf7dd1e10371d412f8d777dfa95",
+    "title": "XVII. Продукция отрасли легкой промышленности \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XVII.html",
+      "sha256": "ad34e6e886f39953803e540d66f7b83d164cf57045726d24b91a1614e2780ceb",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XVIII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/371bc6327f5ff4ee22ad9be0afd050c257f1f71d/",
+    "retrievedAt": "2026-10-15T17:41:40.039130+00:00",
+    "status": 200,
+    "bytes": 230444,
+    "sha256": "57d87665db9a39073ae00cae4084a48ef67a4b2590546284eee2e68570e816bf",
+    "title": "XVIII. Продукция судостроения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XVIII.html",
+      "sha256": "fb1de0dd4d60a285b0e9d5e533e606eb8b776eb19238113f17e0466c2fecc845",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XIX",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/33db50733595dd603ee199a69c4efe4b8a85794b/",
+    "retrievedAt": "2026-10-15T17:41:40.204375+00:00",
+    "status": 200,
+    "bytes": 80453,
+    "sha256": "4ba3eb121ec2fdedd4bfe7f4713c63c62bd0b7c15ad2724815987edc584217d0",
+    "title": "XIX. Насосное оборудование \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XIX.html",
+      "sha256": "615c3896b159c25598e57099bbb3f51efbbac938dda5165aa0b937b4a58c8c5f",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XX",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/f4a6edc8e52cbf69c8365ce297747c39a1387905/",
+    "retrievedAt": "2026-10-15T17:41:41.729010+00:00",
+    "status": 200,
+    "bytes": 167589,
+    "sha256": "58db43231a89a057907df6463e8bb224ca80d15387c24caf4d582c22b5c2fa90",
+    "title": "XX. Бурильные установки \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XX.html",
+      "sha256": "ece488cb4d4fad918a3dbb6089948add6cdad1e95cb649933205749fd154bca5",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXI",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/82c0b08178438969cc07e714540ece4690e77bcf/",
+    "retrievedAt": "2026-10-15T17:41:41.843560+00:00",
+    "status": 200,
+    "bytes": 217648,
+    "sha256": "a3ea2efa3ec68c08f53a74b841531f8a1858a9d3df335951999dc36e3c8f09fa",
+    "title": "XXI. Химическая и нефтегазохимическая продукция \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXI.html",
+      "sha256": "9ad6ce585dc6426727ae9f92103ec44d6971e67c550f497a8ee818a79f02ec5a",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/9568304bf32c0e9abb61a81e2ec1f94565525202/",
+    "retrievedAt": "2026-10-15T17:41:42.050343+00:00",
+    "status": 200,
+    "bytes": 108756,
+    "sha256": "f9cc3ea7fa27c223e4f2006ecfe3bcb2b0fbe6c62670caf3152aea9c2d921353",
+    "title": "XXII. Приборы для измерения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXII.html",
+      "sha256": "19e746fad26a7c03355f62e6cde82c71c614746daa67aec242af0f8472da79b4",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXIII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/fbfe8e0c06a719c50a9d7dd4cb48ce66b7a62698/",
+    "retrievedAt": "2026-10-15T17:41:42.187702+00:00",
+    "status": 200,
+    "bytes": 57394,
+    "sha256": "c8c344f916ad6f13c04a445eced9e6e49b44854a656c1a6b3d61899a9f013977",
+    "title": "XXIII. Продукция отрасли металлургии и материалов \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXIII.html",
+      "sha256": "1c3f7a25ca9575d02fcde2f4eb8c337a4ece4ee8da21ddf6e9e9f640ab6f8f1d",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXIV",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/2fc110d2e99b148de9a43fa40185b6076a2079ed/",
+    "retrievedAt": "2026-10-15T17:41:42.210791+00:00",
+    "status": 200,
+    "bytes": 98549,
+    "sha256": "2efdd7125aa2ccbf191e77d6832a969405f10172160aa0d5c7f060c263ca168c",
+    "title": "XXIV. Оборудование для автомобильных заправочных станций сжиженным и компримированным природным газом \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXIV.html",
+      "sha256": "e05ba00852ace86e661b049e4855cb2826dc0d37570b37c3ee3c5109c0210d17",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXV",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/9199e69e266e20a40c2abc892e320905574935b6/",
+    "retrievedAt": "2026-10-15T17:41:45.128378+00:00",
+    "status": 200,
+    "bytes": 197381,
+    "sha256": "9458184d8cff1e5b4783c10e8c8ede96b547242b43bac1666d4294d2e2985000",
+    "title": "XXV. Музыкальные инструменты и звуковое оборудование \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXV.html",
+      "sha256": "c39f1c476c2236fa68072f810f8342ec1576d923cf6543a2b250359453a61717",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXVI",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/636332d7b93a7be0442706afb1ee4630c86edcd3/",
+    "retrievedAt": "2026-10-15T17:41:45.529428+00:00",
+    "status": 200,
+    "bytes": 97774,
+    "sha256": "dbbfc08ed41a5e1c67fe2fe5b3962f64bdcee3865d3caa500f946ed411202c69",
+    "title": "XXVI. Оборудование для производства и потребления сжиженного природного газа \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXVI.html",
+      "sha256": "edf0f54ed5e812a24e4fe29028fbceb79a2421cc30dfeca72442f84da0462f0d",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXVII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/de0941d0e3de5108be6bfc1e8e7d191e8a2bfb45/",
+    "retrievedAt": "2026-10-15T17:41:45.684101+00:00",
+    "status": 200,
+    "bytes": 83557,
+    "sha256": "4729fa6b7ad409882c016a0afc7691f0495895a9a3c0ea510c47b24022ee1351",
+    "title": "XXVII. Продукция индустрии детских товаров \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXVII.html",
+      "sha256": "37d0a07eeefddd43aeb7ac38b58ef7415df64f9a5f0d8c54bfab2095b34d9e1e",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXVIII",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/b5bfaaf9298541271271de244ccdbebd3e761370/",
+    "retrievedAt": "2026-10-15T17:41:45.728768+00:00",
+    "status": 200,
+    "bytes": 59189,
+    "sha256": "21365e7992b39a2bc4a0a7481bf94f68ea2234ed68260add649125401bad877e",
+    "title": "XXVIII. Продукция авиационной промышленности \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXVIII.html",
+      "sha256": "90252fe20322aa2add2c9b75483e6a1459f335b4fa90fb918f3c72c6854714c3",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "XXIX",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/74160580e0ccd239ca05383c881dc4db343980d8/",
+    "retrievedAt": "2026-10-15T17:41:45.736366+00:00",
+    "status": 200,
+    "bytes": 83224,
+    "sha256": "1f596d248ab4697b49538e7b24fa80a42395a1bd77d91e0ebc2d811da98a3020",
+    "title": "XXIX. Оборудование для разведки нефти и газа \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/XXIX.html",
+      "sha256": "05b91582c0139122d36136a55de5b183072674492b404ff03b63fc2f5d91175d",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-toc",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/",
+    "retrievedAt": "2026-10-15T17:41:45.973695+00:00",
+    "status": 200,
+    "bytes": 39955,
+    "sha256": "7baaa38892f69d2b0b285357bea8429361d0a877cc64153a5bf819b4a84010ae",
+    "title": "Постановление Правительства РФ от 17.07.2015 N 719\n(ред. от 05.10.2026)\n\"О подтверждении производства российской промышленной продукции\" \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-toc.html",
+      "sha256": "6a9f509bf0eefa6d4267ae9c8ce4bbc396581abac3fa408b09c24cef956931a8",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "52-toc",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_299374/",
+    "retrievedAt": "2026-10-15T17:41:47.197909+00:00",
+    "status": 200,
+    "bytes": 39118,
+    "sha256": "679365c93a329d6b51763c2bc9d91820b0f5f253cb319579d5ccd23174a2cdb5",
+    "title": "Приказ ТПП РФ от 30.05.2018 N 52\n(ред. от 29.07.2026)\n\"Об утверждении Положения о порядке выдачи документов для целей подтверждения производства промышленной продукции на территории Российской Федерации\" \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "29.07.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/52-toc.html",
+      "sha256": "6a9f509bf0eefa6d4267ae9c8ce4bbc396581abac3fa408b09c24cef956931a8",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-footnotes",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/54c67e703389112d3f989062d908377adc7204b5/",
+    "retrievedAt": "2026-10-15T17:41:47.560495+00:00",
+    "status": 200,
+    "bytes": 203196,
+    "sha256": "0269c91f8f6cd0aa6b2bfd08bcc820050bc07489923e258852e3e7b9547bfa15",
+    "title": "Сноски \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-footnotes.html",
+      "sha256": "a1ff20fbc8f061d9657879dc8de73df5d9f295248992792ff9d194414ef7e714",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-notes",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/2520ddabe22a7b4c40206228222ea3d6f5b74f8a/",
+    "retrievedAt": "2026-10-15T17:41:56.570402+00:00",
+    "status": 200,
+    "bytes": 300048,
+    "sha256": "152993f9dc3dae41bf8478bbaecee1f6aa1edddb47c88ad18dd93f6865eae7ac",
+    "title": "Примечания \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-notes.html",
+      "sha256": "9836dac3e27c56f7baf829c6d4b8da4b14c11e525ad1dc8291f2ae8c24cb9e2e",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-registry",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/6df89df94d6a44f253d3e2c15225337c7c0fd3db/",
+    "retrievedAt": "2026-10-15T17:41:56.650583+00:00",
+    "status": 200,
+    "bytes": 37570,
+    "sha256": "923196762d16d6d4195c3adf885651b639b966016a7c2f2d09035c575aa74b7f",
+    "title": "ПРАВИЛА ФОРМИРОВАНИЯ И ВЕДЕНИЯ РЕЕСТРА РОССИЙСКОЙ ПРОМЫШЛЕННОЙ ПРОДУКЦИИ, СОСТАВ СВЕДЕНИЙ, ВКЛЮЧАЕМЫХ В РЕЕСТР, ПОРЯДОК ВКЛЮЧЕНИЯ ТАКИХ СВЕДЕНИЙ В РЕЕСТР И ИСКЛЮЧЕНИЯ ИХ ИЗ РЕЕСТРА, В ТОМ ЧИСЛЕ РАЗМЕЩЕНИЯ ТАКИХ СВЕДЕНИЙ В ГОСУДАРСТВЕННОЙ... \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-registry.html",
+      "sha256": "ddf866732c21ebd949fc072e23570e6d1d11350f8ba5ea856c4e7a92d6716ef9",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "52-consolidated",
+    "url": "https://pravo.ppt.ru/prikaz/tpp/n-52-200362",
+    "retrievedAt": "2026-10-15T17:41:56.656941+00:00",
+    "status": 200,
+    "bytes": 417702,
+    "sha256": "003a081d5e44418bdb612e83dfdbdcb59c6b13f52b1707df8fd053d9f3d0cf0b",
+    "title": "Приказ ТПП РФ от 30.05.2018 № 52 (ред. от 29.07.2026) Об утверждении Положения о порядке выдачи документов для целей подтверждения производства промышленной…",
+    "accessWall": false,
+    "observedEdition": "29.07.2026",
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "64-alta",
+    "url": "https://www.alta.ru/tamdoc/26b00064/",
+    "retrievedAt": "2026-10-15T17:41:58.147759+00:00",
+    "status": 200,
+    "bytes": 67341,
+    "sha256": "1ed0ebe99d6b46d5eea60fc14e7d554ebb6a448f25e0ff7197e04817c1d405a3",
+    "title": "Приказ ТПП РФ  от 29.07.2026 № 64 \"О внесении изменения в Положение о порядке выдачи документов для целей подтверждения производства российской промышленной продукции\". Таможенные документы | Альта-Софт",
+    "accessWall": false,
+    "observedEdition": null,
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1254-official",
+    "url": "https://publication.pravo.gov.ru/document/0001202609300041",
+    "retrievedAt": "2026-10-15T17:41:58.519475+00:00",
+    "error": "HTTPError: HTTP Error 502: Bad Gateway",
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1257-official",
+    "url": "https://publication.pravo.gov.ru/document/View/0001202609300049",
+    "retrievedAt": "2026-10-15T17:41:58.640766+00:00",
+    "error": "HTTPError: HTTP Error 502: Bad Gateway",
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1297-official",
+    "url": "https://publication.pravo.gov.ru/document/0001202610060054",
+    "retrievedAt": "2026-10-15T17:41:58.683636+00:00",
+    "error": "HTTPError: HTTP Error 502: Bad Gateway",
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "52-official-index",
+    "url": "https://tpprf.ru/ru/legal_provision/podtverzhdenie-proizvodstva-promyshlennoy-produktsii/",
+    "retrievedAt": "2026-10-15T17:41:58.706123+00:00",
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "719-extra-12",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/92d969e26a4326c5d02fa79b8f9cf4994ee5633b/",
+    "retrievedAt": "2026-10-15T17:43:58.576787+00:00",
+    "status": 200,
+    "bytes": 94057,
+    "sha256": "f3572362f1328bed3627f6d6fb10fdc698be25df8bd2cb4a368f359dc4041d66",
+    "title": "ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ ПОСТАНОВЛЕНИЕ от 17 июля 2015 г. N 719 О ПОДТВЕРЖДЕНИИ ПРОИЗВОДСТВА РОССИЙСКОЙ ПРОМЫШЛЕННОЙ ПРОДУКЦИИ \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-12.html",
+      "sha256": "f81cde1950595afbd17de11f392783a84f0c4d1614acc811abcbc33dee04d727",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-13",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/46424779c5848295ec5c1a36db174362a117214e/",
+    "retrievedAt": "2026-10-15T17:43:58.577289+00:00",
+    "status": 200,
+    "bytes": 56641,
+    "sha256": "da23ebc59d1fd17675a775fda53c0e1ce1d9498b6f1cf004dcf5e050a0f48e75",
+    "title": "ТРЕБОВАНИЯ К ПРОМЫШЛЕННОЙ ПРОДУКЦИИ, ПРЕДЪЯВЛЯЕМЫЕ В ЦЕЛЯХ ЕЕ ОТНЕСЕНИЯ К РОССИЙСКОЙ ПРОМЫШЛЕННОЙ ПРОДУКЦИИ \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-13.html",
+      "sha256": "85dcbc82cd9622823934719653463101ff40358fc8cdf848ad4fc12d151e038c",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-45",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/d49e228b2f953a00cea3154178c438e199b060f2/",
+    "retrievedAt": "2026-10-15T17:43:58.577994+00:00",
+    "status": 200,
+    "bytes": 41824,
+    "sha256": "6117b121a5efb54c7c5ec660a68de714fa6c6133166fb09ae84bb0f1db2a477b",
+    "title": "ПРАВИЛА ВЫДАЧИ ЗАКЛЮЧЕНИЯ О ПОДТВЕРЖДЕНИИ ПРОИЗВОДСТВА ПРОМЫШЛЕННОЙ ПРОДУКЦИИ НА ТЕРРИТОРИИ РОССИЙСКОЙ ФЕДЕРАЦИИ \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-45.html",
+      "sha256": "30ee812e230cbc22551a56e12bf2572d2574985bbba15a7bd56aae00554a17e4",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-47",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/0777d48892057888a35cc4028f5ea702b102038b/",
+    "retrievedAt": "2026-10-15T17:43:58.578409+00:00",
+    "status": 200,
+    "bytes": 50741,
+    "sha256": "61c939db43f5638757cc73183d3b2e65334b583d9b90b7195df68574bd69f7b1",
+    "title": "I. Общие положения \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-47.html",
+      "sha256": "ae6e0344108a9ac7f8c0c2d47e87f1b5e420e0c9fb6af2a72658beff5740ceb4",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-48",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/5564254756d5192110a48af8ef99e7599c14a201/",
+    "retrievedAt": "2026-10-15T17:43:58.578871+00:00",
+    "status": 200,
+    "bytes": 78036,
+    "sha256": "4b4c6184eca72153af611f38068de05d0e11b85b179459a38b5e432845d896e1",
+    "title": "II. Включение сведений о промышленной продукции в реестр \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-48.html",
+      "sha256": "d0dbaa014bd3f55cb2480a944b95f3b2c78631b8652fd9d3afc769d02df2bb42",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-49",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/ccbf3cef54c70438f289de7e52c066b1bf5552a2/",
+    "retrievedAt": "2026-10-15T17:43:58.579378+00:00",
+    "status": 200,
+    "bytes": 66422,
+    "sha256": "1c612660517360c6d6dcf909f39fbeec387a02e8c7d6ad244b98c3c8030cb76e",
+    "title": "III. Внесение изменений в реестровую запись \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-49.html",
+      "sha256": "7acf10e9062680b1c5a648b7f0204b09ba6e15ad0ea3cdb1cfe396b8e72e3ded",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-50",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/77926e5b95af422a9c78746c9d60660e1d154e6d/",
+    "retrievedAt": "2026-10-15T17:44:04.171575+00:00",
+    "status": 200,
+    "bytes": 65613,
+    "sha256": "55b947422dfa6951b7d0d6c8a5b07371c3ee66696582333887c5a68dd285dcc2",
+    "title": "IV. Формирование реестровой записи, состав сведений, включаемых в реестр, период действия реестровой записи и исключение реестровой записи из реестра \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-50.html",
+      "sha256": "30fa2147b8028741990d088280478d6615b10befde4b71cb06188dfc0c09719b",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-51",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/6cba15ed0b243deb52d1f6df07a1c722b2faa7bc/",
+    "retrievedAt": "2026-10-15T17:44:04.333650+00:00",
+    "status": 200,
+    "bytes": 39422,
+    "sha256": "e6832776dd0ef93698930707addef9755b2c406e5baa61e356257e6cd81fe95a",
+    "title": "V. Предоставление сведений из реестра \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-51.html",
+      "sha256": "d3b1d1daf958b313d24274cc6bb7d69edc030175c2d86dee8384d71cf13544f5",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-52",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/ab6d5548e041ab75382b9afa98bbce0b242d8078/",
+    "retrievedAt": "2026-10-15T17:44:04.654523+00:00",
+    "status": 200,
+    "bytes": 42623,
+    "sha256": "0cae918364a93c0b3568412b053df3c86ec29620a3f6a4d434c809d65957d117",
+    "title": "VI. Формирование и ведение каталога продукции \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-52.html",
+      "sha256": "e6111e1585fe9243313c93fbb6791b2e908b2138c7cac2eb9f7959ce5b1e965b",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "719-extra-53",
+    "url": "https://www.consultant.ru/document/cons_doc_LAW_183175/6346f48d0656cfc380326f5db77457628e27a36c/",
+    "retrievedAt": "2026-10-15T17:44:04.844654+00:00",
+    "status": 200,
+    "bytes": 40721,
+    "sha256": "2b0ecccd5deefa4a114b843c17e56cc3b143d263d32cbc587ce485527b6305e7",
+    "title": "Приложение. Выписка из реестра российской промышленной продукции (форма) \\ КонсультантПлюс",
+    "accessWall": false,
+    "observedEdition": "05.10.2026",
+    "officialFullTextVerified": false,
+    "archivedExtract": {
+      "path": "audits/2026-10-16/evidence/719-extra-53.html",
+      "sha256": "934182a3f7e980029cef8962e6645a1434966a52aa421859b3518609f1d43d24",
+      "notice": "Extracted legal content, not raw page bytes; original raw page hash stored separately."
+    }
+  },
+  {
+    "id": "1254-alta",
+    "url": "https://www.alta.ru/tamdoc/26ps1254/",
+    "retrievedAt": "2026-10-15T17:44:47.628149+00:00",
+    "status": 200,
+    "bytes": 70267,
+    "sha256": "4a200b14c649ef746c55fceb4d1cfc3dfbfd5e64384860f7a341f8e16f8116e5",
+    "title": "Постановление Правительства РФ  от 29.09.2026 № 1254 \"О внесении изменений в постановление Правительства Российской Федерации от 17 июля 2015 г. N 719\". Таможенные документы | Альта-Софт",
+    "accessWall": false,
+    "observedEdition": null,
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1257-alta",
+    "url": "https://www.alta.ru/tamdoc/26ps1257/",
+    "retrievedAt": "2026-10-15T17:44:47.630225+00:00",
+    "status": 200,
+    "bytes": 69210,
+    "sha256": "2c9a115e1ed5af5d6f2a1ffebcbd0a3d70e455313efd2e8e5ee4df8fa895213f",
+    "title": "Постановление Правительства РФ  от 29.09.2026 № 1257 \"О внесении изменений в некоторые акты Правительства Российской Федерации\". Таможенные документы | Альта-Софт",
+    "accessWall": false,
+    "observedEdition": null,
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1297-alta",
+    "url": "https://www.alta.ru/tamdoc/26ps1297/",
+    "retrievedAt": "2026-10-15T17:44:47.631022+00:00",
+    "status": 200,
+    "bytes": 1120593,
+    "sha256": "221d0a5b5aad746c9ca922ad58cb9a326de01959ce88c21e605689c8ee20a23e",
+    "title": "Постановление Правительства РФ  от 05.10.2026 № 1297 \"О внесении изменений в некоторые акты Правительства Российской Федерации\". Таможенные документы | Альта-Софт",
+    "accessWall": false,
+    "observedEdition": null,
+    "officialFullTextVerified": false
+  },
+  {
+    "id": "1297-garant",
+    "url": "https://base.garant.ru/415025312/",
+    "retrievedAt": "2026-10-15T17:44:47.632514+00:00",
+    "status": 200,
+    "bytes": 918301,
+    "sha256": "4bd08122dc1c6f1caeea350117822d1db8227be78a444fa6e4f7bfca826f6b42",
+    "title": "Постановление Правительства Российской Федерации от 05.10.2026 № 1297 \"О внесении изменений в некоторые акты Правительства Российской Федерации\" | ГАРАНТ",
+    "accessWall": false,
+    "observedEdition": null,
+    "officialFullTextVerified": false
+  }
+]

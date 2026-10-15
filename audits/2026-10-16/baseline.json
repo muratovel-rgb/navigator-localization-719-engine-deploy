@@ -1,0 +1,178 @@
+{
+  "repository": "muratovel-rgb/navigator-localization-719-engine-deploy",
+  "commit": "797569a4291c63b75711620f3680a11203201ee9",
+  "lastVerifiedLegalReview": null,
+  "priorProjectReviewDate": "2026-10-15",
+  "attemptedAt": "2026-10-15T17:47:05.861746+00:00",
+  "localReviewDate": "2026-10-16",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha": "fb9ffe707cd10aeea0b035e2014a4304d96b0c4b",
+      "size": 68,
+      "sha256": "8acd63924d424ed99d15c64cc771fb7277fd00f369ebc508c44639bf495e3997"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha": "c8481232dd57502bc5ce1fa004fae490b4456dfa",
+      "size": 2406,
+      "sha256": "660dfb833c29d0cb4995f5d52c0f64838d3a2b34662c679bbc084c92c1bdf630"
+    },
+    {
+      "path": "DEPLOY_RENDER.md",
+      "sha": "888a7597f4f1dee9453b235a7a65384ce12d35d8",
+      "size": 2110,
+      "sha256": "c460ae5e3dca8bd2a4d6faf55b05f86193d3f27b5b0e56b009a543257e5eb16c"
+    },
+    {
+      "path": "MCP_TOOL_CONTRACT.md",
+      "sha": "36d473941384e7abc33df8b1d08674b17c4b27e4",
+      "size": 3663,
+      "sha256": "1e18caaa942c34a6f89381e55952e1b5f98cd2d9f85af57d1b3d5d9a6195fecc"
+    },
+    {
+      "path": "README.md",
+      "sha": "3d0d4f5cc41275aadbe4c9a6d17b1480a3ca9b1a",
+      "size": 5368,
+      "sha256": "f4406e85188c870312c3ca782156c995921b9b176f8aaebf6b7d03a1b7280caa"
+    },
+    {
+      "path": "REPO_DEPLOY_CHECKLIST.md",
+      "sha": "c7bb65932250c9506e11fecda3e2e0e14ae1d332",
+      "size": 363,
+      "sha256": "fc7e25b0aec89c5555ad01009763c235bcc3a7504fc7d0ae6c2191e79a90fb6e"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha": "6ecdbddd70833f0f4d73e15e7cb4cf21c45b18bd",
+      "size": 676,
+      "sha256": "27eba9c4f1a81ca669f9affc7554a0fa0399bc2b680963c7191e8a710120701b"
+    },
+    {
+      "path": "adapter.js",
+      "sha": "20291b30ef8954677b3d0e8f651febdced5a5609",
+      "size": 7515,
+      "sha256": "a564b900bb336c890a69a3c42f74fa26928ce6c3c145d2941ce240b30b0608bd"
+    },
+    {
+      "path": "build-site-modules.cjs",
+      "sha": "38b182c83d3c91176839378a1dae533be631ae33",
+      "size": 3703,
+      "sha256": "8196abd783866c63c63c818e422a316162565ecda9567487bc97e47e1eb38b66"
+    },
+    {
+      "path": "cli.js",
+      "sha": "0c06a4e0de9bf5c8fcaaab9130b3998821a0bdde",
+      "size": 826,
+      "sha256": "bc8a879cf615d620ef177239086f5bd18bacc50ec060827abb930edeb5c9af02"
+    },
+    {
+      "path": "context-tests.cjs",
+      "sha": "3e1a69fca0428462e568934268c091082cf7d72f",
+      "size": 2121,
+      "sha256": "fada08047d019c882f79f98869cd635e06bf36345b6b9657a384ee0bb8c510d5"
+    },
+    {
+      "path": "engine.js",
+      "sha": "33547027633b211abccd446ef1f5e9fad2a59105",
+      "size": 45639,
+      "sha256": "7c1be26f74efbcc0502c745e864fc6c6ff19f1047345755b152d8540e26c0e0c"
+    },
+    {
+      "path": "index-tests.cjs",
+      "sha": "94dd0d1481c86be3ada945be9dd428a0e97eeac4",
+      "size": 2092,
+      "sha256": "db27da86f1a6763f506aac38e6b7f62e8c65d4e76016c0629ed8414847f3c99f"
+    },
+    {
+      "path": "legal-index.cjs",
+      "sha": "6db3c993931e3c388cc06286a1e0db7dfca77d5c",
+      "size": 1567,
+      "sha256": "b9b270eba637c7570e15ef6f405f5026eb3365d255f907cd3774f7f1aa06030e"
+    },
+    {
+      "path": "mcp.json.template",
+      "sha": "9c7a2ad3ebfc7caf2f2dc025a58cfcd922dc7870",
+      "size": 219,
+      "sha256": "c37f8c48a400954040c484ba000694e7e31cd6e7db07278455609005a23c9f90"
+    },
+    {
+      "path": "measurement-data.js",
+      "sha": "cc766efeb75a46bbadcfc58d6e3d2ab6d0fc9f0b",
+      "size": 27244,
+      "sha256": "054e652f7884a6ce7874aa79c8f07032e446b9f68d4ccfcefb6460357c864193"
+    },
+    {
+      "path": "monitoring-baseline.json",
+      "sha": "2df48c80030f5e99bebb6ab97438236d311f253e",
+      "size": 872,
+      "sha256": "22548652d6f6b4f2099e9277954ee31ef65914d9c1461c221f4e0644a0b7b71b"
+    },
+    {
+      "path": "package.json",
+      "sha": "5bd5ae07bd806baa6fc074d1fbbf626c92ffa784",
+      "size": 620,
+      "sha256": "934428245eda1794c50a86f08261bfafb8895cf757deb4aef9145e32b0ab9e33"
+    },
+    {
+      "path": "pp719-index.json",
+      "sha": "793504c34e6eec88a5d169d912983dffa8d9db73",
+      "size": 2698218,
+      "sha256": "d9de0bb27055abf9f4db7b11790c9ba6fc9a74f3f1636789409fc5acd2602bc4"
+    },
+    {
+      "path": "regression.cjs",
+      "sha": "3322da0a2600463656c70f3487c4161daefeb80f",
+      "size": 5657,
+      "sha256": "3e530ae2235bf724bf2d1b76a7dd23d90289b5c27fa010c920ee71fed3065435"
+    },
+    {
+      "path": "render.yaml",
+      "sha": "d23d2492632e7310466c8f00944acd14dc047bd0",
+      "size": 282,
+      "sha256": "17176b3692c1c87b32c2868328867c1a2ac4ba1e3095aff3189b2b05a092c699"
+    },
+    {
+      "path": "server-smoke.mjs",
+      "sha": "d7961e857e0c18abb01550f8adad2f634d50e2be",
+      "size": 1806,
+      "sha256": "816e47903cb5d34ce06191607720660f0d88084f414b0726ea9581bed661cc8e"
+    },
+    {
+      "path": "server.mjs",
+      "sha": "530ae0b14493851da3ef9e0203d518eaf88d1a8e",
+      "size": 5190,
+      "sha256": "0ff9733c2c628fa9f63f005cdf60afbb6af50468eb956bb947acb877a06cdd2d"
+    },
+    {
+      "path": "table-context.json",
+      "sha": "98aa061e04143411109107ec85f9e0604c62516d",
+      "size": 2159472,
+      "sha256": "61abcdc6e186f4578856e2dc472bbb268968ed7636b73b119fceeb573306db03"
+    },
+    {
+      "path": "test.cjs",
+      "sha": "f353669c77ffe54a72aa102952b95f0fb5a43131",
+      "size": 2379,
+      "sha256": "75640a56fba6a51f98f12deb322a7ad0f282e76d18730e89bc0ac7dc1e278617"
+    },
+    {
+      "path": "tools/audit-table-context.py",
+      "sha": "24c9d12078fa43d637c66ca58f3034a9d10cd099",
+      "size": 5135,
+      "sha256": "a8df3ad55b80a304de5a46bbdb9569e2f0a0db971dabf721da2868b19a67bc87"
+    },
+    {
+      "path": "tools/requirements-context.txt",
+      "sha": "9754594efbbc7a80e4aa9a62f648825fd72cd6d5",
+      "size": 11,
+      "sha256": "0e06a2cd5104817742c13c9599d8c4637f92124e1e4bd8b2bbef66293f9a6c18"
+    },
+    {
+      "path": "tools/test-table-context.py",
+      "sha": "0cc3b0a5860e828fd7896ec921703c9966301b3a",
+      "size": 2326,
+      "sha256": "da5f4aacbd1db50610c79f7f333cde0882c1f227427c42318d066bc127051244"
+    }
+  ]
+}
