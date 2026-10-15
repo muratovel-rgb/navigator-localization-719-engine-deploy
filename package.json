@@ -8,7 +8,8 @@
     "start": "node server.mjs",
     "test": "node test.cjs && node regression.cjs && node index-tests.cjs && node context-tests.cjs",
     "build:site": "node build-site-modules.cjs",
-    "test:server": "node server-smoke.mjs"
+    "test:server": "node server-smoke.mjs",
+    "test:audit": "python3 tools/test-table-context.py && node audit-search-tests.cjs"
   },
   "engines": {
     "node": ">=20"

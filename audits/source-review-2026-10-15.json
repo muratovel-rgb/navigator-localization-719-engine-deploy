@@ -1,0 +1,49 @@
+{
+  "reviewDate": "2026-10-15",
+  "targetAct": {
+    "date": "2015-07-17",
+    "number": "719"
+  },
+  "fullLegalCoverageVerified": false,
+  "productionRulesChanged": false,
+  "sources": [
+    {
+      "act": "2026-09-29-1254",
+      "officialPublicationUrl": "https://publication.pravo.gov.ru/document/0001202609300041",
+      "officialMetadataLocated": true,
+      "officialFullTextRead": false,
+      "accessIssue": "Timed out / inaccessible through current browsing tool",
+      "secondaryTextRead": "https://www.consultant.ru/document/cons_doc_LAW_545627/dfde3640d173ce05cc3968ea3693e4a9f1bac099/",
+      "scopeCandidate": "Footnote 12, automotive R&D credits; formulas include image objects",
+      "readiness": "pending official text and formula image verification"
+    },
+    {
+      "act": "2026-09-29-1257",
+      "officialPublicationUrl": null,
+      "officialFullTextRead": false,
+      "secondaryTextRead": "https://www.consultant.ru/document/cons_doc_LAW_545631/92d969e26a4326c5d02fa79b8f9cf4994ee5633b/",
+      "reportedEffectiveDate": "2026-10-31",
+      "effectiveDateVerified": false,
+      "scopeCandidate": "Changes to several acts, including PP719; effective-date and full annex review required",
+      "readiness": "future change candidate, not applied"
+    },
+    {
+      "act": "2026-10-05-1297",
+      "officialPublicationUrl": null,
+      "officialFullTextRead": false,
+      "secondaryTextRead": "https://www.alta.ru/tamdoc/26ps1297/",
+      "corroboratingText": "https://www.consultant.ru/document/cons_doc_LAW_546154/92d969e26a4326c5d02fa79b8f9cf4994ee5633b/",
+      "reportedPublicationDate": "2026-10-06",
+      "reportedEffectiveDate": "2026-10-16",
+      "effectiveDateVerified": false,
+      "scopeCandidate": "PP719 annex and amendments to acts 1026 and 1135; medical products and other positions need detailed impact review",
+      "readiness": "urgent future change candidate, not applied"
+    }
+  ],
+  "limits": [
+    "This is a source discovery and access log, not a complete amendment chain.",
+    "Search results are not official full-text verification.",
+    "No future requirement was assigned to the assessment date.",
+    "No production formula, threshold or normative approval status was changed."
+  ]
+}
