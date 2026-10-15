@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "version": "719-index-2026-10-13-v1",
+    "snapshotDate": "2026-10-06",
+    "fullLegalCoverageVerified": false,
+    "coverageNote": "Поисковый индекс извлечённых строк из 29 разделов. Полнота строк, периоды действия и официальная цепочка изменений для всего перечня не проверены. Наличие текста не означает готовность расчёта.",
+    "usage": "historical_search_cache",
+    "liveSource": "existing MCP search_localization_rules and get_localization_rule",
+    "currentLawVerified": false
+  },
+  "total_positions": 787,
+  "sections": {
+    "I": 31,
+    "II": 4,
+    "III": 32,
+    "IV": 49,
+    "IX": 20,
+    "V": 64,
+    "VI": 39,
+    "VII": 48,
+    "VIII": 2,
+    "X": 2,
+    "XI": 29,
+    "XII": 5,
+    "XIII": 6,
+    "XIV": 16,
+    "XIX": 16,
+    "XV": 12,
+    "XVI": 34,
+    "XVII": 22,
+    "XVIII": 58,
+    "XX": 13,
+    "XXI": 155,
+    "XXII": 19,
+    "XXIII": 10,
+    "XXIV": 10,
+    "XXIX": 9,
+    "XXV": 45,
+    "XXVI": 8,
+    "XXVII": 14,
+    "XXVIII": 15
+  }
+}

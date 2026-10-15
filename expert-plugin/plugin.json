@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "navigator-localization-719",
+  "version": "0.1.9",
+  "description": "Private expert workflow for localization of industrial products under Russian Government Resolution No. 719, focused on identifying applicable requirements, assessing production facts, GAP analysis, component-origin evidence, OKPD2 routing, and localization scenarios without replacing the shared deterministic calculation engine.",
+  "author": {
+    "name": "Евгений"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Навигатор локализации 719",
+        "shortDescription": "Локализация по ПП №719",
+        "longDescription": "Определяет применимую позицию ПП №719, проверяет требования к операциям, КД/ТД/ПО, комплектующим и доказательствам, разрешает конфликты актуальных и устаревших кодов ОКПД2, строит GAP и сценарии локализации. ПП №1875 используется только как дополнительный закупочный контекст. Для подготовленных ветвей использует детерминированный расчётный движок Навигатора через MCP. Расширенный поиск отделён от готовности расчёта; архивные фрагменты не объявляются проверенной нормой.",
+        "developerName": "Евгений",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "Найди применимые требования ПП №719 для моего изделия и покажи, что нужно уточнить.",
+          "Проведи GAP-анализ локализации по ПП №719 по моим данным производства.",
+          "Проверь, не применяется ли к детали устаревший код ОКПД2 вместо действующей группировки."
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "plugin": "navigator-localization-719",
+  "version": "0.1.9",
+  "baselineRelease": "pluginrel_6acfa16130e08191b1197cdaa659d62c",
+  "sourceScope": "partial update for the existing private plugin, not an independent product",
+  "retainedFiles": "Unchanged sources remain in the existing Plugin release. This directory is not a standalone distribution.",
+  "privateSourcePolicy": "Only the generic component-origin instruction diff is mirrored. Client case-source text stays in the existing private Plugin.",
+  "updateFileCount": 10,
+  "normativeFormulasChanged": false,
+  "mcpConnectionChanged": false
+}
