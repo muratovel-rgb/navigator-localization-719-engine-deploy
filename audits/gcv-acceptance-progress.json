@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-15",
+  "scope": "Technical coverage on synthetic GCV-like inputs only",
+  "actualClientLegalAcceptance": false,
+  "fullEndToEndPassed": false,
+  "variantsInTests": 18,
+  "cases": [
+    {
+      "id": "G01",
+      "status": "implemented",
+      "evidenceOrGap": "Project record and DOM tests create 18 variants in one project"
+    },
+    {
+      "id": "G02",
+      "status": "partial",
+      "evidenceOrGap": "Remark and reply history exists; structured request register and deadlines are pending"
+    },
+    {
+      "id": "G03",
+      "status": "partial",
+      "evidenceOrGap": "File identity and reference exist; editable-format sufficiency check is pending"
+    },
+    {
+      "id": "G04",
+      "status": "missing",
+      "evidenceOrGap": "Component classification register is not yet part of dossier-only projects"
+    },
+    {
+      "id": "G05",
+      "status": "partial",
+      "evidenceOrGap": "Unknown origin is not automatically Russian; structured component-origin model is pending"
+    },
+    {
+      "id": "G06",
+      "status": "partial",
+      "evidenceOrGap": "Manufacturer documents can be recorded; component supply-chain graph is pending"
+    },
+    {
+      "id": "G07",
+      "status": "partial",
+      "evidenceOrGap": "Product metadata history and recheck exist; no automatic change of nuclear purpose is performed"
+    },
+    {
+      "id": "G08",
+      "status": "missing",
+      "evidenceOrGap": "Per-variant GISP application and signature/send events are pending"
+    },
+    {
+      "id": "G09",
+      "status": "partial",
+      "evidenceOrGap": "Evidence scope is checked by variant; cost calculation and formal test completeness are not implemented for GCV"
+    },
+    {
+      "id": "G10",
+      "status": "implemented",
+      "evidenceOrGap": "Stable document and variant IDs are independent of folder names"
+    },
+    {
+      "id": "G11",
+      "status": "blocked",
+      "evidenceOrGap": "No accepted GCV numeric rule or verified primary costs; no fabricated recalculation"
+    },
+    {
+      "id": "G12",
+      "status": "blocked",
+      "evidenceOrGap": "Mounted-equipment exclusion requires verified applicability and evidence"
+    },
+    {
+      "id": "G13",
+      "status": "partial",
+      "evidenceOrGap": "One project can contain 18 variants; registry grouping is never inferred as approved"
+    },
+    {
+      "id": "G14",
+      "status": "implemented",
+      "evidenceOrGap": "Versions and prior reviews remain in replayable dossier history"
+    },
+    {
+      "id": "G15",
+      "status": "partial",
+      "evidenceOrGap": "Registration-document dates can be recorded; clause-based expiry check remains legally gated"
+    },
+    {
+      "id": "G16",
+      "status": "implemented",
+      "evidenceOrGap": "Single-variant evidence cannot close a multi-variant remark"
+    },
+    {
+      "id": "G17",
+      "status": "missing",
+      "evidenceOrGap": "Frozen submitted-package manifest is pending"
+    },
+    {
+      "id": "G18",
+      "status": "missing",
+      "evidenceOrGap": "Confirmed official submission event model is pending"
+    },
+    {
+      "id": "G19",
+      "status": "implemented",
+      "evidenceOrGap": "Reply, content review and reopening after document or product change are tested"
+    },
+    {
+      "id": "G20",
+      "status": "missing",
+      "evidenceOrGap": "Separate official act and registry-record result types are pending"
+    },
+    {
+      "id": "G21",
+      "status": "partial",
+      "evidenceOrGap": "No automatic origin confirmation; structured raw-material/component distinction is pending in project UI"
+    },
+    {
+      "id": "G22",
+      "status": "partial",
+      "evidenceOrGap": "Candidate applicability remains unresolved; component legacy-code routing is pending in project UI"
+    },
+    {
+      "id": "G23",
+      "status": "partial",
+      "evidenceOrGap": "Event IDs are idempotent; repeated-file checksum review policy is pending"
+    },
+    {
+      "id": "G24",
+      "status": "partial",
+      "evidenceOrGap": "Project summaries and individual JSON export exist; structured client status report is pending"
+    }
+  ]
+}
