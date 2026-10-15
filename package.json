@@ -9,7 +9,8 @@
     "test": "node test.cjs && node regression.cjs && node index-tests.cjs && node context-tests.cjs",
     "build:site": "node build-site-modules.cjs",
     "test:server": "node server-smoke.mjs",
-    "test:audit": "python3 tools/test-table-context.py && node audit-search-tests.cjs && python3 tools/check-amendment-audit.py"
+    "test:audit": "python3 tools/test-table-context.py && node audit-search-tests.cjs && python3 tools/check-amendment-audit.py",
+    "test:tpp52": "node tpp52-dossier-tests.cjs"
   },
   "engines": {
     "node": ">=20"
