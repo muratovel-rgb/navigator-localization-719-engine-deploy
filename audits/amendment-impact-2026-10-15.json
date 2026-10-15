@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-15",
+  "status": "review_candidate",
+  "productionRulesChanged": false,
+  "normativeApprovalRequired": true,
+  "changes": [
+    {
+      "id": "1254-RD",
+      "act": "2026-09-29-1254",
+      "scope": "footnote_12",
+      "sections": [
+        "II"
+      ],
+      "action": "review_automotive_RD_formula_images_and_periods",
+      "existingPositionIds": [
+        "pp719-ii-42a3989c71bb",
+        "pp719-ii-2c4b0ad366e7",
+        "pp719-ii-d10cd86316b1",
+        "pp719-ii-968e84ae6750"
+      ],
+      "mappingStatus": "section_review_candidates",
+      "tests": [
+        "formula_image_transcription",
+        "round_down_integer_credits",
+        "2026_2027_boundary",
+        "credit_expiry_preserved"
+      ],
+      "evidence": [
+        "https://www.consultant.ru/document/cons_doc_LAW_545627/dfde3640d173ce05cc3968ea3693e4a9f1bac099/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1257-needle",
+      "act": "2026-09-29-1257",
+      "scope": "section_XXIII_and_note_10",
+      "sections": [
+        "XXIII"
+      ],
+      "action": "prepare_new_position_and_specific_threshold",
+      "code": "25.93.18.110",
+      "existingPositionIds": [],
+      "mappingStatus": "new_code_not_found_in_original_index",
+      "tests": [
+        "not_active_before_accepted_date",
+        "mandatory_rights_separate_from_points",
+        "specific_threshold_not_universal",
+        "non_applicable_operation_zero_points",
+        "preserve_1875_separation"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1257/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-medical",
+      "act": "2026-10-05-1297",
+      "scope": "section_VII",
+      "sections": [
+        "VII"
+      ],
+      "action": "map_deletions_additions_operations_and_evidence",
+      "existingPositionIds": [
+        "pp719-vii-cc112f7be73d",
+        "pp719-vii-d0371534b9bc",
+        "pp719-vii-273b919fa850",
+        "pp719-vii-3a9626ccb8f7",
+        "pp719-vii-aeb1c619909d",
+        "pp719-vii-fe89caac3333",
+        "pp719-vii-2b0a85beec29",
+        "pp719-vii-b4136a22baa8",
+        "pp719-vii-966b1cfe482a",
+        "pp719-vii-0c32db051e7a",
+        "pp719-vii-7ff1184b8475",
+        "pp719-vii-0ee54d47b1f9",
+        "pp719-vii-f8ae93971f40",
+        "pp719-vii-a87f8ec95ce6",
+        "pp719-vii-78d1fba5739e",
+        "pp719-vii-0feefd7d3006",
+        "pp719-vii-6c4314e167d6",
+        "pp719-vii-81a94524df2d",
+        "pp719-vii-ffc7911e74ad",
+        "pp719-vii-d85abfcecd32",
+        "pp719-vii-0d53ab58cd73",
+        "pp719-vii-2522596cedce",
+        "pp719-vii-6fb8b8224466",
+        "pp719-vii-f75c3cf73122",
+        "pp719-vii-2d68e9cfd5ab",
+        "pp719-vii-748607f2879b",
+        "pp719-vii-7742e4e85a4c",
+        "pp719-vii-2e8a00103526",
+        "pp719-vii-53d9f51def70",
+        "pp719-vii-f9988a22e953",
+        "pp719-vii-fcf88f19477c",
+        "pp719-vii-f47167d35453",
+        "pp719-vii-aa0ccf6c37c5",
+        "pp719-vii-69fb19b63c1d",
+        "pp719-vii-0a0bdfa55548",
+        "pp719-vii-e9ce3eb718b0",
+        "pp719-vii-d982ceaf6330",
+        "pp719-vii-ea9895f9b4ec",
+        "pp719-vii-e6a3103e7ee3",
+        "pp719-vii-0acdbda4218d",
+        "pp719-vii-1642b963c864",
+        "pp719-vii-4ad54ea99fe6",
+        "pp719-vii-7299cdb21a1c",
+        "pp719-vii-d439bd1cce4a",
+        "pp719-vii-ee0849e467ca",
+        "pp719-vii-0cf76911b100",
+        "pp719-vii-ac2158f375e5",
+        "pp719-vii-402e89399d2d"
+      ],
+      "mappingStatus": "whole_section_review_candidates_not_all_confirmed_changed",
+      "tests": [
+        "deleted_position_not_removed_from_history",
+        "same_code_different_medical_products",
+        "conditional_sterilization",
+        "component_origin_footnotes",
+        "date_conflict_blocks_activation"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-mattress",
+      "act": "2026-10-05-1297",
+      "scope": "section_XI_and_act_1026",
+      "sections": [
+        "XI"
+      ],
+      "action": "add_iz_and_medical_product_exclusion_in_current_and_future_versions",
+      "existingPositionIds": [
+        "pp719-xi-fc3d5cba9f30"
+      ],
+      "mappingStatus": "exact_code_and_section",
+      "tests": [
+        "ordinary_vs_medical_mattress",
+        "current_future_amendment_consistency"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-textile",
+      "act": "2026-10-05-1297",
+      "scope": "section_XVII",
+      "sections": [
+        "XVII"
+      ],
+      "action": "narrow_bedding_workwear_and_protective_footwear_scope",
+      "existingPositionIds": [
+        "pp719-xvii-4207a161c113",
+        "pp719-xvii-b491cfe6e65d",
+        "pp719-xvii-d52d7b3c7d40"
+      ],
+      "mappingStatus": "exact_codes_and_section",
+      "tests": [
+        "medical_vs_non_medical_bedding",
+        "iz_code_requires_purpose",
+        "no_threshold_transfer_between_sections"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-rubber",
+      "act": "2026-10-05-1297",
+      "scope": "section_XXI",
+      "sections": [
+        "XXI"
+      ],
+      "action": "narrow_22_19_with_medical_product_exclusion",
+      "existingPositionIds": [
+        "pp719-xxi-8bbe34123c40"
+      ],
+      "mappingStatus": "exact_code_and_section",
+      "tests": [
+        "rubber_medical_scope",
+        "group_code_not_automatic_applicability"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-notes",
+      "act": "2026-10-05-1297",
+      "scope": "footnotes_61_66_note_28_note_80_1",
+      "sections": [
+        "VII",
+        "XXI"
+      ],
+      "action": "version_footnotes_and_year_tables_with_product_variants",
+      "existingPositionIds": [],
+      "mappingStatus": "cross_reference_review_required",
+      "tests": [
+        "2026_through_2031_column_mapping",
+        "same_product_different_configuration",
+        "footnote_local_anchor_not_global_number_only",
+        "unknown_date_no_threshold"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    },
+    {
+      "id": "1297-rail",
+      "act": "2026-10-05-1297",
+      "scope": "amendment_to_1135_effective_in_future",
+      "sections": [
+        "XII"
+      ],
+      "action": "renumber_future_railway_footnotes_61_62_to_67_68",
+      "existingPositionIds": [
+        "pp719-xii-bfe6b39f8d83"
+      ],
+      "mappingStatus": "future_railway_scope_candidate",
+      "tests": [
+        "medical_and_rail_footnote_collision",
+        "future_railway_requirements_not_activated_in_2026"
+      ],
+      "evidence": [
+        "https://www.alta.ru/tamdoc/26ps1297/",
+        "https://www.alta.ru/tamdoc/26ps1135/"
+      ],
+      "legalVerification": "not_verified",
+      "approvedEffectiveDate": null,
+      "productionActivation": false
+    }
+  ],
+  "limitations": [
+    "Section-level mappings are review candidates, not confirmed changed rows.",
+    "No formula or legal period is accepted by this file.",
+    "The three acts do not represent a complete amendment history."
+  ]
+}
