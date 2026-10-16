@@ -85,3 +85,11 @@ HTML 0.9.0: адресные запросы, ответы и отдельные 
 Квартальный мониторинг прежней задачей расширен на №52, без второго расписания и без разрешения самостоятельно менять нормативную логику или production. Подготовлен совместимый текст существующего Plugin, без публикации: установленная версия по-прежнему 0.1.9.
 
 Начата закрытая проверка реального кейса через разрешённый Drive. Выявлены вопросы идентификации и подписания, требующие сверки первичных документов. Подробные данные клиента находятся отдельно от Git и общей HTML-сборки. Фактическая приёмка не завершена. Отчёт: audits/README-step93.md.
+
+## 16.10.2026 — 0.10.0 private workspace
+
+The user authorized continuing all remaining steps and releasing completed components without repeated confirmation. The earlier release-approval item above is superseded for this technical release; normative acceptance still requires actual source review.
+
+The existing owner-private Site now has a shared project workspace implementation, revision-protected saves, historical exports, exact-byte document attachments, PDF page text and reviewable ChatGPT proposals. Standalone HTML remains usable with browser-local projects and adds report/request draft exports. No model API key or built-in LLM chat is introduced. See audits/README-step100.md for checks and unresolved dependencies.
+
+Not closed by this implementation: current-law acceptance, full real-case evidence and cost validation, OCR/Office document extraction, native browser QA, hosted authenticated dossier end-to-end testing and second-user participation. These items must not be represented as completed merely because the implementation builds.

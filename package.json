@@ -13,7 +13,7 @@
     "test:tpp52": "node tpp52-dossier-tests.cjs",
     "build:web": "python3 build-web.py",
     "test:import": "node project-import-tests.cjs",
-    "test:web": "python3 build-web.py && node web-tests.cjs && node project-web-tests.cjs && node ui-simplicity-tests.cjs && node workflow-web-tests.cjs && node document-format-web-tests.cjs && node requirements-web-tests.cjs",
+    "test:web": "python3 build-web.py && node web-tests.cjs && node project-web-tests.cjs && node ui-simplicity-tests.cjs && node workflow-web-tests.cjs && node document-format-web-tests.cjs && node requirements-web-tests.cjs && node workspace-web-tests.cjs",
     "test:projects": "node project-records-tests.cjs"
   },
   "engines": {

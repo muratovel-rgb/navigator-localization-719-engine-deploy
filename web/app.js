@@ -131,5 +131,9 @@
     if(!ok){if(previous===undefined)delete a.tpp52;else a.tpp52=previous;}
     return ok;
   }});
+  // Hosted workspace uses the same validated import and local backup paths.
+  globalThis.NavigatorWorkspace={current:()=>a&&!projectDirty?JSON.parse(JSON.stringify(exportAssessment(a))):null,dirty:()=>projectDirty,
+    receive:value=>{const id=value?.assessments?.[0]?.id;importData(value);if(id&&data.assessments.some(x=>x.id===id))open(data.assessments.find(x=>x.id===id));},
+    open:id=>{const item=data.assessments.find(x=>x.id===id);if(item)open(item);},notice};
   $('close-measure').addEventListener('click',()=>$('measure-dialog').close());$('measure-dialog').addEventListener('close',()=>measureTrigger?.focus());$('close-history').addEventListener('click',()=>$('history-dialog').close());$('report').addEventListener('click',()=>{save();window.print();});ScenarioUI.init({assessment:()=>a,entry:()=>entry,save,refreshFacts:renderFacts,changed:()=>{save();update();},notice,plan:()=>showWorkspace('plan','plan-tab')});LocalizationUI.init({assessment:()=>a,entry:()=>entry,show:showWorkspace,scroll});Registry719UI.mount();RegimeUI.mount();$('regime-nav').addEventListener('click',()=>{page('nr');RegimeUI.openStandalone();});renderSearch();
 })();
