@@ -15,7 +15,7 @@ const toolResult = (output) => ({
 function createMcpServer() {
   const server = new McpServer({
     name: 'navigator-localization-719-engine',
-    version: '0.3.0'
+    version: '0.4.1'
   });
 
   server.registerTool(
@@ -31,12 +31,14 @@ function createMcpServer() {
     'search_localization_rules',
     {
       title: 'Search PP 719 Calculation Rules',
-      description: 'Search only the deterministic calculation branches extracted from Navigator HTML 0.8 by OKPD2, rule name, registry number, or known product identifier. This is not the full 787-row search index.',
+      description: 'Search all 787 indexed PP 719 positions plus prepared calculation branches. Return source, coverage and calculation availability. Use get_localization_rule for exact indexed text; not every index position is a verified calculation rule.',
       inputSchema: {
-        query: z.string().min(1).describe('OKPD2, product name, rule name, registry number, or identifier')
+        query: z.string().min(1).describe('OKPD2, product name, rule name, registry number, or identifier'),
+        limit: z.number().int().min(1).max(100).optional(),
+        offset: z.number().int().min(0).optional()
       }
     },
-    async ({ query }) => toolResult(A.searchRules({ query }))
+    async (args) => toolResult(A.searchRules(args))
   );
 
   server.registerTool(
@@ -92,7 +94,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(express.json({ limit: '1mb' }));
 
-app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.3.0' }));
+app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.4.1' }));
 
 app.post('/mcp', async (req, res) => {
   const server = createMcpServer();
@@ -121,6 +123,6 @@ app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
 
 const port = Number.parseInt(process.env.PORT || '3000', 10);
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Navigator 719 MCP v0.3.0 listening on :${port}/mcp`);
+  console.log(`Navigator 719 MCP v0.4.1 listening on :${port}/mcp`);
 });
 

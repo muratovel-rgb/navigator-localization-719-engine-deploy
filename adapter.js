@@ -1,10 +1,13 @@
 'use strict';
 const E = require('./engine.js');
+const I = require('./legal-index.cjs');
 
 function findRule(ruleId) {
   const entry = E.entries.find(e => e.id === ruleId);
-  if (!entry) throw new Error(`Unknown ruleId: ${ruleId}`);
-  return entry;
+  if (entry) return entry;
+  const position=I.byId.get(ruleId);
+  if (!position) throw new Error(`Unknown ruleId: ${ruleId}`);
+  return E.entries.find(e=>e.id===position.entryId) || I.unresolved(position);
 }
 
 function summarizeRule(e) {
@@ -42,16 +45,32 @@ function summarizeRule(e) {
   };
 }
 
-function searchRules({ query }) {
+function searchRules({ query, limit=20, offset=0 }) {
+  if (!Number.isInteger(limit)||limit<1||limit>100||!Number.isInteger(offset)||offset<0) throw new Error('Invalid pagination');
+  const positions=I.search(query);
+  const prepared=E.search(query).map(e => ({
+    id:e.id,code:e.code,title:e.title,method:e.method,maximum:e.maximum??null,version:e.version,source:e.source,
+    scope:e.scope,criteriaCount:e.criteria.length,resultType:'prepared_rule',calculationAvailable:e.method!=='unresolved'
+  }));
+  const indexed=positions.map(p=>({
+    id:p.id,positionId:p.id,code:p.codeText,title:p.title,method:p.entryId?'points':'unresolved',
+    source:p.source,section:p.section,scope:p.sectionTitle,resultType:'indexed_position',
+    calculationRuleId:E.entries.some(e=>e.id===p.entryId)?p.entryId:null,
+    calculationAvailable:E.entries.some(e=>e.id===p.entryId&&e.method!=='unresolved'),
+    normativeStatus:p.status,verified:p.verified,effectivePeriod:p.effectivePeriod,
+    sourceSnapshotDate:p.sourceSnapshotDate,textNeedsContext:p.textNeedsContext,codeInherited:p.codeInherited,
+    sourceContextStatus:I.context(p.id)?.status??'unmatched'
+  }));
+  const results=[...prepared,...indexed];
   return {
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
     query,
-    results: E.search(query).map(e => ({
-      id: e.id, code: e.code, title: e.title, method: e.method,
-      maximum: e.maximum ?? null, version: e.version, source: e.source,
-      scope: e.scope, criteriaCount: e.criteria.length
-    }))
+    ...I.metadata(),
+    matchingPositions:positions.length,totalResults:results.length,offset,limit,
+    results:results.slice(offset,offset+limit),
+    nextOffset:offset+limit<results.length?offset+limit:null,
+    notice:results.length?'Совпадение кода требует проверки назначения и специальных позиций. Индексная строка не является готовым вычислимым правилом.':'В загруженном индексе совпадений нет. Это не подтверждает отсутствие требований в ПП №719.'
   };
 }
 
@@ -59,7 +78,8 @@ function getRule({ ruleId }) {
   return {
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
-    rule: summarizeRule(findRule(ruleId))
+    rule: summarizeRule(findRule(ruleId)),
+    ...(I.byId.has(ruleId)?{indexedPosition:I.byId.get(ruleId),indexVersion:I.data.version,calculationAvailable:findRule(ruleId).method!=='unresolved',requirementContext:I.context(ruleId)}:{})
   };
 }
 
@@ -135,7 +155,7 @@ function thresholdContext({ ruleId, date, goal = 'localization', applicableCrite
     date,
     goal,
     applicableMaximum: maximum,
-    context: E.thresholdInfo(entry, date, goal),
+    context: I.byId.has(ruleId)&&entry.method==='unresolved'?{label:'Расчётное правило не подготовлено',percent:null,reason:'Текст позиции доступен через get_localization_rule. Порог не назначается без формализации и проверки правила.'}:E.thresholdInfo(entry, date, goal),
     threshold: maximum ? E.threshold(date, maximum, entry, goal) : null
   };
 }
@@ -145,6 +165,8 @@ function health() {
     ok: true,
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
+    serviceVersion: '0.4.1',
+    ...I.metadata(),
     rules: E.entries.length,
     calculationRules: E.entries.filter(e => e.method !== 'unresolved').length,
     unresolvedRules: E.entries.filter(e => e.method === 'unresolved').length,

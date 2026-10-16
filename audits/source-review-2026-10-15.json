@@ -1,0 +1,112 @@
+{
+  "reviewDate": "2026-10-15",
+  "targetAct": {
+    "date": "2015-07-17",
+    "number": "719"
+  },
+  "fullLegalCoverageVerified": false,
+  "productionRulesChanged": false,
+  "sources": [
+    {
+      "act": "2026-09-29-1254",
+      "officialPublicationUrl": "https://publication.pravo.gov.ru/document/0001202609300041",
+      "officialMetadataLocated": true,
+      "officialFullTextRead": false,
+      "accessIssue": "Timed out / inaccessible through current browsing tool",
+      "secondaryTextRead": "https://www.consultant.ru/document/cons_doc_LAW_545627/dfde3640d173ce05cc3968ea3693e4a9f1bac099/",
+      "scopeCandidate": "Footnote 12, automotive R&D credits; formulas include image objects",
+      "readiness": "secondary formula transcription completed; official full text and complete footnote context pending",
+      "reportedEffectiveDate": "2026-09-30",
+      "corroboratingText": "https://www.alta.ru/tamdoc/26ps1254/",
+      "formulaVisualStatus": "Three Garant formula images downloaded and visually read on 2026-10-15; official PDF still inaccessible.",
+      "additionalEvidence": [
+        "https://www.garant.ru/products/ipo/prime/doc/414893576/",
+        "https://www.garant.ru/files/3/0/2262703/pict7-414893576.png",
+        "https://www.garant.ru/files/3/0/2262703/pict8-414893576.png",
+        "https://www.garant.ru/files/3/0/2262703/pict9-414893576.png"
+      ],
+      "formulaCandidate": {
+        "base": "400 * (C_NIOKR / TR) * 100",
+        "K_low": "1.29 * ((C_NIOKR * 10^-9) / 1 RUB) + 0.1 for C_NIOKR <= 0.7 billion RUB",
+        "K_high": "1.5 for C_NIOKR > 0.7 billion RUB",
+        "visualSource": "Garant reproduction; not the official PDF",
+        "legalVerification": "not_verified",
+        "productionActivation": false,
+        "boundaryWarning": "Do not silently smooth the source discontinuity at 0.7 billion RUB."
+      },
+      "secondaryImageHashes": [
+        {
+          "name": "1254-formula-garant.png",
+          "sha256": "4122ec5ddc21b79144f3472f6fbb36db3bbe701eb55a0596f7c6c43c9a5d9549",
+          "bytes": 899
+        },
+        {
+          "name": "1254-k-low.png",
+          "sha256": "5f24aa720b4f81874d6dd2ed692c2e182efbe5ac221000285d7bc69a06e61f48",
+          "bytes": 1210
+        },
+        {
+          "name": "1254-k-high.png",
+          "sha256": "ddc542df61c3135395ba5042f3fbbbe7c97b816ce1720802d77c9239c07ff2b3",
+          "bytes": 645
+        }
+      ]
+    },
+    {
+      "act": "2026-09-29-1257",
+      "officialPublicationUrl": "https://publication.pravo.gov.ru/document/View/0001202609300049",
+      "officialFullTextRead": false,
+      "secondaryTextRead": "https://www.consultant.ru/document/cons_doc_LAW_545631/92d969e26a4326c5d02fa79b8f9cf4994ee5633b/",
+      "reportedEffectiveDate": "2026-10-31",
+      "effectiveDateVerified": false,
+      "scopeCandidate": "Section XXIII: new sewing-needle position 25.93.18.110; note 10; separate PP1875 amendment",
+      "readiness": "future change candidate, not applied",
+      "officialMetadataLocated": true,
+      "reportedPublicationDate": "2026-09-30",
+      "corroboratingText": "https://www.alta.ru/tamdoc/26ps1257/",
+      "fullSecondaryAnnexRead": true
+    },
+    {
+      "act": "2026-10-05-1297",
+      "officialPublicationUrl": "https://publication.pravo.gov.ru/document/0001202610060054",
+      "officialFullTextRead": false,
+      "secondaryTextRead": "https://www.alta.ru/tamdoc/26ps1297/",
+      "corroboratingText": "https://www.consultant.ru/document/cons_doc_LAW_546154/92d969e26a4326c5d02fa79b8f9cf4994ee5633b/",
+      "reportedPublicationDate": "2026-10-06",
+      "effectiveDateVerified": false,
+      "scopeCandidate": "Annex sections VII, XI, XVII, XXI; footnotes 61-66; note 28; new note 80(1). Amends acts 1026 (mattresses) and 1135 (railway footnote numbering).",
+      "readiness": "Date conflict and official full-text access unresolved. No future requirements activated.",
+      "officialMetadataLocated": true,
+      "reportedEffectiveDates": [
+        {
+          "source": "https://www.alta.ru/tamdoc/26ps1297/",
+          "date": "2026-10-16"
+        },
+        {
+          "source": "https://base.garant.ru/415025312/",
+          "date": "2026-10-17"
+        },
+        {
+          "source": "https://pravo.ppt.ru/postanovlenie/pravitelstvo/n-1297-356815",
+          "date": "2026-10-16"
+        }
+      ],
+      "effectiveDateConflict": true,
+      "approvedEffectiveDate": null,
+      "dateAssessment": {
+        "candidateDate": "2026-10-17",
+        "basis": "Excluding publication day, ten complete days after 2026-10-06 end on 2026-10-16. This is an interpretation, not an accepted legal date. Garant independently reports 2026-10-17; Alta and PPT report 2026-10-16.",
+        "status": "conflict_preserved",
+        "approvedEffectiveDate": null,
+        "productionActivation": false
+      }
+    }
+  ],
+  "limits": [
+    "This is a source discovery and access log, not a complete amendment chain.",
+    "Search results are not official full-text verification.",
+    "No future requirement was assigned to the assessment date.",
+    "No production formula, threshold or normative approval status was changed."
+  ],
+  "reviewStage": "8.3"
+}

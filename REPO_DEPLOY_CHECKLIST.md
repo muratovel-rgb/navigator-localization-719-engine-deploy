@@ -7,3 +7,4 @@
 5. Health endpoint: `/health`.
 6. MCP endpoint: `/mcp`.
 7. First deployment must be tested only with non-confidential facts because v0.2.2 has no application-level authentication.
+

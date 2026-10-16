@@ -17,3 +17,4 @@ const map = {
 if (!map[action]) { console.error(JSON.stringify({ok:false,error:`Unknown action: ${action}`})); process.exit(2); }
 try { console.log(JSON.stringify({ok:true,data:map[action](input)}, null, 2)); }
 catch (e) { console.error(JSON.stringify({ok:false,error:e.message})); process.exit(1); }
+

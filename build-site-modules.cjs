@@ -17,11 +17,15 @@ function build(output=destination){
  let data=replaceOnce(sourceData,'(function(g){const data=','const data=');
  data=replaceOnce(data,';if(typeof module!=="undefined"&&module.exports)module.exports=data;else g.MeasurementData=data;})(globalThis);',';\nexport default data;');
  let adapter=replaceOnce(sourceAdapter,"const E = require('./engine.js');","import E from './engine.mjs';");
+ adapter=replaceOnce(adapter,"const I = require('./legal-index.cjs');","import I from './legal-index.mjs';");
  adapter=replaceOnce(adapter,'module.exports = { health, searchRules, getRule, calculateLocalization, thresholdContext };','export { health, searchRules, getRule, calculateLocalization, thresholdContext };');
- const files=Object.fromEntries(Object.entries({'engine.mjs':engine,'measurement-data.mjs':data,'adapter.mjs':adapter}).map(([name,source])=>[name,source.trimEnd()+'\n']));
+ let index=replaceOnce(read('legal-index.cjs'),"const data=require('./pp719-index.json');","import data from './pp719-index.mjs';");
+ index=replaceOnce(index,"const contextData=require('./table-context.json');","import contextData from './table-context.mjs';");
+ index=replaceOnce(index,'module.exports={data,search,byId,unresolved,metadata,context};','export default {data,search,byId,unresolved,metadata,context};');
+ const files=Object.fromEntries(Object.entries({'engine.mjs':engine,'measurement-data.mjs':data,'adapter.mjs':adapter,'legal-index.mjs':index,'pp719-index.mjs':'export default '+read('pp719-index.json')+';\n','table-context.mjs':'export default '+read('table-context.json')+';\n'}).map(([name,source])=>[name,source.trimEnd()+'\n']));
  const digest=s=>crypto.createHash('sha256').update(s).digest('hex');
  const E=require('./engine.js');
- const provenance={source:'navigator-localization-719-engine-deploy',engineVersion:E.VERSION,releaseVersion:E.RELEASE,serviceVersion:require('./package.json').version,generator:'build-site-modules.cjs',sourceSha256:Object.fromEntries(['engine.js','measurement-data.js','adapter.js'].map(n=>[n,digest(read(n))])),generatedSha256:Object.fromEntries(Object.entries(files).map(([n,s])=>[n,digest(s)])),excludedLocalCard:'rzba: unresolved product-specific data remains in local HTML'};
+ const provenance={source:'navigator-localization-719-engine-deploy',engineVersion:E.VERSION,releaseVersion:E.RELEASE,serviceVersion:require('./package.json').version,generator:'build-site-modules.cjs',sourceSha256:Object.fromEntries(['engine.js','measurement-data.js','adapter.js','legal-index.cjs','pp719-index.json','table-context.json'].map(n=>[n,digest(read(n))])),generatedSha256:Object.fromEntries(Object.entries(files).map(([n,s])=>[n,digest(s)])),excludedLocalCard:'rzba: unresolved product-specific data remains in local HTML'};
  files['provenance.json']=JSON.stringify(provenance,null,2)+'\n';
  fs.mkdirSync(output,{recursive:true});
  for(const [name,content]of Object.entries(files))fs.writeFileSync(path.join(output,name),content);

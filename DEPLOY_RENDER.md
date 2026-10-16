@@ -57,3 +57,4 @@ Do not place API keys or secrets in `mcp.json`. Agent Plugins v1 does not treat 
 ## Data boundary
 
 The first remote prototype has no application-level authentication. Use it only with non-confidential test facts until an authenticated deployment is configured. Do not send restricted corporate documents, confidential design data, contract data, personal data, or secrets through the public endpoint.
+

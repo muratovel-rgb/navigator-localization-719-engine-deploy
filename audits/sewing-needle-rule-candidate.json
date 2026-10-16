@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "candidateId": "sewing-needle-25.93.18.110-draft",
+  "status": "draft_not_accepted",
+  "legalVerification": "not_verified",
+  "engineIntegration": null,
+  "productionActivation": false,
+  "code": "25.93.18.110",
+  "section": "XXIII",
+  "title": "Иглы швейные из черных металлов",
+  "amendingAct": "2026-09-29-1257",
+  "sourceUrl": "https://www.alta.ru/tamdoc/26ps1257/",
+  "officialPublicationUrl": "https://publication.pravo.gov.ru/document/View/0001202609300049",
+  "approvedEffectiveDate": null,
+  "reportedEffectiveDate": "2026-10-31",
+  "mandatoryConditionsCandidate": [
+    {
+      "id": "rights_and_applicant",
+      "description": "Резидентство ЕАЭС и права на техническую документацию в достаточном объеме на срок не менее 5 лет",
+      "minimumYears": 5,
+      "requiresSourceAndEvidenceReview": true
+    }
+  ],
+  "criteriaCandidate": [
+    {
+      "proposedId": "N01",
+      "name": "Российская стальная проволока",
+      "points": 35,
+      "territory": "rf",
+      "criterionType": "component_origin"
+    },
+    {
+      "proposedId": "N02",
+      "name": "Правка проволоки и отрубка заготовок",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N03",
+      "name": "Торцовка заготовок",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N04",
+      "name": "Ротационная вытяжка лезвия",
+      "points": 15,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N05",
+      "name": "Правка и обрубка до заданной длины",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N06",
+      "name": "Штамповка и пробитие ушка",
+      "points": 15,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N07",
+      "name": "Фрезеровка желобка",
+      "points": 10,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N08",
+      "name": "Отрубка технологического загиба",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N09",
+      "name": "Правка заготовки",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N10",
+      "name": "Термическая обработка",
+      "points": 15,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N11",
+      "name": "Рихтовка после термообработки",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N12",
+      "name": "Окончательная заточка",
+      "points": 10,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N13",
+      "name": "Шлифовка внутренней части ушка",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N14",
+      "name": "Нанесение покрытия",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    },
+    {
+      "proposedId": "N15",
+      "name": "Финальная полировка",
+      "points": 5,
+      "territory": "rf",
+      "criterionType": "production_operation"
+    }
+  ],
+  "arithmeticSumOfListedWeights": 145,
+  "thresholdCandidate": {
+    "points": 115,
+    "sourceLocations": [
+      "позиция раздела XXIII",
+      "дополнение примечания 10"
+    ],
+    "scope": "Only this product; not universal",
+    "approved": false
+  },
+  "nonApplicableCandidate": "If absent from the production technology, no requirement to perform and no points; do not infer permission to lower the explicit 115 threshold.",
+  "acceptancePrerequisites": [
+    "Official full-text and annex comparison",
+    "Accepted effective date and current/future version boundary",
+    "Full reading of applicable footnotes and note 10",
+    "Review mandatory rights and applicant status evidence",
+    "Map component-origin evidence for Russian wire",
+    "Integrate into the existing common engine only after normative approval",
+    "Run boundary and mandatory-condition tests through the shared engine"
+  ],
+  "testSpecification": [
+    {
+      "case": "before_effective_date",
+      "expected": "New rule not applied to earlier date"
+    },
+    {
+      "case": "mandatory_rights_unknown",
+      "expected": "No positive conclusion even if hypothetical points exceed threshold"
+    },
+    {
+      "case": "points_114_vs_115",
+      "expected": "Below explicit threshold vs meets numeric condition; mandatory/evidence checks remain separate"
+    },
+    {
+      "case": "operation_not_applicable",
+      "expected": "No points; cannot silently lower 115"
+    },
+    {
+      "case": "procurement_measure",
+      "expected": "PP1875 treatment stays separate from localization criteria"
+    },
+    {
+      "case": "real_client_costs",
+      "expected": "No confidential transfer through public MCP"
+    }
+  ]
+}

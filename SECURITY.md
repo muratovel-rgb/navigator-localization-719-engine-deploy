@@ -6,3 +6,4 @@
 - Do not send confidential enterprise data to an unauthenticated endpoint.
 - Do not embed tokens, passwords, API keys, or other secrets in `mcp.json` fixed headers.
 - Before corporate rollout, add an authenticated MCP deployment and review host logging/retention, access controls, network controls, and data-processing requirements.
+

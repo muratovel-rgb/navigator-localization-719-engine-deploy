@@ -1,0 +1,122 @@
+(function(root){
+'use strict';
+const T=root.Tpp52Dossier, statuses={OPEN:'Открыто',DOCUMENT_RECEIVED:'Документ получен, нужна проверка',RESOLVED:'Устранено по внутренней проверке',PARTIALLY_RESOLVED:'Устранено частично',REOPENED:'Нужна повторная проверка'};
+let ctx,actor='';
+const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
+const uid=prefix=>prefix+'-'+(root.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
+const field=(label,id,type='text',value='')=>{const l=node('label',label),i=node(type==='textarea'?'textarea':'input');i.id=id;if(type!=='textarea')i.type=type;i.value=value;if(type!=='file')i.maxLength=5000;l.append(i);return {label:l,input:i};};
+function disclosure(label,content,id){const d=node('details');if(id)d.id=id;d.append(node('summary',label),content);return d;}
+function choose(label,id,options){const l=node('label',label),s=node('select');s.id=id;for(const [value,text]of options){const o=node('option',text);o.value=value;s.append(o);}l.append(s);return {label:l,input:s};}
+const scopes=value=>[...new Set(value.split(';').map(s=>s.trim()).filter(Boolean))];
+function projectVariants(){const a=ctx?.assessment();return root.NavigatorProjects?.isProject(a)?a.variants:null;}
+function scopeNames(ids){const variants=projectVariants();return ids.map(id=>variants?.find(v=>v.id===id)?.label||id).join('; ');}
+function scopeField(label,id){
+  const variants=projectVariants();
+  if(!variants){const f=field(label,id);f.input.placeholder='Например: GCV DN20; GCV DN32';return {...f,values:()=>scopes(f.input.value),assign:values=>{f.input.value=values.join('; ');}};}
+  const box=node('fieldset');box.id=id;box.className='tpp-variant-picker';box.append(node('legend',label));
+  const wrapper=disclosure(label+' · выбрано: 0',box),summary=wrapper.querySelector('summary');
+  const update=()=>{summary.textContent=label+' · выбрано: '+selected(box).length+' из '+variants.length;};
+  for(const v of variants){const l=node('label',undefined,'check'),i=node('input');i.type='checkbox';i.value=v.id;i.addEventListener('change',update);l.append(i,document.createTextNode(v.label));box.append(l);}
+  return {label:wrapper,values:()=>selected(box),assign:values=>{for(const i of box.querySelectorAll('input'))i.checked=values.includes(i.value);update();}};
+}
+function current(){const a=ctx.assessment();return a.tpp52||T.create(a.id);}
+function dispatch(type,payload){
+  if(!actor.trim())throw Error('Укажи, кто вносит запись или проверяет ответ');
+  const next=T.apply(current(),{id:uid('event'),at:new Date().toISOString(),actor:actor.trim(),type,payload});
+  if(!ctx.commit(next))throw Error('Не удалось сохранить. Предыдущие данные не заменены');
+  render(ctx.assessment());ctx.notice('Запись сохранена в досье проекта');
+}
+const errors={'Invalid document':'Проверь название, исполнения и данные документа','Invalid remark content':'Заполни текст замечания и проверяемый вопрос','Invalid remark scope':'Укажи затронутые исполнения','Resolution requires evidence':'Для закрытия замечания выбери доказательства','Evidence does not cover all affected variants':'Документы не охватывают все исполнения замечания','Missing or superseded evidence':'Выбрана отсутствующая или заменённая версия документа','Document receipt requires evidence':'Выбери документ, полученный с ответом','Review result and basis required':'Укажи основание результата проверки','Answer required':'Укажи содержание полученного ответа','Reopen reason required':'Укажи причину повторной проверки','Official decision source required':'Укажи реквизиты и источник внешнего решения','Official decision needs document version reference':'Свяжи решение с версией документа'};
+function action(form,fn){form.addEventListener('submit',async e=>{e.preventDefault();const b=form.querySelector('button[type="submit"]');if(b)b.disabled=true;try{await fn();}catch(err){ctx.notice(errors[err.message]||err.message);}finally{if(b)b.disabled=false;}});}
+function submit(form,label){const b=node('button',label);b.type='submit';form.append(b);return b;}
+function referenceList(state,selection){
+  return state.documents.filter(d=>selection.includes(d.id)).map(d=>({documentId:d.id,versionId:d.currentVersionId}));
+}
+function evidencePicker(state,id){
+  const box=node('fieldset'),legend=node('legend','Документы для этого ответа или проверки');box.id=id;box.append(legend);
+  for(const d of state.documents){const v=d.versions.find(v=>v.id===d.currentVersionId),l=node('label',undefined,'check'),i=node('input');i.type='checkbox';i.value=d.id;l.append(i,document.createTextNode(v.title+' · '+scopeNames(v.scope)));box.append(l);}
+  if(!state.documents.length)box.append(node('p','Сначала добавь документ.','small'));
+  return box;
+}
+function selected(box){return [...box.querySelectorAll('input')].filter(i=>i.checked).map(i=>i.value);}
+function render(a){
+  const box=document.getElementById('tpp52-content');if(!box)return;box.replaceChildren();
+  const state=a.tpp52||T.create(a.id),ready=T.readiness(state);
+  box.append(node('p','Автоматическая экспертиза по №52 пока недоступна. Здесь ведутся документы и замечания.','small'));
+  box.append(disclosure('Как работает досье',node('p','Файлы остаются у тебя. Сохраняются реквизиты, контрольные суммы и история. Проверки по редакции №52 от 29.07.2026 не активированы; соответствие нормам и решение ТПП автоматически не подтверждаются.','small')));
+  const send=(type,payload)=>{if(type==='package.freeze'&&ctx.ready&&!ctx.ready())throw Error('Сначала сохрани изменения карточки проекта');if(ctx.assessment()?.id!==a.id||ctx.assessment()?.revision!==a.revision||JSON.stringify(current())!==JSON.stringify(state))throw Error('Проект изменился. Повтори действие в текущем досье');dispatch(type,payload);};
+  const who=field('Кто вносит запись','tpp52-actor','text',actor);who.input.maxLength=200;who.input.addEventListener('input',()=>{actor=who.input.value;});box.append(who.label);
+  box.append(node('p',state.documents.length+' документов · '+state.remarks.length+' замечаний · '+ready.unresolvedRemarkIds.length+' требуют работы','tpp-summary'));
+  const docs=node('section');docs.append(node('h3','Документы и версии'));
+  const form=node('form',undefined,'tpp-form');
+  const doc=choose('Документ','tpp-doc-select',[['new','Новый документ'],...state.documents.map(d=>[d.id,d.versions.find(v=>v.id===d.currentVersionId).title])]);
+  const title=field('Название или обозначение документа','tpp-doc-title');title.input.maxLength=500;
+  const scope=scopeField('Исполнения документа','tpp-doc-scope');
+  const file=field('Файл для фиксации версии','tpp-doc-file','file');
+  const reference=field('Реквизиты или место хранения','tpp-doc-reference','textarea');
+  form.append(doc.label,title.label,scope.label,file.label,reference.label);submit(form,'Сохранить версию документа');
+  doc.input.addEventListener('change',()=>{const d=state.documents.find(d=>d.id===doc.input.value);if(d){const v=d.versions.find(v=>v.id===d.currentVersionId);title.input.value=v.title;scope.assign(v.scope);reference.input.value=v.reference||'';}});
+  action(form,async()=>{
+    const f=file.input.files?.[0];if(!f)throw Error('Выбери файл документа');
+    if(!root.crypto?.subtle)throw Error('Браузер не поддерживает контрольную сумму файла. Открой HTML в актуальном браузере');
+    if(f.size>50*1024*1024)throw Error('Для фиксации версии выбери файл до 50 МБ');
+    if(!title.input.value.trim()||!scope.values().length)throw Error('Укажи название документа и исполнения');
+    const bytes=await f.arrayBuffer(),digest=await root.crypto.subtle.digest('SHA-256',bytes),checksum=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('');
+    send('document.version',{documentId:doc.input.value==='new'?uid('doc'):doc.input.value,versionId:uid('version'),title:title.input.value.trim(),scope:scope.values(),checksum,reference:reference.input.value.trim(),fileName:f.name||'',mimeType:f.type||''});
+  });docs.append(disclosure('Добавить документ или новую версию',form,'tpp-add-document'));
+  if(!state.documents.length)docs.append(node('p','Документов пока нет. Добавь файл, чтобы связать его с замечанием.','small'));
+  for(const d of state.documents){
+    const article=node('details',undefined,'tpp-record'),v=d.versions.find(v=>v.id===d.currentVersionId);article.id='tpp-document-'+d.id;article.append(node('summary',v.title+' · версий: '+d.versions.length));
+    const formatLabels={EDITABLE:'Редактируемость проверена',READ_ONLY:'Только просмотр',UNDETERMINED:'Формат не проверен'};
+    article.append(node('p',v.fileName||'Имя файла ранее не записано','small'),node('p',formatLabels[v.formatReview?.result||'UNDETERMINED'],'small'));
+    if(v.formatReview)article.append(node('p',v.formatReview.actor+' · '+v.formatReview.basis,'small'));
+    const ff=node('form',undefined,'tpp-form'),fr=choose('Пригодность текущей версии','format-result-'+d.id,[['UNDETERMINED','Нужно проверить'],['EDITABLE','Открывается для редактирования'],['READ_ONLY','Только просмотр']]),fb=field('В чём открыт файл и что проверено','format-basis-'+d.id,'textarea');ff.append(fr.label,fb.label);submit(ff,'Сохранить проверку формата');
+    action(ff,()=>{if(!fb.input.value.trim())throw Error('Укажи, в чём открыт файл и что проверено');send('document.format_review',{documentId:d.id,versionId:v.id,result:fr.input.value,basis:fb.input.value.trim()});});
+    article.append(disclosure('Проверить формат',ff));
+    if(state.documents.flatMap(d=>d.versions).filter(ver=>ver.checksum===v.checksum).length>1)article.append(node('p','Содержимое этого файла совпадает с другой записанной версией. Повторная запись сама по себе не добавляет доказательств.','small'));
+    for(const ver of [...d.versions].reverse())article.append(node('p',ver.title+(ver.id===d.currentVersionId?' · текущая версия':' · предыдущая версия')),node('p','Исполнения: '+scopeNames(ver.scope),'small'),node('p',ver.recordedAt+' · '+ver.recordedBy,'small'),node('p',ver.reference||'Место хранения не указано','small'),node('p','SHA-256: '+ver.checksum,'tpp-hash'));
+    docs.append(article);
+  }
+  const variants=projectVariants();
+  if(variants){
+    const coverage=T.documentCoverage(state,variants.map(v=>v.id)),body=node('div'),count=coverage.filter(v=>v.documents.length).length;
+    body.append(node('p','Показана только связь с текущими версиями файлов. Полнота комплекта и содержание проверяются отдельно.','small'));
+    for(const row of coverage)body.append(node('p',scopeNames([row.variantId])+' · '+(row.documents.map(d=>d.title).join('; ')||'Нет документов'),'small'));
+    docs.append(disclosure('Документы по исполнениям · '+count+' из '+variants.length,body,'document-coverage'));
+  }
+  box.append(docs);
+  const remarks=node('section');remarks.append(node('h3','Замечания и дозапросы'));
+  const rf=node('form',undefined,'tpp-form');
+  const source=choose('Источник замечания','tpp-remark-source',[['TPP','ТПП'],['INTERNAL','Внутренняя проверка'],['MINPROMTORG','Минпромторг']]);
+  const check=choose('Проверяемый вопрос','tpp-remark-check',(root.Tpp52Checks?.checks||[]).map(c=>[c.id,c.id+' · '+c.clause+' · '+c.condition]));
+  const text=field('Текст замечания','tpp-remark-text','textarea'),rs=scopeField('Затронутые исполнения','tpp-remark-scope');
+  const related=evidencePicker(state,'tpp-remark-docs');rf.append(source.label,check.label,text.label,rs.label,related);submit(rf,'Добавить замечание');
+  action(rf,()=>send('remark.open',{remarkId:uid('remark'),source:source.input.value,checkId:check.input.value,text:text.input.value.trim(),scope:rs.values(),documentIds:selected(related)}));remarks.append(disclosure('Добавить замечание',rf,'tpp-add-remark'));
+  if(!state.remarks.length)remarks.append(node('p','Замечаний пока нет. Это не означает готовность к подтверждению.','small'));
+  for(const r of [...state.remarks].reverse()){
+    const record=node('details',undefined,'tpp-record');record.id='tpp-record-'+r.id;record.append(node('summary',statuses[r.status]+' · '+r.text.slice(0,100)),node('p',r.text),node('p',r.checkId+' · '+({TPP:'ТПП',INTERNAL:'Внутренняя проверка',MINPROMTORG:'Минпромторг'}[r.source])+' · '+scopeNames(r.scope),'small'));
+    if(r.recheckReason)record.append(node('p',r.recheckReason==='Document version changed'?'Документ заменён. Проверь связанные выводы ещё раз.':r.recheckReason,'banner'));
+    if(r.lastReview)record.append(node('p','Последняя внутренняя проверка: '+r.lastReview.at+' · '+r.lastReview.reviewer+' · '+r.lastReview.basis,'small'));
+    if(r.officialDecisions.length)for(const dec of r.officialDecisions)record.append(node('p','Записанное внешнее решение: '+(dec.decision==='ACCEPTED'?'принято':'не принято')+' · '+dec.reference+' · '+dec.at,'small'));
+    const answerForm=node('form',undefined,'tpp-form'),answer=field('Ответ или основание проверки','answer-'+r.id,'textarea'),evidence=evidencePicker(state,'evidence-'+r.id),mode=choose('Действие','mode-'+r.id,[['receive','Зафиксировать получение ответа'],['RESOLVED','Устранено по внутренней проверке'],['PARTIALLY_RESOLVED','Устранено частично'],['OPEN','Оставить открытым'],['reopen','Вернуть на проверку']]);
+    answerForm.append(answer.label,evidence,mode.label);submit(answerForm,'Сохранить результат');
+    action(answerForm,()=>{
+      const refs=referenceList(current(),selected(evidence));
+      if(mode.input.value==='receive')send('remark.receive',{remarkId:r.id,answer:answer.input.value.trim(),evidence:refs});
+      else if(mode.input.value==='reopen')send('remark.reopen',{remarkId:r.id,reason:answer.input.value.trim()});
+      else send('remark.review',{remarkId:r.id,result:mode.input.value,basis:answer.input.value.trim(),evidence:refs});
+    });record.append(answerForm);
+    const official=node('details');official.append(node('summary','Зафиксировать полученное решение ТПП или Минпромторга'));
+    const of=node('form',undefined,'tpp-form'),decision=choose('Результат','decision-'+r.id,[['ACCEPTED','Принято'],['NOT_ACCEPTED','Не принято']]),basis=field('Реквизиты решения и источник','official-'+r.id,'textarea'),orefs=evidencePicker(state,'official-evidence-'+r.id);of.append(decision.label,basis.label,orefs);submit(of,'Записать внешнее решение');
+    action(of,()=>send('remark.official_decision',{remarkId:r.id,decision:decision.input.value,reference:basis.input.value.trim(),evidence:referenceList(current(),selected(orefs))}));official.append(of);record.append(official);remarks.append(record);
+  }
+  box.append(remarks);
+  root.NavigatorWorkflowUI.render({box,a,state,send,node,field,choose,scopeField,evidencePicker,selected,referenceList,disclosure,action,submit,uid});
+  const history=node('details');history.append(node('summary','История изменений · '+state.events.length));
+  for(const e of [...state.events].reverse()){
+    const types={'document.version':'Версия документа','document.format_review':'Проверен формат документа','remark.open':'Открыто замечание','remark.receive':'Получен ответ','remark.review':'Проведена проверка','remark.reopen':'Повторная проверка','remark.official_decision':'Записано внешнее решение'};
+    history.append(node('p',e.at+' · '+e.actor+' · '+(types[e.type]||({'request.open':'Создан запрос','request.receive':'Получен ответ на запрос','request.review':'Проверен ответ','request.amend':'Изменён срок или ответственный','origin.record':'Записан объект происхождения','origin.review':'Проверено происхождение','workflow.recheck':'Повторная проверка оснований','package.freeze':'Сохранён состав пакета','official.event':'Записано внешнее событие'}[e.type])||e.type)),node('p',e.payload.title||e.payload.label||e.payload.text||e.payload.answer||e.payload.basis||e.payload.reason||e.payload.reference||'','small'));
+  }box.append(history);
+}
+root.Tpp52UI={init:config=>{ctx=config;},render};
+})(globalThis);

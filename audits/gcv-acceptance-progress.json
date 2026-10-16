@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-16",
+  "scope": "Technical coverage on synthetic GCV-like inputs only",
+  "actualClientLegalAcceptance": false,
+  "fullEndToEndPassed": false,
+  "variantsInTests": 18,
+  "cases": [
+    {
+      "id": "G01",
+      "status": "implemented",
+      "evidenceOrGap": "Project record and DOM tests create 18 variants in one project"
+    },
+    {
+      "id": "G02",
+      "status": "implemented",
+      "evidenceOrGap": "Addressed request, explicit due date and owner, answer/review/recheck in workflow core and DOM tests"
+    },
+    {
+      "id": "G03",
+      "status": "implemented",
+      "evidenceOrGap": "Explicit editable-form requests require a recorded format review of current evidence covering every variant. Filename or extension alone never accepts the response. Synthetic DOM and native browser tests passed; no real-client content conclusion."
+    },
+    {
+      "id": "G04",
+      "status": "partial",
+      "evidenceOrGap": "Origin objects record candidate codes and separate object kinds; statutory classification remains gated"
+    },
+    {
+      "id": "G05",
+      "status": "partial",
+      "evidenceOrGap": "Separate object/ancestor status, documentary basis and scope checks implemented; actual client proof remains open"
+    },
+    {
+      "id": "G06",
+      "status": "partial",
+      "evidenceOrGap": "Cycle-free supplier/manufacturer/batch graph and descendant recheck implemented; primary chain documents not fully accepted"
+    },
+    {
+      "id": "G07",
+      "status": "partial",
+      "evidenceOrGap": "Product metadata history and recheck exist; no automatic change of nuclear purpose is performed"
+    },
+    {
+      "id": "G08",
+      "status": "implemented",
+      "evidenceOrGap": "Per-variant application/signature/submission events can be recorded with source evidence; no live GISP API or automatic authenticity check"
+    },
+    {
+      "id": "G09",
+      "status": "partial",
+      "evidenceOrGap": "Evidence scope is checked by variant; cost calculation and formal test completeness are not implemented for GCV"
+    },
+    {
+      "id": "G10",
+      "status": "implemented",
+      "evidenceOrGap": "Stable document and variant IDs are independent of folder names"
+    },
+    {
+      "id": "G11",
+      "status": "blocked",
+      "evidenceOrGap": "No accepted GCV numeric rule or verified primary costs; no fabricated recalculation"
+    },
+    {
+      "id": "G12",
+      "status": "blocked",
+      "evidenceOrGap": "Mounted-equipment exclusion requires verified applicability and evidence"
+    },
+    {
+      "id": "G13",
+      "status": "partial",
+      "evidenceOrGap": "One project can contain 18 variants; registry grouping is never inferred as approved"
+    },
+    {
+      "id": "G14",
+      "status": "implemented",
+      "evidenceOrGap": "Versions and prior reviews remain in replayable dossier history"
+    },
+    {
+      "id": "G15",
+      "status": "partial",
+      "evidenceOrGap": "Registration-document dates can be recorded; clause-based expiry check remains legally gated"
+    },
+    {
+      "id": "G16",
+      "status": "implemented",
+      "evidenceOrGap": "Single-variant evidence cannot close a multi-variant remark"
+    },
+    {
+      "id": "G17",
+      "status": "implemented",
+      "evidenceOrGap": "Frozen local package contains exact document versions, project revision, then-current remarks/requests/origins; later edits do not change it"
+    },
+    {
+      "id": "G18",
+      "status": "partial",
+      "evidenceOrGap": "Submission evidence can be recorded separately per package/variant; actual external authenticity remains unverified"
+    },
+    {
+      "id": "G19",
+      "status": "implemented",
+      "evidenceOrGap": "Reply, content review and reopening after document or product change are tested"
+    },
+    {
+      "id": "G20",
+      "status": "implemented",
+      "evidenceOrGap": "TPP_ACT and REGISTRY_ENTRY are distinct, registry record requires recorded submission scope"
+    },
+    {
+      "id": "G21",
+      "status": "implemented",
+      "evidenceOrGap": "RAW_MATERIAL and PART separated; raw-only status never automatically approves child object"
+    },
+    {
+      "id": "G22",
+      "status": "partial",
+      "evidenceOrGap": "Legacy 28.14.20.000 receives a review warning; automated legal routing remains pending"
+    },
+    {
+      "id": "G23",
+      "status": "partial",
+      "evidenceOrGap": "Idempotent events retained; matching file checksums shown as duplicate content, no independent proof inferred"
+    },
+    {
+      "id": "G24",
+      "status": "implemented",
+      "evidenceOrGap": "Per-project text status report includes open requests, owners, dates and distinct submission/act/registry counts"
+    }
+  ],
+  "technicalWorkflowPassed": true,
+  "coreWorkflowChecks": 26,
+  "domWorkflowChecks": 14,
+  "actualClientSourceInventoryStarted": true,
+  "actualClientSourceContentsInRepository": false,
+  "syntheticBrowserWorkflowPassed": true,
+  "nativeLayoutVerified": true,
+  "nativeViewports": [1440, 390],
+  "nativeBrowserChecks": 28,
+  "formatCoreChecks": 12,
+  "formatDomChecks": 7
+}
