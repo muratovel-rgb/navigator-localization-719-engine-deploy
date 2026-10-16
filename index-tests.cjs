@@ -24,4 +24,51 @@ eq(A.searchRules({query:'датчики давления'}).results[0].id,'press
 for(const p of I.data.positions.filter(p=>p.codeInherited||p.textNeedsContext)){
  const x=A.getRule({ruleId:p.id}).indexedPosition;eq(x.codeInherited,p.codeInherited);eq(x.textNeedsContext,p.textNeedsContext);
 }
-console.log(JSON.stringify({pass:true,checks,indexed:787,sections:29,fullLegalCoverageVerified:false}));
+// SEARCH-001: a publisher footnote is not an OKPD2 code. Keep the raw
+// index unchanged and retain actual two-digit codes and group matches.
+const rawIndex=JSON.stringify(I.data);
+const fixtures=[
+ {id:'search001-note',codeText:'20.16.10.110 <11>',codes:['20.16.10.110','11'],title:'Synthetic polymer'},
+ {id:'search001-nested-note',codeText:'28.14.13 < 11(1) >',codes:['28.14.13','11'],title:'Synthetic valve'},
+ {id:'search001-group',codeText:'Из 20',codes:['20'],title:'Synthetic group'},
+ {id:'search001-real',codeText:'11',codes:['11'],title:'Synthetic actual code'},
+ {id:'search001-multiple',codeText:'из 26.51.52.110; 26.51.52.120 <11>',codes:['26.51.52.110','26.51.52.120','11'],title:'Synthetic instruments'}
+];
+const fixtureIds=q=>I.search(q).map(p=>p.id).filter(id=>id.startsWith('search001-'));
+I.data.positions.push(...fixtures);
+try{
+ eq(fixtureIds('11'),['search001-real']);
+ eq(fixtureIds('20.16.10.110'),['search001-note','search001-group']);
+ eq(fixtureIds('201610110'),['search001-note','search001-group']);
+ eq(fixtureIds('20.99.99'),['search001-group']);
+ eq(fixtureIds('28.14.13.121'),['search001-nested-note']);
+ eq(fixtureIds('26.51.52.120'),['search001-multiple']);
+ eq(fixtureIds('synthetic polymer'),['search001-note']);
+ eq(fixtures[0].codes,['20.16.10.110','11']);
+}finally{I.data.positions.splice(-fixtures.length);}
+eq(JSON.stringify(I.data),rawIndex);
+eq(A.searchRules({query:'11'}).totalResults,0);
+
+// Exercise the existing generator, not a handwritten second implementation.
+// Compare every indexed code query and representative text queries at the
+// index and public adapter layers, including result ordering and pagination.
+(async()=>{
+ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+ const {pathToFileURL}=require('node:url');
+ const output=fs.mkdtempSync(path.join(os.tmpdir(),'search001-esm-'));
+ try{
+  require('./build-site-modules.cjs').build(output);
+  const esm=(await import(pathToFileURL(path.join(output,'legal-index.mjs')).href)).default;
+  const adapter=await import(pathToFileURL(path.join(output,'adapter.mjs')).href);
+  const queries=new Set(I.data.positions.flatMap(p=>p.codes));
+  for(const q of ['11','20','28.14.13.121','281413121','датчики давления','расходомер','несуществующее_изделие'])queries.add(q);
+  for(const query of queries){
+   eq(esm.search(query),I.search(query));
+   eq(adapter.searchRules({query,limit:7,offset:0}),A.searchRules({query,limit:7,offset:0}));
+   eq(adapter.searchRules({query,limit:7,offset:7}),A.searchRules({query,limit:7,offset:7}));
+  }
+  eq(adapter.health(),A.health());
+  eq(JSON.stringify(I.data),rawIndex);
+  console.log(JSON.stringify({pass:true,checks,indexed:787,sections:29,fullLegalCoverageVerified:false,searchParityQueries:queries.size,rawIndexPreserved:true}));
+ }finally{fs.rmSync(output,{recursive:true,force:true});}
+})().catch(error=>{console.error(error);process.exitCode=1;});
