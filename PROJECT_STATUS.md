@@ -93,3 +93,9 @@ The user authorized continuing all remaining steps and releasing completed compo
 The existing owner-private Site now has a shared project workspace implementation, revision-protected saves, historical exports, exact-byte document attachments, PDF page text and reviewable ChatGPT proposals. Standalone HTML remains usable with browser-local projects and adds report/request draft exports. No model API key or built-in LLM chat is introduced. See audits/README-step100.md for checks and unresolved dependencies.
 
 Not closed by this implementation: current-law acceptance, full real-case evidence and cost validation, OCR/Office document extraction, native browser QA, hosted authenticated dossier end-to-end testing and second-user participation. These items must not be represented as completed merely because the implementation builds.
+
+## 16.10.2026 — 0.10.1: live dossier, OCR and Office
+
+The earlier statement that the real dossier was not in the hosted workspace is superseded: the private pilot and six exact originals are now imported, with 109 text units corresponding to actual PDF pages and six OCR pages. Authenticated project/context/document reads and a pending proposal were verified through the installed Site tools. The proposal remains un-applied and the source dossier stayed at revision 1.
+
+Added create-only import, Word/Excel/PowerPoint text readers and Russian/English OCR with locators/confidence. No new Site, agent or calculation logic. Expert Plugin 0.1.11 documents the updated workflow. Full normative/real-case acceptance, native browser QA and a second participant remain open. See audits/README-step101.md.

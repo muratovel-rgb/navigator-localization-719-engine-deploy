@@ -15,7 +15,7 @@
     ]
   },
   "name": "navigator-localization-719",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Private expert workflow for localization of industrial products under Russian Government Resolution No. 719, focused on identifying applicable requirements, assessing production facts, GAP analysis, component-origin evidence, OKPD2 routing, and localization scenarios without replacing the shared deterministic calculation engine.",
   "author": {
     "name": "Евгений"

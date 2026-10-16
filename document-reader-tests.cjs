@@ -1,0 +1,20 @@
+'use strict';
+const assert=require('node:assert/strict'),{DOMParser}=require('linkedom'),R=require('./web/document-reader.js'),Zip=require('jszip');
+let checks=0;const equal=(a,b)=>{assert.deepEqual(a,b);checks++;};const options={Zip,parseXml:x=>new DOMParser().parseFromString(x,'application/xml')};
+const zip=async files=>{const z=new Zip();for(const [name,text]of Object.entries(files))z.file(name,text);return z.generateAsync({type:'uint8array',compression:'DEFLATE'});};
+(async()=>{
+ const doc=await R.office(await zip({'word/document.xml':'<w:document xmlns:w="urn:test"><w:p><w:r><w:t>Русский текст</w:t><w:tab/><w:t>GCV</w:t></w:r></w:p><w:p><w:r><w:t>&lt;script&gt;не команда&lt;/script&gt;</w:t></w:r></w:p></w:document>','word/header1.xml':'<w:hdr xmlns:w="urn:test"><w:p><w:r><w:t>Обозначение</w:t></w:r></w:p></w:hdr>'}),'docx',options);
+ equal(doc.method,'DOCX_XML');equal(doc.pages[0].text,'Русский текст\tGCV\n<script>не команда</script>');equal(doc.pages[1].label,'word/header1.xml');equal(doc.pages[0].unitType,'DOCUMENT_PART');
+ const xlsx=await R.office(await zip({'xl/workbook.xml':'<workbook xmlns:r="urn:rel"><sheets><sheet name="Состав" r:id="rId1"/></sheets></workbook>','xl/_rels/workbook.xml.rels':'<Relationships><Relationship Id="rId1" Target="worksheets/sheet1.xml"/></Relationships>','xl/sharedStrings.xml':'<sst><si><t>Деталь</t></si></sst>','xl/worksheets/sheet1.xml':'<worksheet><sheetData><row><c r="A1" t="s"><v>0</v></c><c r="B2"><f>1+2</f><v>3</v></c><c r="C3" t="inlineStr"><is><t>Россия</t></is></c></row></sheetData></worksheet>'}),'xlsx',options);
+ equal(xlsx.method,'XLSX_XML');equal(xlsx.pages[0].label,'Состав');assert(xlsx.pages[0].text.includes('A1: Деталь'));checks++;assert(xlsx.pages[0].text.includes('сохранённый результат, не пересчитан'));checks++;assert(xlsx.pages[0].text.includes('C3: Россия'));checks++;
+ const ppt=await R.office(await zip({'ppt/slides/slide2.xml':'<p:sld xmlns:p="p" xmlns:a="a"><a:p><a:r><a:t>Второй</a:t></a:r></a:p></p:sld>','ppt/slides/slide1.xml':'<p:sld xmlns:p="p" xmlns:a="a"><a:p><a:r><a:t>Первый</a:t></a:r></a:p></p:sld>'}),'pptx',options);equal(ppt.pages.map(p=>p.text),['Первый','Второй']);
+ await assert.rejects(R.office(await zip({'word/document.xml':'<!DOCTYPE x [<!ENTITY data SYSTEM "file:///secret">]><x/>'}),'docx',options),/внешние/);checks++;
+ await assert.rejects(R.office(await zip({'word/document.xml':'x'.repeat(2100000)}),'docx',options),/2 МБ/);checks++;
+ const signal={aborted:true};await assert.rejects(R.office(await zip({'word/document.xml':'<x/>'}),'docx',{...options,signal}),/отменено/);checks++;
+ const pages=[{text:'Текстовый слой с достаточным количеством букв для чтения без распознавания изображения страницы.'},{text:''}];let destroyed=false,ocrCalls=0;
+ const pdfjs={getDocument:()=>({promise:Promise.resolve({numPages:2,getPage:async i=>({getTextContent:async()=>({items:[{str:pages[i-1].text}]}),getViewport:()=>({width:800,height:1000}),render:()=>({promise:Promise.resolve()}),cleanup(){}}),destroy:async()=>{destroyed=true;}})})};
+ const result=await R.pdf(new Uint8Array([1]),{pdfjs,createCanvas:()=>({getContext:()=>({})}),ocr:async()=>{ocrCalls++;return {text:'Распознанный русский текст',confidence:91};}});
+ equal(ocrCalls,1);equal(result.pages.map(p=>p.method),['PDF_TEXT','OCR']);equal(result.pages[1].page,2);equal(result.pages[1].confidence,91);equal(result.method,'PDF_OCR');equal(destroyed,true);
+ assert.throws(()=>R.budget([{text:'x'.repeat(100001)}]),/100 000/);checks++;
+ console.log(JSON.stringify({pass:true,checks,office:'DOCX/XLSX/PPTX extracted from real ZIP fixtures',ocrRouting:'Text preserved; scanned page routed once; exact page locator retained',nativeBrowserVerified:false}));
+})().catch(e=>{console.error(e);process.exit(1);});
