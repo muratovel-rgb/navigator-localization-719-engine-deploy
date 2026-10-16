@@ -149,5 +149,9 @@
   "nativeLayoutVerifiedVersion": "0.9.1",
   "currentHtmlVersion": "0.9.2",
   "requirementsSourceReviewIsManual": true,
-  "requirementsCompletenessEvaluated": false
+  "requirementsCompletenessEvaluated": false,
+  "actualClientPrimaryReviewStage": "partial_six_pdf_sources",
+  "actualClientPrimaryPdfVisualReview": true,
+  "actualClientProjectRoundtripVerified": true,
+  "actualClientSourceDataInRepository": false
 }
