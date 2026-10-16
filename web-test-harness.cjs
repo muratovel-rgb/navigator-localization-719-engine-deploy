@@ -21,5 +21,6 @@ const submit=(a,s)=>a.document.querySelector(s).closest('form').dispatchEvent(ne
 const data=a=>JSON.parse(a.storage.get('localization-prototype-v2'));
 const load=async(a,payload)=>{const input=a.document.getElementById('import-file');Object.defineProperty(input,'files',{configurable:true,value:[{size:2000,text:async()=>JSON.stringify(payload)}]});input.dispatchEvent(new a.window.Event('change'));await wait();};
 const file=(a,name,text)=>Object.defineProperty(a.document.querySelector('#tpp-doc-file'),'files',{configurable:true,value:[{name,size:text.length,arrayBuffer:async()=>new TextEncoder().encode(text).buffer}]});
+const localToday=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 
-module.exports={app,wait,click,fill,submit,data,load,file,clone};
+module.exports={app,wait,click,fill,submit,data,load,file,clone,localToday};

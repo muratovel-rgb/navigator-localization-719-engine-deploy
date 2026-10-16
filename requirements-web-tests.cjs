@@ -1,0 +1,34 @@
+'use strict';
+const assert=require('node:assert/strict'),{app,wait,click,fill,submit,data,file,load,localToday}=require('./web-test-harness.cjs');
+let checks=0;const test=(name,fn)=>{fn();checks++;console.log('PASS '+name);};
+function select(a,id,all=true){for(const [i,n]of [...a.document.querySelectorAll('#'+id+' input')].entries()){n.checked=all||i===0;n.dispatchEvent(new a.window.Event('change'));}}
+const requirement=a=>data(a).assessments[0].tpp52.requirements[0];
+const fillReview=(a,r,production='PERFORMED',documentary='SUFFICIENT')=>{fill(a,'#requirement-production-'+r.id,production);fill(a,'#requirement-documentary-'+r.id,documentary);fill(a,'#requirement-fact-'+r.id,'Synthetic operation observed');fill(a,'#requirement-basis-'+r.id,'Synthetic evidence check');select(a,'requirement-evidence-'+r.id);submit(a,'#requirement-basis-'+r.id);};
+(async()=>{
+ const a=app();click(a,'#portfolio-nav');click(a,'#new-project');for(const [k,v]of Object.entries({name:'Synthetic matrix test',productName:'Test product',okpd2:'28.14.13.121','new-variants':'A\nB',actor:'Reviewer'}))fill(a,'#project-'+k,v);submit(a,'#project-name');await wait();fill(a,'#tpp52-actor','Reviewer');
+ test('matrix is compact and empty requirements never show readiness',()=>{assert(!a.document.getElementById('localization-matrix').open);assert(!a.document.getElementById('requirement-add').open);assert.match(a.document.getElementById('requirement-summary').textContent,/Требований пока нет/);});
+ for(const [key,value]of Object.entries({condition:'Synthetic operation condition',sourceReference:'Synthetic source',clause:'Test clause'}))fill(a,'#requirement-'+key,value);select(a,'requirement-scope');submit(a,'#requirement-condition');await wait();let r=requirement(a);
+ test('requirement stays a candidate and belongs to both variants',()=>{assert.equal(r.scope.length,2);assert.equal(r.sourceStatus,'CANDIDATE');assert.match(a.document.getElementById('requirement-record-'+r.id).textContent,/Сверить источник/);});
+ fill(a,'#tpp-doc-title','Test evidence');select(a,'tpp-doc-scope',false);file(a,'test.txt','Synthetic evidence');submit(a,'#tpp-doc-title');await wait();let doc=data(a).assessments[0].tpp52.documents[0];fillReview(a,r);await wait();
+ test('UI rejects one-variant evidence for a two-variant requirement',()=>{assert.equal(requirement(a).review,null);assert.match(a.document.getElementById('notice').textContent,/по всем исполнениям/);});
+ fillReview(a,r,'NOT_PERFORMED','INSUFFICIENT');await wait();
+ test('UI records production and document problems separately',()=>{const text=a.document.getElementById('requirement-record-'+r.id).textContent;assert.match(text,/Производство: Не выполняется/);assert.match(text,/Доказательства: Документы не подтверждают факт/);});
+ fill(a,'#requirement-action-kind-'+r.id,'CHANGE_PRODUCTION');fill(a,'#requirement-action-text-'+r.id,'Establish operation at the test site');fill(a,'#requirement-owner-'+r.id,'Test technologist');fill(a,'#requirement-due-'+r.id,'2026-11-01');submit(a,'#requirement-owner-'+r.id);await wait();
+ test('a corrective action does not close a production problem',()=>{assert.equal(requirement(a).action.owner,'Test technologist');assert.equal(requirement(a).review.production,'NOT_PERFORMED');assert.match(a.document.getElementById('localization-matrix').textContent,/1 требуют работы/);});
+ fill(a,'#requirement-select',r.id);fill(a,'#requirement-sourceStatus','SOURCE_CHECKED');submit(a,'#requirement-condition');await wait();
+ test('source acceptance cannot skip its period and applicability review',()=>{assert.equal(requirement(a).sourceStatus,'CANDIDATE');assert.match(a.document.getElementById('notice').textContent,/начало действия/);});
+ for(const [key,value]of Object.entries({sourceEdition:'Synthetic edition',sourceCheckedOn:localToday(),effectiveFrom:'2026-01-01',sourceBasis:'Synthetic applicability checked'}))fill(a,'#requirement-'+key,value);submit(a,'#requirement-condition');await wait();
+ fill(a,'#tpp-doc-select',doc.id);select(a,'tpp-doc-scope');file(a,'test2.txt','Synthetic second version');submit(a,'#tpp-doc-title');await wait();fillReview(a,r);await wait();
+ test('explicit internal review records acceptance without claiming legal readiness',()=>{assert.match(a.document.getElementById('requirement-summary').textContent,/принято во внутренней проверке: 1/);assert.equal(a.context.Tpp52Dossier.requirementSummary(data(a).assessments[0].tpp52,data(a).assessments[0].date).legalReadiness,'NOT_EVALUATED');});
+ click(a,'#requirement-export');let exported=JSON.parse(await a.downloads.at(-1).text());
+ test('matrix export includes source facts evidence and action for this project only',()=>{assert.equal(exported.format,'navigator-719-requirements-v1');assert.equal(exported.requirements.length,1);assert.equal(exported.requirements[0].sourceEdition,'Synthetic edition');assert.equal(exported.requirements[0].review.evidence.length,1);assert.equal(exported.requirements[0].action.owner,'Test technologist');assert.equal(exported.assessments,undefined);});
+ fill(a,'#tpp-doc-select',doc.id);select(a,'tpp-doc-scope');file(a,'test3.txt','Synthetic replacement');submit(a,'#tpp-doc-title');await wait();
+ test('replacement visibly reopens the matrix review',()=>{assert(requirement(a).recheckReason);assert.match(a.document.getElementById('requirement-record-'+r.id).textContent,/Повторить проверку после изменений/);assert.match(a.document.getElementById('requirement-summary').textContent,/принято во внутренней проверке: 0/);});
+ click(a,'#project-export');const payload=JSON.parse(await a.downloads.at(-1).text()),restored=app();await load(restored,payload);
+ test('JSON transfer retains exact old evidence action and reopening state',()=>{const v=requirement(restored);assert.equal(v.id,r.id);assert.equal(v.review.evidence[0].versionId,exported.requirements[0].review.evidence[0].versionId);assert.equal(v.action.owner,'Test technologist');assert(v.recheckReason);});
+ const before=JSON.stringify(data(a));a.failStorage(true);fillReview(a,r);await wait();
+ test('storage failure preserves the previous review and matrix history',()=>{assert.equal(JSON.stringify(data(a)),before);assert.match(a.document.getElementById('notice').textContent,/Не удалось сохранить/);});
+ a.failStorage(false);fill(a,'#requirement-condition','<img src=x onerror=alert(1)>');fill(a,'#requirement-sourceReference','Synthetic literal text');fill(a,'#requirement-clause','Test');select(a,'requirement-scope');submit(a,'#requirement-condition');await wait();
+ test('user-supplied requirement text is rendered as text',()=>{assert.equal(a.document.querySelectorAll('#localization-matrix img').length,0);assert.match(a.document.getElementById('localization-matrix').textContent,/<img src=x/);});
+ console.log(JSON.stringify({pass:true,checks,nativeLayoutVerified:false}));
+})().catch(e=>{console.error(e);process.exitCode=1;});

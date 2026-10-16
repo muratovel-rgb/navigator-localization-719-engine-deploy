@@ -6,14 +6,14 @@
   "main": "server.mjs",
   "scripts": {
     "start": "node server.mjs",
-    "test": "node test.cjs && node regression.cjs && node index-tests.cjs && node context-tests.cjs && node tpp52-dossier-tests.cjs && node project-import-tests.cjs && node project-records-tests.cjs && node workflow-tests.cjs && node document-format-tests.cjs",
+    "test": "node test.cjs && node regression.cjs && node index-tests.cjs && node context-tests.cjs && node tpp52-dossier-tests.cjs && node project-import-tests.cjs && node project-records-tests.cjs && node workflow-tests.cjs && node document-format-tests.cjs && node requirements-tests.cjs",
     "build:site": "node build-site-modules.cjs",
     "test:server": "node server-smoke.mjs",
     "test:audit": "python3 tools/test-table-context.py && node audit-search-tests.cjs && python3 tools/check-amendment-audit.py",
     "test:tpp52": "node tpp52-dossier-tests.cjs",
     "build:web": "python3 build-web.py",
     "test:import": "node project-import-tests.cjs",
-    "test:web": "python3 build-web.py && node web-tests.cjs && node project-web-tests.cjs && node ui-simplicity-tests.cjs && node workflow-web-tests.cjs && node document-format-web-tests.cjs",
+    "test:web": "python3 build-web.py && node web-tests.cjs && node project-web-tests.cjs && node ui-simplicity-tests.cjs && node workflow-web-tests.cjs && node document-format-web-tests.cjs && node requirements-web-tests.cjs",
     "test:projects": "node project-records-tests.cjs"
   },
   "engines": {

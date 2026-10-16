@@ -40,10 +40,16 @@ function recordingDate(event,p){
   return day;
 }
 function invalidateWorkflow(next, reason, documentId) {
+  invalidateRequirements(next,reason,documentId);
   for(const r of next.requests||[])if(!documentId||r.evidence.some(e=>e.documentId===documentId)||r.review?.evidence.some(e=>e.documentId===documentId)) {r.status='REOPENED';r.recheckReason=reason;}
   const changed=new Set((next.origins||[]).filter(o=>!documentId||o.evidence.some(e=>e.documentId===documentId)||o.review?.evidence.some(e=>e.documentId===documentId)).map(o=>o.id));
   let repeat=true;while(repeat){repeat=false;for(const o of next.origins||[])if(!changed.has(o.id)&&o.parentIds.some(id=>changed.has(id))){changed.add(o.id);repeat=true;}}
   for(const o of next.origins||[])if(changed.has(o.id)){o.status='LEGAL_REVIEW_REQUIRED';o.recheckReason=reason;}
+}
+function invalidateRequirements(next,reason,documentId,originIds) {
+  for(const r of next.requirements||[])if((!documentId&&!originIds)||
+    (documentId&&r.review?.evidence.some(e=>e.documentId===documentId))||
+    (originIds&&r.originIds.some(id=>originIds.has(id))))r.recheckReason=reason;
 }
 function reduce(state, event) {
   demand(event && id(event.id) && text(event.actor, 200), 'Invalid event identity');
@@ -173,6 +179,7 @@ function reduce(state, event) {
       const refs=evidenceRefs(next,p.evidence,true),old=next.origins.find(o=>o.id===p.nodeId);
       demand(old||next.origins.length<300,'Origin object limit');
       for(const o of next.origins)if(descendants.has(o.id)){o.status='LEGAL_REVIEW_REQUIRED';o.recheckReason='Origin object changed';}
+      invalidateRequirements(next,'Origin object changed',null,descendants);
       const record={id:p.nodeId,kind:p.kind,label:p.label,scope:clone(p.scope),parentIds:clone(p.parentIds),evidence:refs,status:'COMPONENT_ORIGIN_UNCONFIRMED',review:old?.review||null,recheckReason:old?'Origin object changed':'',recordedAt:event.at};
       for(const k of ['designation','code','supplier','manufacturer','batch','delivery','operations','operationDates'])record[k]=p[k];
       if(old)Object.assign(old,record);else next.origins.push(record);break;
@@ -192,7 +199,36 @@ function reduce(state, event) {
       o.status=p.status;o.evidence=refs;o.review={at:event.at,actor:event.actor,status:p.status,basis:p.basis,classificationBasis:p.classificationBasis||'',objectBasis:p.objectBasis||'',traceBasis:p.traceBasis||'',evidence:clone(refs)};o.recheckReason='';
       // A parent's review never approves its descendants. Recheck old conclusions.
       const affected=new Set([o.id]);let repeat=true;while(repeat){repeat=false;for(const child of next.origins)if(!affected.has(child.id)&&child.parentIds.some(id=>affected.has(id))){affected.add(child.id);child.status='LEGAL_REVIEW_REQUIRED';child.recheckReason='Parent origin review changed';repeat=true;}}
+      invalidateRequirements(next,'Origin review changed',null,affected);
       break;
+    }
+    case 'requirement.record': {
+      next.requirements ||= [];
+      const old=next.requirements.find(r=>r.id===p.requirementId);
+      demand(id(p.requirementId)&&(old||next.requirements.length<200)&&text(p.condition)&&text(p.sourceReference)&&text(p.clause)&&scopes(p.scope),'Requirement fields required');
+      demand(['CANDIDATE','SOURCE_CHECKED'].includes(p.sourceStatus),'Invalid requirement source status');
+      demand(['sourceUrl','sourceEdition','sourceCheckedOn','effectiveFrom','effectiveTo','sourceBasis'].every(k=>typeof p[k]==='string'&&p[k].length<=5000),'Requirement source fields required');
+      demand(!p.sourceUrl||/^https?:\/\/[^\s]+$/.test(p.sourceUrl),'Invalid requirement source URL');
+      demand(['sourceCheckedOn','effectiveFrom','effectiveTo'].every(k=>!p[k]||date(p[k]))&&(!p.effectiveTo||!p.effectiveFrom||p.effectiveTo>=p.effectiveFrom),'Invalid requirement source dates');
+      if(p.sourceStatus==='SOURCE_CHECKED')demand(text(p.sourceEdition)&&date(p.sourceCheckedOn)&&date(p.effectiveFrom)&&text(p.sourceBasis)&&p.sourceCheckedOn<=recordingDate(event,p),'Requirement source review required');
+      demand(list(p.originIds)&&p.originIds.every(id=>next.origins?.some(o=>o.id===id)),'Unknown requirement origin');
+      const record={id:p.requirementId,condition:p.condition,scope:clone(p.scope),originIds:clone(p.originIds),sourceStatus:p.sourceStatus,review:old?.review||null,action:old?.action||null,recheckReason:old?'Requirement or source changed':'',recordedAt:event.at,recordedBy:event.actor};
+      for(const k of ['sourceReference','clause','sourceUrl','sourceEdition','sourceCheckedOn','effectiveFrom','effectiveTo','sourceBasis'])record[k]=p[k];
+      if(old)Object.assign(old,record);else next.requirements.push(record);break;
+    }
+    case 'requirement.review': {
+      const r=next.requirements?.find(r=>r.id===p.requirementId);
+      demand(r&&['NOT_CHECKED','PERFORMED','PARTIAL','NOT_PERFORMED'].includes(p.production)&&['NOT_CHECKED','SUFFICIENT','MISSING','INSUFFICIENT'].includes(p.documentary)&&text(p.fact)&&text(p.basis),'Requirement review required');
+      demand(['operation','site','performer'].every(k=>typeof p[k]==='string'&&p[k].length<=5000),'Requirement fact fields required');
+      const refs=evidenceRefs(next,p.evidence,true);
+      if(p.documentary==='SUFFICIENT')demand(refs.length>0&&covered(next,refs,r.scope),'Requirement evidence does not cover scope');
+      r.review={at:event.at,actor:event.actor,production:p.production,documentary:p.documentary,fact:p.fact,basis:p.basis,operation:p.operation,site:p.site,performer:p.performer,evidence:refs};r.recheckReason='';break;
+    }
+    case 'requirement.action': {
+      const r=next.requirements?.find(r=>r.id===p.requirementId);
+      demand(r&&['VERIFY_SOURCE','VERIFY_PRODUCTION','CHANGE_PRODUCTION','REQUEST_EVIDENCE','REVIEW_EVIDENCE'].includes(p.kind)&&text(p.text)&&text(p.owner)&&date(p.dueDate),'Requirement action required');
+      demand(p.requestId===''||next.requests?.some(q=>q.id===p.requestId&&r.scope.every(s=>q.scope.includes(s))),'Requirement request does not cover scope');
+      r.action={at:event.at,actor:event.actor,kind:p.kind,text:p.text,owner:p.owner,dueDate:p.dueDate,requestId:p.requestId};break;
     }
     case 'workflow.recheck': {
       demand(text(p.reason),'Workflow recheck reason required');invalidateWorkflow(next,p.reason);break;
@@ -202,7 +238,9 @@ function reduce(state, event) {
       demand(id(p.packageId)&&!next.packages.some(k=>k.id===p.packageId)&&next.packages.length<100&&text(p.title,500)&&scopes(p.scope),'Invalid package');
       demand(Number.isInteger(p.projectRevision)&&p.projectRevision>=0&&p.projectSnapshot&&typeof p.projectSnapshot==='object'&&!Array.isArray(p.projectSnapshot),'Project snapshot required');
       const refs=evidenceRefs(next,p.evidence,true);demand(refs.length>0&&covered(next,refs,p.scope),'Package evidence does not cover scope');
-      next.packages.push({id:p.packageId,title:p.title,scope:clone(p.scope),frozenAt:event.at,frozenOn:recordingDate(event,p),frozenBy:event.actor,projectRevision:p.projectRevision,projectSnapshot:clone(p.projectSnapshot),documents:refs.map(ref=>({documentId:ref.documentId,...clone(next.documents.find(d=>d.id===ref.documentId).versions.find(v=>v.id===ref.versionId))})),remarks:clone(next.remarks),requests:clone(next.requests||[]),origins:clone(next.origins||[]),legalReadiness:'NOT_EVALUATED'});break;
+      next.packages.push({id:p.packageId,title:p.title,scope:clone(p.scope),frozenAt:event.at,frozenOn:recordingDate(event,p),frozenBy:event.actor,projectRevision:p.projectRevision,projectSnapshot:clone(p.projectSnapshot),documents:refs.map(ref=>({documentId:ref.documentId,...clone(next.documents.find(d=>d.id===ref.documentId).versions.find(v=>v.id===ref.versionId))})),remarks:clone(next.remarks),requests:clone(next.requests||[]),origins:clone(next.origins||[]),legalReadiness:'NOT_EVALUATED'});
+      if(next.requirements)next.packages.at(-1).requirements=clone(next.requirements);
+      break;
     }
     case 'official.event': {
       next.officialEvents ||= [];
@@ -264,7 +302,29 @@ function documentCoverage(dossier,scope){
     return v.scope.includes(variantId)?[{documentId:d.id,versionId:v.id,title:v.title,format:v.formatReview?.result||'UNDETERMINED'}]:[];
   })}));
 }
-const api = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness, documentCoverage, canonical};
+function requirementSummary(dossier,evaluationDate){
+  demand(valid(dossier)&&date(evaluationDate),'Invalid requirement summary');
+  const rows=(dossier.requirements||[]).map(r=>{
+    const gaps=[];
+    if(r.sourceStatus!=='SOURCE_CHECKED')gaps.push('SOURCE_UNCHECKED');
+    if(!r.effectiveFrom||evaluationDate<r.effectiveFrom||(r.effectiveTo&&evaluationDate>r.effectiveTo))gaps.push('PERIOD_UNCONFIRMED');
+    if(r.recheckReason)gaps.push('RECHECK');
+    const originIds=new Set(r.originIds);let repeat=true;
+    while(repeat){repeat=false;for(const o of dossier.origins||[])if(originIds.has(o.id))for(const parent of o.parentIds)if(!originIds.has(parent)){originIds.add(parent);repeat=true;}}
+    const chain=(dossier.origins||[]).filter(o=>originIds.has(o.id));
+    if(chain.some(o=>['LEGAL_REVIEW_REQUIRED','COMPONENT_ORIGIN_UNCONFIRMED'].includes(o.status)||(o.kind!=='RAW_MATERIAL'&&o.status==='RUS_RAW_MATERIAL_ONLY')))gaps.push('ORIGIN_UNCHECKED');
+    if(chain.some(o=>!r.scope.every(s=>o.scope.includes(s))))gaps.push('ORIGIN_SCOPE_GAP');
+    if(r.action?.requestId&&!dossier.requests?.some(q=>q.id===r.action.requestId&&r.scope.every(s=>q.scope.includes(s))))gaps.push('REQUEST_SCOPE_GAP');
+    const v=r.review;
+    if(!v||v.production==='NOT_CHECKED')gaps.push('PRODUCTION_UNCHECKED');
+    else if(v.production!=='PERFORMED')gaps.push('PRODUCTION_GAP');
+    if(!v||v.documentary==='NOT_CHECKED')gaps.push('EVIDENCE_UNCHECKED');
+    else if(v.documentary!=='SUFFICIENT')gaps.push('EVIDENCE_GAP');
+    return {requirementId:r.id,scope:clone(r.scope),condition:r.condition,gaps,internallyAccepted:gaps.length===0,action:clone(r.action)};
+  });
+  return {rows,total:rows.length,internallyAccepted:rows.filter(r=>r.internallyAccepted).length,needsWork:rows.filter(r=>!r.internallyAccepted).length,completeness:'NOT_EVALUATED',legalReadiness:'NOT_EVALUATED'};
+}
+const api = {SCHEMA, create, apply, valid, attach, validOptional, installImportValidator, readiness, documentCoverage, requirementSummary, canonical};
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 else root.Tpp52Dossier = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

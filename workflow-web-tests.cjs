@@ -1,5 +1,5 @@
 'use strict';
-const assert=require('node:assert/strict'),{app,wait,click,fill,submit,data,file,load}=require('./web-test-harness.cjs');
+const assert=require('node:assert/strict'),{app,wait,click,fill,submit,data,file,load,localToday}=require('./web-test-harness.cjs');
 let checks=0;const test=(name,fn)=>{fn();checks++;console.log('PASS '+name);};
 function select(a,id,indices){for(const [i,n]of [...a.document.querySelectorAll('#'+id+' input')].entries()){n.checked=indices===true||indices.includes(i);n.dispatchEvent(new a.window.Event('change'));}}
 function open(a,id){const d=a.document.getElementById(id);assert.equal(d.tagName,'DETAILS');d.open=true;}
@@ -24,8 +24,8 @@ open(a,'workflow-origins');open(a,'origin-add');fill(a,'#origin-kind','PART');fi
 test('material and part remain separate objects in UI',()=>{assert.equal(p.tpp52.origins[0].status,'RUS_RAW_MATERIAL_ONLY');assert.equal(p.tpp52.origins[1].status,'COMPONENT_ORIGIN_UNCONFIRMED');assert.deepEqual(p.tpp52.origins[1].parentIds,[metal]);assert.match(a.document.getElementById('origin-record-'+p.tpp52.origins[1].id).textContent,/Код требует проверки/);});
 open(a,'workflow-packages');open(a,'package-add');fill(a,'#package-title','Synthetic package');select(a,'package-scope',true);select(a,'package-evidence',true);submit(a,'#package-title');await wait();p=data(a).assessments[0];const pack=p.tpp52.packages[0];
 test('HTML freezes document versions and project metadata',()=>{assert.equal(pack.scope.length,18);assert.equal(pack.documents.length,1);assert.equal(pack.projectSnapshot.product.name,'GCV');assert.equal(pack.legalReadiness,'NOT_EVALUATED');});
-open(a,'workflow-packages');open(a,'official-add');fill(a,'#official-kind','SUBMITTED');fill(a,'#official-number','TEST-SUBMIT');fill(a,'#official-date',new Date().toISOString().slice(0,10));fill(a,'#official-reference','Synthetic GISP receipt');select(a,'official-scope',[0]);select(a,'official-evidence',true);submit(a,'#official-number');await wait();
-test('HTML submission event covers only selected variant',()=>assert.equal(data(a).assessments[0].tpp52.officialEvents[0].scope.length,1));
+open(a,'workflow-packages');open(a,'official-add');fill(a,'#official-kind','SUBMITTED');fill(a,'#official-number','TEST-SUBMIT');fill(a,'#official-date',localToday());fill(a,'#official-reference','Synthetic GISP receipt');select(a,'official-scope',[0]);select(a,'official-evidence',true);submit(a,'#official-number');await wait();
+test('HTML submission event covers only selected variant',()=>{assert(data(a).assessments[0].tpp52.officialEvents?.length,a.document.getElementById('notice').textContent);assert.equal(data(a).assessments[0].tpp52.officialEvents[0].scope.length,1);});
 open(a,'project-card-editor');fill(a,'#project-productName','GCV changed');open(a,'workflow-packages');open(a,'package-add');fill(a,'#package-title','Unsaved metadata');select(a,'package-scope',true);select(a,'package-evidence',true);submit(a,'#package-title');await wait();
 test('cannot freeze a package while card edits are unsaved',()=>{assert.equal(data(a).assessments[0].tpp52.packages.length,1);assert.match(a.document.getElementById('notice').textContent,/Сначала сохрани/);});
 fill(a,'#project-actor','Synthetic reviewer');submit(a,'#project-name');await wait();p=data(a).assessments[0];

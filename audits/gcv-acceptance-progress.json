@@ -134,8 +134,20 @@
   "actualClientSourceContentsInRepository": false,
   "syntheticBrowserWorkflowPassed": true,
   "nativeLayoutVerified": true,
-  "nativeViewports": [1440, 390],
+  "nativeViewports": [
+    1440,
+    390
+  ],
   "nativeBrowserChecks": 28,
   "formatCoreChecks": 12,
-  "formatDomChecks": 7
+  "formatDomChecks": 7,
+  "requirementsMatrixVersion": "0.9.2",
+  "requirementsCoreChecks": 27,
+  "requirementsDomChecks": 12,
+  "currentHtmlDomChecks": 79,
+  "nativeLayoutVerifiedForCurrentHtml": false,
+  "nativeLayoutVerifiedVersion": "0.9.1",
+  "currentHtmlVersion": "0.9.2",
+  "requirementsSourceReviewIsManual": true,
+  "requirementsCompletenessEvaluated": false
 }

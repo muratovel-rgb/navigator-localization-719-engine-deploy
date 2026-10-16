@@ -47,6 +47,7 @@ function render(a){
   const send=(type,payload)=>{if(type==='package.freeze'&&ctx.ready&&!ctx.ready())throw Error('Сначала сохрани изменения карточки проекта');if(ctx.assessment()?.id!==a.id||ctx.assessment()?.revision!==a.revision||JSON.stringify(current())!==JSON.stringify(state))throw Error('Проект изменился. Повтори действие в текущем досье');dispatch(type,payload);};
   const who=field('Кто вносит запись','tpp52-actor','text',actor);who.input.maxLength=200;who.input.addEventListener('input',()=>{actor=who.input.value;});box.append(who.label);
   box.append(node('p',state.documents.length+' документов · '+state.remarks.length+' замечаний · '+ready.unresolvedRemarkIds.length+' требуют работы','tpp-summary'));
+  root.NavigatorRequirementsUI.render({box,a,state,send,node,field,choose,scopeField,evidencePicker,selected,referenceList,disclosure,action,submit,uid});
   const docs=node('section');docs.append(node('h3','Документы и версии'));
   const form=node('form',undefined,'tpp-form');
   const doc=choose('Документ','tpp-doc-select',[['new','Новый документ'],...state.documents.map(d=>[d.id,d.versions.find(v=>v.id===d.currentVersionId).title])]);
@@ -114,8 +115,8 @@ function render(a){
   root.NavigatorWorkflowUI.render({box,a,state,send,node,field,choose,scopeField,evidencePicker,selected,referenceList,disclosure,action,submit,uid});
   const history=node('details');history.append(node('summary','История изменений · '+state.events.length));
   for(const e of [...state.events].reverse()){
-    const types={'document.version':'Версия документа','document.format_review':'Проверен формат документа','remark.open':'Открыто замечание','remark.receive':'Получен ответ','remark.review':'Проведена проверка','remark.reopen':'Повторная проверка','remark.official_decision':'Записано внешнее решение'};
-    history.append(node('p',e.at+' · '+e.actor+' · '+(types[e.type]||({'request.open':'Создан запрос','request.receive':'Получен ответ на запрос','request.review':'Проверен ответ','request.amend':'Изменён срок или ответственный','origin.record':'Записан объект происхождения','origin.review':'Проверено происхождение','workflow.recheck':'Повторная проверка оснований','package.freeze':'Сохранён состав пакета','official.event':'Записано внешнее событие'}[e.type])||e.type)),node('p',e.payload.title||e.payload.label||e.payload.text||e.payload.answer||e.payload.basis||e.payload.reason||e.payload.reference||'','small'));
+    const types={'requirement.record':'Записано требование','requirement.review':'Проверены факт и доказательства','requirement.action':'Назначено действие по разрыву','document.version':'Версия документа','document.format_review':'Проверен формат документа','remark.open':'Открыто замечание','remark.receive':'Получен ответ','remark.review':'Проведена проверка','remark.reopen':'Повторная проверка','remark.official_decision':'Записано внешнее решение'};
+    history.append(node('p',e.at+' · '+e.actor+' · '+(types[e.type]||({'request.open':'Создан запрос','request.receive':'Получен ответ на запрос','request.review':'Проверен ответ','request.amend':'Изменён срок или ответственный','origin.record':'Записан объект происхождения','origin.review':'Проверено происхождение','workflow.recheck':'Повторная проверка оснований','package.freeze':'Сохранён состав пакета','official.event':'Записано внешнее событие'}[e.type])||e.type)),node('p',e.payload.condition||e.payload.title||e.payload.label||e.payload.text||e.payload.answer||e.payload.basis||e.payload.reason||e.payload.reference||'','small'));
   }box.append(history);
 }
 root.Tpp52UI={init:config=>{ctx=config;},render};
