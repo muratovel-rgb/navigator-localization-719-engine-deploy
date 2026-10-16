@@ -1,5 +1,35 @@
 # Navigator Localization 719 MCP v0.3.0 prepared update
 
+## Release provenance
+
+`release-provenance.json` pins the shared core source commit, SHA-256 of source,
+generator, server and acceptance files, six generated Site modules, component
+versions, and dated hosting/plugin observations. It is metadata, not a second
+rule registry. Private dossier modules and legal currency are explicitly outside
+this check. Unchanged version numbers alone do not establish synchronization.
+
+```sh
+node verify-release-provenance.cjs --self-test
+node verify-release-provenance.cjs --site /path/to/existing-site/lib/navigator
+npm test
+```
+
+The verifier regenerates modules in a temporary directory and optionally compares
+the six modules in an existing Site checkout without modifying it. It checks all
+covered hashes and version fields; self-test checks source tampering, omission,
+stale versions and generated-output tampering. It performs no network calls.
+The source commit identifies the covered bytes; a later metadata-only commit can
+contain those same bytes. The manifest does not claim to know its own future
+commit or deploy ID. Dated consumer observations are historical evidence, not
+live pointers or proof of legal applicability. For each publication, verify the
+actual GitHub commit, Render live deploy and working MCP separately, then record
+that result in the existing PROJECT_STATE_719.md and ISSUES_719.md.
+
+When covered bytes change, refresh the source pin/hashes and repeat generation,
+tests and consumer checks. Do not copy a prior successful deployment observation
+as confirmation of the new release. Roll back metadata with a normal revert;
+do not rewrite main or modify legal data to make the check pass.
+
 Deterministic calculation service extracted from `localization-prototype-v0.8.html`.
 
 ## Tools
