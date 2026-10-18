@@ -107,6 +107,7 @@ function calculateLocalization(input) {
     classificationConfirmed = false,
     facts = {},
     costs = null,
+    selection,
     name = '',
     characteristics = ''
   } = input || {};
@@ -119,6 +120,15 @@ function calculateLocalization(input) {
   a.characteristics = characteristics || '';
   applyFacts(a, facts);
   if (costs) a.costs = {...a.costs, ...costs};
+  if (selection !== undefined) {
+    const keys = Object.keys(a.selection);
+    if (!selection || typeof selection !== 'object' || Array.isArray(selection) ||
+        Object.entries(selection).some(([key, value]) => !keys.includes(key) || typeof value !== 'string' || value.length > 120)) {
+      throw new Error('Expected selection fields from the existing assessment model as strings up to 120 characters');
+    }
+    // Transport only. Applicability and accepted values remain owned by engine.js.
+    a.selection = {...a.selection, ...selection};
+  }
   const result = E.evaluate(entry, a, a.date);
   return {
     engineVersion: E.VERSION,
@@ -130,7 +140,8 @@ function calculateLocalization(input) {
       goal: a.goal,
       classificationConfirmed: a.classification,
       facts,
-      costs: costs || undefined
+      costs: costs || undefined,
+      ...(selection !== undefined ? {selection: {...a.selection}} : {})
     },
     result
   };
@@ -165,7 +176,7 @@ function health() {
     ok: true,
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
-    serviceVersion: '0.4.1',
+    serviceVersion: '0.4.2',
     ...I.metadata(),
     rules: E.entries.length,
     calculationRules: E.entries.filter(e => e.method !== 'unresolved').length,

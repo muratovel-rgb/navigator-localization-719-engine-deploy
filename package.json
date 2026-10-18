@@ -1,6 +1,6 @@
 {
   "name": "navigator-localization-719-mcp",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": true,
   "description": "Shared deterministic Navigator 719 core: HTML 0.8 rules and corrected threshold forwarding",
   "main": "server.mjs",

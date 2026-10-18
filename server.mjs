@@ -15,7 +15,7 @@ const toolResult = (output) => ({
 function createMcpServer() {
   const server = new McpServer({
     name: 'navigator-localization-719-engine',
-    version: '0.4.1'
+    version: '0.4.2'
   });
 
   server.registerTool(
@@ -80,6 +80,12 @@ function createMcpServer() {
         classificationConfirmed: z.boolean().default(false).describe('True only after the product is confirmed to match the selected PP 719 position'),
         name: z.string().optional(),
         characteristics: z.string().optional(),
+        selection: z.object({
+          equipment: z.string().max(120).optional(),
+          type: z.string().max(120).optional(),
+          usage: z.string().max(120).optional(),
+          standard: z.string().max(120).optional()
+        }).strict().optional().describe('Existing assessment selection fields. Values and applicability are validated only by the shared engine; missing context remains blocked.'),
         facts: z.record(z.record(z.any())).optional().describe('Facts keyed by criterion ID. Use get_localization_rule first.'),
         costs: z.record(z.any()).optional().describe('Cost inputs for rules that use foreign-component share')
       }
@@ -94,7 +100,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(express.json({ limit: '1mb' }));
 
-app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.4.1' }));
+app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.4.2' }));
 
 app.post('/mcp', async (req, res) => {
   const server = createMcpServer();
@@ -123,6 +129,6 @@ app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
 
 const port = Number.parseInt(process.env.PORT || '3000', 10);
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Navigator 719 MCP v0.4.1 listening on :${port}/mcp`);
+  console.log(`Navigator 719 MCP v0.4.2 listening on :${port}/mcp`);
 });
 
