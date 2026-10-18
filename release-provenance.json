@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "scope": "shared-deterministic-core",
-  "observedAt": "2026-10-18T08:17:56.097155+00:00",
+  "observedAt": "2026-10-18T16:41:54.975152+00:00",
   "source": {
     "repository": "muratovel-rgb/navigator-localization-719-engine-deploy",
-    "commit": "7f9c1905502908dc9320db5055c5a0e5d70da505",
-    "tree": "13c5fae551fddc34eb341e294d020222caa5c987",
-    "meaning": "Exact API-002 source snapshot created in existing GitHub through its connector. Covered source tree matches the reviewed local candidate byte for byte; publication state is recorded separately."
+    "commit": "f286a19a7d8dffd3e580da5a5f355701b43c38fc",
+    "tree": "bde241e7ee38c84dd87d7a6a8712cd4f7018da59",
+    "meaning": "Exact OPS-002 covered-source snapshot in existing draft branch. Source bytes match the tested candidate; manifest metadata itself is not covered by its own hashes. Current publication state is recorded separately; this source snapshot is not a production deployment."
   },
   "versions": {
     "engine": "0.8.1",
@@ -29,9 +29,10 @@
     "index-tests.cjs": "d560a94631b6b999a8410c7fd8c905e9885e66bcd6f8b270685e29b9aa070a2c",
     "context-tests.cjs": "fada08047d019c882f79f98869cd635e06bf36345b6b9657a384ee0bb8c510d5",
     "server-smoke.mjs": "a954a17f005ec67407aab83f5c225e2cc36169921ac23a0a919c07cbc6d4bdc6",
-    "render.yaml": "17176b3692c1c87b32c2868328867c1a2ac4ba1e3095aff3189b2b05a092c699",
+    "render.yaml": "49a57e10f8c91b4a92430a91062acff4ad4ed8579405fa183c224993419499b1",
     "MCP_TOOL_CONTRACT.md": "6b13393a0f1a7cd0dac8fed3f80fb2161cbbcf99c4169ca8a0932cd87ed4828c",
-    "bom-tests.cjs": "5efd911ad9a48e45573589d8e9a6e596b9a545e1fa738e3c333f33058b469563"
+    "bom-tests.cjs": "5efd911ad9a48e45573589d8e9a6e596b9a545e1fa738e3c333f33058b469563",
+    "package-lock.json": "9adfb1345c6bda250c5a6e6fa3f18bdf595b22297898a2b492a49e149d501964"
   },
   "generatedSha256": {
     "engine.mjs": "e0801384c0e00ae1a47bb9af44ad8b13fa2329add82b5c7588e6d74bfb2714e8",
@@ -91,21 +92,26 @@
         "registryThreshold": null
       }
     },
-    "note": "Manifest pins a local API-002 candidate. observedConsumers are dated live baseline observations, not candidate deployments. Historical liveAcceptanceSnapshot remains dated2026-10-16. Local checks do not validate legal currency or authorize confidential BOM transfer; publicRender remains synthetic-only.",
+    "note": "OPS-002 candidate manifest; observedConsumers and liveAcceptanceSnapshot retain explicitly dated historical baseline observations, not current deployment claims. Actual transitions and newer runtime checks belong to OPS-002-PREPARATION reports and PROJECT_STATE_719.md. This manifest does not validate legal currency, client-data security or production dependency installation.",
     "candidateAcceptance": {
-      "id": "API-002",
-      "status": "PREPARED_LOCAL_NOT_PUBLISHED",
-      "sourcePublished": false,
+      "id": "OPS-002",
+      "status": "COMMITTED_DRAFT_SOURCE_SNAPSHOT_NOT_DEPLOYED",
+      "sourcePublished": true,
       "deployed": false,
       "liveCandidateVerified": false,
-      "scope": "Existing BOM transport only; no engine/normative/auth/storage changes. Synthetic local tests only.",
-      "hostDiscovery": "Current Site App supports API-001 selection, not this unpublished BOM. Separate Engine App schema remains stale. New typed input needs actual acceptance after any separately approved release."
+      "scope": "Lock the previously tested dependency tree and prepare npm ci build configuration. Engine, rules, index, API, auth and storage are unchanged. Normative readiness is not verified.",
+      "localRuntimes": [
+        "Node24.19.0/npm11.9.0",
+        "Node20.19.0/npm10.8.2"
+      ],
+      "configurationLimit": "Existing Render service still uses npm ci || npm install; changing render.yaml does not change that live setting.",
+      "hostDiscovery": "No new tool inputs. Existing separate Engine App selection/BOM catalog limitation remains."
     }
   },
   "excluded": [
     "Legal currency and READY_FOR_CALCULATION acceptance",
     "Site private tpp52-dossier/project-records modules and client data",
     "Whole UI behavior, access isolation and recovery",
-    "Runtime dependency resolution: no committed lockfile"
+    "Production dependency installation and effective existing Render build-command switch; local locked installs verified only"
   ]
 }
