@@ -1,41 +1,42 @@
 {
   "formatVersion": 1,
   "scope": "shared-deterministic-core",
-  "observedAt": "2026-10-18T07:28:50.178137+00:00",
+  "observedAt": "2026-10-18T08:17:56.097155+00:00",
   "source": {
     "repository": "muratovel-rgb/navigator-localization-719-engine-deploy",
-    "commit": "4a80a6c12d1b64b96c336a02a4117d9c86265cfb",
-    "tree": "8c1a2cafd5bdc80ab0f15223dd7cd067417bc72d",
-    "meaning": "Exact source snapshot uploaded via the existing GitHub connector. Covered source bytes and tree match the approved local candidate. A later metadata-only commit records this source identity; runtime publication requires branch and deploy checks."
+    "commit": "7f9c1905502908dc9320db5055c5a0e5d70da505",
+    "tree": "13c5fae551fddc34eb341e294d020222caa5c987",
+    "meaning": "Exact API-002 source snapshot created in existing GitHub through its connector. Covered source tree matches the reviewed local candidate byte for byte; publication state is recorded separately."
   },
   "versions": {
     "engine": "0.8.1",
-    "service": "0.4.2",
+    "service": "0.4.3",
     "release": "localization-719-2026-10-14",
     "index": "719-index-2026-10-14-v2"
   },
   "sourceSha256": {
     "engine.js": "7c1be26f74efbcc0502c745e864fc6c6ff19f1047345755b152d8540e26c0e0c",
     "measurement-data.js": "054e652f7884a6ce7874aa79c8f07032e446b9f68d4ccfcefb6460357c864193",
-    "adapter.js": "9d2a2b84eb78b78c182c723a78d37dd56aab141f8d1b7eec14056359d7cd7c50",
+    "adapter.js": "8e422b26910fc2d717a335a18a6ca0eece6ced881f51eb83ff19258b1c9165eb",
     "legal-index.cjs": "c7cd96d5b7a291b512112fffe0fe76636048d39772c134e4ca822c0fe41729be",
     "pp719-index.json": "d9de0bb27055abf9f4db7b11790c9ba6fc9a74f3f1636789409fc5acd2602bc4",
     "table-context.json": "61abcdc6e186f4578856e2dc472bbb268968ed7636b73b119fceeb573306db03",
     "build-site-modules.cjs": "8196abd783866c63c63c818e422a316162565ecda9567487bc97e47e1eb38b66",
-    "server.mjs": "8e282c087a12e2a9aa063867888325c7dac2e2305ef61efb2ccf9ee7a6797972",
-    "package.json": "e4d8dd10b44d71a78b84edfb3e28266819f5a316c5f1e96e551f38d1077c2c7a",
-    "test.cjs": "fb1428ab983dcb72635a33830700b0cf7da8ae28cdf6dfbb64432bb5b8dcad55",
+    "server.mjs": "6d6bdd478632cbf959cdb9d60ee880ab7ebde5d974303e91de318a380f038b5c",
+    "package.json": "87f0bfea90d46bef349eb23946154b75f4c2878f3689f11d72b10fad5b9976d7",
+    "test.cjs": "4e14fc83d2b3456d8f3fcbe7ed9de9e7fb060205008b2fdd8d08187b76c74bc0",
     "regression.cjs": "3e530ae2235bf724bf2d1b76a7dd23d90289b5c27fa010c920ee71fed3065435",
     "index-tests.cjs": "d560a94631b6b999a8410c7fd8c905e9885e66bcd6f8b270685e29b9aa070a2c",
     "context-tests.cjs": "fada08047d019c882f79f98869cd635e06bf36345b6b9657a384ee0bb8c510d5",
-    "server-smoke.mjs": "d29302f1cf7e4dcfd0599dd5e2b5d48512b075ce79dd696e779b191b5b632541",
+    "server-smoke.mjs": "a954a17f005ec67407aab83f5c225e2cc36169921ac23a0a919c07cbc6d4bdc6",
     "render.yaml": "17176b3692c1c87b32c2868328867c1a2ac4ba1e3095aff3189b2b05a092c699",
-    "MCP_TOOL_CONTRACT.md": "1057987b3636f538cd62cc43c513327e930f63cd80cd81172a24cf5b4c377d3b"
+    "MCP_TOOL_CONTRACT.md": "6b13393a0f1a7cd0dac8fed3f80fb2161cbbcf99c4169ca8a0932cd87ed4828c",
+    "bom-tests.cjs": "5efd911ad9a48e45573589d8e9a6e596b9a545e1fa738e3c333f33058b469563"
   },
   "generatedSha256": {
     "engine.mjs": "e0801384c0e00ae1a47bb9af44ad8b13fa2329add82b5c7588e6d74bfb2714e8",
     "measurement-data.mjs": "62a5dad5a82f03d689423ded05593f67155d401bc75897c9d8d1ac4f2219ce70",
-    "adapter.mjs": "e66624e6e992d3ca3b1d551c8a71f0d013ea401d82ff8bf1cf8c3867e89213db",
+    "adapter.mjs": "67e1156d329ebd47881d06f03d4b03ea30e6a65a0a4bd22a4ff5707a269c1daa",
     "legal-index.mjs": "ea628d61f8a43bd93f3132cfa80ae5ab8dbde172ce887dbfcb7d66685f12f050",
     "pp719-index.mjs": "7806875021e6eae276ae05cf2bdf3d7c41a9c3b1da09865331f5a9c2eac09c57",
     "table-context.mjs": "f341c35188fef08add6ad7d9ea72d8847eb488250b3703542592c556b8333bae"
@@ -43,19 +44,19 @@
   "observedConsumers": {
     "render": {
       "serviceId": "srv-db7pr9dg1s2s73bdv820",
-      "deployId": "dep-db92s8qvcj2c73bmsj7g",
-      "commit": "a30d5a6a8bf4b3917ff24201c79dde3446ea1997",
+      "deployId": "dep-dba7gbrncjis738edac0",
+      "commit": "3ce219ad042d2b2bc51052c70b9ae60032732ecd",
       "status": "live",
-      "serviceVersion": "0.4.1",
-      "verification": "Recovery Check list_deploys; live baseline, NOT candidate"
+      "serviceVersion": "0.4.2",
+      "verification": "Recovery Check2026-10-18T15:02+07, baseline NOT API-002 candidate"
     },
     "site": {
       "projectId": "appgprj_6ad05f2683848191a7b4b857ef3c570e",
-      "sourceCommit": "e665503df804c320348768c7f95f1f42d308c26c",
-      "platformVersion": 9,
+      "sourceCommit": "30c610cece6872cb08e186b8593c2c51c408b968",
+      "platformVersion": 10,
       "uiVersion": "0.10.1",
-      "deployId": "appgdep_6ad437df61a48191a77ad55ad791104b",
-      "verification": "Recovery Check get_site active/version9; baseline NOT candidate"
+      "deployId": "appgdep_6ad4790812308191894735795b096813",
+      "verification": "Recovery Check baseline activeSite10, NOT API-002 candidate"
     },
     "expertPlugin": {
       "id": "plugins_6ace5ad4248c8191944b95afcd6b4e41",
@@ -90,15 +91,15 @@
         "registryThreshold": null
       }
     },
-    "note": "Source hashes and generated bytes identify a local candidate. observedConsumers are dated live BASELINE observations; they do not claim this candidate is deployed. Historical liveAcceptanceSnapshot below remains a 2026-10-16 observation. Verify source/deploy/health/discovery and affected scenarios after a separately authorized release.",
+    "note": "Manifest pins a local API-002 candidate. observedConsumers are dated live baseline observations, not candidate deployments. Historical liveAcceptanceSnapshot remains dated2026-10-16. Local checks do not validate legal currency or authorize confidential BOM transfer; publicRender remains synthetic-only.",
     "candidateAcceptance": {
-      "id": "API-001",
-      "status": "PREPARED_FOR_BRANCH_PUBLICATION",
-      "sourcePublished": true,
+      "id": "API-002",
+      "status": "PREPARED_LOCAL_NOT_PUBLISHED",
+      "sourcePublished": false,
       "deployed": false,
       "liveCandidateVerified": false,
-      "scope": "Transport only; engine and normative data unchanged. Local tests are recorded externally in API-001-validation.json.",
-      "hostDiscovery": "Unresolved existing Engine App host schema refresh blocker; do not infer exposure from server schema."
+      "scope": "Existing BOM transport only; no engine/normative/auth/storage changes. Synthetic local tests only.",
+      "hostDiscovery": "Current Site App supports API-001 selection, not this unpublished BOM. Separate Engine App schema remains stale. New typed input needs actual acceptance after any separately approved release."
     }
   },
   "excluded": [
