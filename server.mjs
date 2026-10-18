@@ -15,7 +15,7 @@ const toolResult = (output) => ({
 function createMcpServer() {
   const server = new McpServer({
     name: 'navigator-localization-719-engine',
-    version: '0.4.2'
+    version: '0.4.3'
   });
 
   server.registerTool(
@@ -80,6 +80,10 @@ function createMcpServer() {
         classificationConfirmed: z.boolean().default(false).describe('True only after the product is confirmed to match the selected PP 719 position'),
         name: z.string().optional(),
         characteristics: z.string().optional(),
+        bom: z.array(z.object({
+          quantity:z.string().max(120), unitCost:z.string().max(120),
+          currency:z.string().max(16), origin:z.string().max(32), originBasis:z.string().max(5000)
+        }).strict()).max(500).optional().describe('Existing assessment BOM lines, only with costs.mode=bom. Public Render accepts synthetic examples only; do not send real client BOM or confidential costs. Domain semantics remain owned by the shared engine.'),
         selection: z.object({
           equipment: z.string().max(120).optional(),
           type: z.string().max(120).optional(),
@@ -100,7 +104,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(express.json({ limit: '1mb' }));
 
-app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.4.2' }));
+app.get('/health', (_req, res) => res.json({ ...A.health(), serviceVersion: '0.4.3' }));
 
 app.post('/mcp', async (req, res) => {
   const server = createMcpServer();
@@ -129,6 +133,6 @@ app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
 
 const port = Number.parseInt(process.env.PORT || '3000', 10);
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Navigator 719 MCP v0.4.2 listening on :${port}/mcp`);
+  console.log(`Navigator 719 MCP v0.4.3 listening on :${port}/mcp`);
 });
 

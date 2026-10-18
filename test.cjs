@@ -4,7 +4,7 @@ const A = require('./adapter.js');
 
 const H = A.health();
 assert.equal(H.ok,true);
-assert.equal(H.serviceVersion,'0.4.2');
+assert.equal(H.serviceVersion,'0.4.3');
 assert.equal(H.engineVersion,'0.8.1');
 assert(H.ruleIds.includes('flow-coriolis'));
 
@@ -99,4 +99,6 @@ echo.input.selection.type = 'changed-by-caller';
 assert.equal(JSON.stringify(incoming),preserved);
 selectionChecks++;
 console.log(JSON.stringify({pass:true,api001SelectionChecks:selectionChecks,engineUnchanged:true,syntheticOnly:true,legalApplicabilityVerified:false}));
+
+require('./bom-tests.cjs');
 

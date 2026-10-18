@@ -108,6 +108,7 @@ function calculateLocalization(input) {
     facts = {},
     costs = null,
     selection,
+    bom,
     name = '',
     characteristics = ''
   } = input || {};
@@ -120,6 +121,18 @@ function calculateLocalization(input) {
   a.characteristics = characteristics || '';
   applyFacts(a, facts);
   if (costs) a.costs = {...a.costs, ...costs};
+  if (bom !== undefined) {
+    const limits = {quantity:120, unitCost:120, currency:16, origin:32, originBasis:5000};
+    const fields = Object.keys(limits);
+    if (costs?.mode !== 'bom' || !Array.isArray(bom) || bom.length > 500 ||
+        Array.from(bom).some(item => !item || typeof item !== 'object' || Array.isArray(item) ||
+          Reflect.ownKeys(item).length !== fields.length ||
+          fields.some(key => !Object.hasOwn(item,key) || typeof item[key] !== 'string' || item[key].length > limits[key]))) {
+      throw new Error('Expected costs.mode=bom and at most 500 BOM lines with only quantity, unitCost, currency, origin and originBasis string fields');
+    }
+    // Transport only: decimal arithmetic, completeness and origin semantics stay in engine.js.
+    a.bom = bom.map(item => Object.fromEntries(fields.map(key => [key,item[key]])));
+  }
   if (selection !== undefined) {
     const keys = Object.keys(a.selection);
     if (!selection || typeof selection !== 'object' || Array.isArray(selection) ||
@@ -141,6 +154,7 @@ function calculateLocalization(input) {
       classificationConfirmed: a.classification,
       facts,
       costs: costs || undefined,
+      ...(bom !== undefined ? {bom:a.bom.map(item => ({...item}))} : {}),
       ...(selection !== undefined ? {selection: {...a.selection}} : {})
     },
     result
@@ -176,7 +190,7 @@ function health() {
     ok: true,
     engineVersion: E.VERSION,
     releaseVersion: E.RELEASE,
-    serviceVersion: '0.4.2',
+    serviceVersion: '0.4.3',
     ...I.metadata(),
     rules: E.entries.length,
     calculationRules: E.entries.filter(e => e.method !== 'unresolved').length,
